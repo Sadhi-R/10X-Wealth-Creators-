@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>10X Wealth Creators</title>
-   
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -21,7 +21,24 @@
             <a href="#reviews">Reviews</a>
             <a href="#contact">Contact</a>
         </div>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="#home">Home</a>
+            <a href="#vision">Vision</a>
+            <a href="#offerings">Offerings</a>
+            <a href="#mentors">Mentors</a>
+            <a href="#programs">Programs</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -59,7 +76,7 @@
         </div>
 
         <!-- Benefits Section -->
-        <div id="mentors" class="benefits">
+        <div class="benefits">
             <div class="benefit-card">
                 <div class="benefit-icon icon-globe"></div>
                 <h3 class="benefit-title">Global Community</h3>
@@ -251,40 +268,41 @@
             </div>
         </div>
     </section>
-    <section class="mentor-section">
-        <h2 class="section-title">Meet Your Mentors</h2>
-        
-        <div class="mentors-container">
-            <!-- First Mentor Card -->
-            <div class="mentor-card">
-                <div class="mentor-info">
-                    <div class="mentor-image">
-                        <img src="images/Sampathkumar.jpg" alt="Sampath Kumar">
+    <section id="mentors" class="mentor-section">
+        <div class="container">
+            <h2 class="section-title">Meet Your Mentors</h2>
+            <div class="mentors-container">
+                <!-- First Mentor Card -->
+                <div class="mentor-card">
+                    <div class="mentor-info">
+                        <div class="mentor-image">
+                            <img src="images/Sampathkumar.jpg" alt="Sampath Kumar">
+                        </div>
+                        <div>
+                            <h3 class="mentor-name">Sampath Kumar</h3>
+                            <p class="mentor-title">Growth Mindset Mentor</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="mentor-name">Sampath Kumar</h3>
-                        <p class="mentor-title">Growth Mindset Mentor</p>
-                    </div>
+                    <p class="mentor-description">
+                        Helps individuals shift their mindset for success. Trains on confidence-building, goal-setting, and high-performance habits.
+                    </p>
                 </div>
-                <p class="mentor-description">
-                    Helps individuals shift their mindset for success. Trains on confidence-building, goal-setting, and high-performance habits.
-                </p>
-            </div>
-            
-            <!-- Second Mentor Card -->
-            <div class="mentor-card">
-                <div class="mentor-info">
-                    <div class="mentor-image">
-                        <img src="images/Ramprasad.jpg" alt="Ram Prasad">
+                
+                <!-- Second Mentor Card -->
+                <div class="mentor-card">
+                    <div class="mentor-info">
+                        <div class="mentor-image">
+                            <img src="images/Ramprasad.jpg" alt="Ram Prasad">
+                        </div>
+                        <div>
+                            <h3 class="mentor-name">Ram Prasad</h3>
+                            <p class="mentor-title">Engineers Business Mentor</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="mentor-name">Ram Prasad</h3>
-                        <p class="mentor-title">Engineers Business Mentor</p>
-                    </div>
+                    <p class="mentor-description">
+                        Specializes in guiding professionals to start and scale businesses. Expert in digital marketing, business automation, and revenue growth strategies.
+                    </p>
                 </div>
-                <p class="mentor-description">
-                    Specializes in guiding professionals to start and scale businesses. Expert in digital marketing, business automation, and revenue growth strategies.
-                </p>
             </div>
         </div>
     </section>

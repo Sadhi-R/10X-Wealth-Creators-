@@ -131,14 +131,27 @@ body {
 @media (max-width: 768px) {
     .navbar {
         padding: 15px 20px;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 20px;
+        margin-right: auto;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        margin-left: 20px;
     }
 
     .nav-links {
-        margin-top: 15px;
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: none;
+    }
+
+    .mobile-menu-overlay {
+        display: block;
     }
 
     .hero-title {
@@ -405,31 +418,37 @@ p.program-description {
     color: #666;
 }
 .mentor-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
+    padding: 80px 0;
+    background-color: #f8fafc;
+    scroll-margin-top: 80px; /* Add space for fixed header */
 }
 
 .section-title {
-    color: #284287;
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 40px;
+    text-align: center;
+    color: #1E3A8A;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
 }
 
 .mentors-container {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .mentor-card {
-    background-color: #f0f7ff;
-    border-radius: 20px;
+    background: white;
+    border-radius: 15px;
     padding: 30px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.mentor-card:hover {
+    transform: translateY(-5px);
 }
 
 .mentor-info {
@@ -439,8 +458,8 @@ p.program-description {
 }
 
 .mentor-image {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 20px;
@@ -453,22 +472,40 @@ p.program-description {
 }
 
 .mentor-name {
-    color: #284287;
-    font-size: 24px;
-    font-weight: bold;
+    color: #1E3A8A;
+    font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
 .mentor-title {
-    color: #4c7bf0;
-    font-size: 16px;
-    margin-bottom: 10px;
+    color: #4B5563;
+    font-size: 1rem;
 }
 
 .mentor-description {
-    color: #555;
-    font-size: 16px;
-    line-height: 1.5;
+    color: #6B7280;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .mentor-section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .mentors-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mentor-card {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 .header {
     margin-bottom: 50px;
@@ -746,9 +783,11 @@ p.program-description {
     text-align: center;
 }
 
-.icon {
-    font-size: 32px;
-    color: #2563eb;
+.icon.hello {
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contact-title {
@@ -798,6 +837,8 @@ p.program-description {
 
 .footer-section ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-section ul li {
@@ -812,6 +853,56 @@ p.program-description {
 
 .footer-section ul li a:hover {
     color: white;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.social-icon {
+    color: #fff;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    color: #4a90e2;
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .footer-section ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .cta-section {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cta-section p {
+        margin: 0 auto 20px;
+        max-width: 300px;
+    }
 }
 
 .cta-section {
@@ -1065,4 +1156,134 @@ font-size: 16px;
 .social-icon svg {
     width: 24px;
     height: 24px;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: auto; /* Push to the right */
+}
+
+.mobile-menu-btn span {
+    width: 30px;
+    height: 3px;
+    background-color: #334d95;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 1001;
+    display: none;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    transform: translateY(0);
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.mobile-menu-content a {
+    color: #334d95;
+    text-decoration: none;
+    font-size: 24px;
+    margin: 15px 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+/* Hide contact link in mobile menu */
+.mobile-menu-content a[href="#contact"] {
+    display: none;
+}
+
+.mobile-menu-content a:hover {
+    color: #1E3A8A;
+    background-color: #f0f4ff;
+    border-radius: 4px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu-overlay {
+        display: block;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Contact Section */
+.contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.contact-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px 30px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.icon.hello {
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .contact-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .contact-card {
+        width: 100%;
+        max-width: 300px;
+        padding: 30px 20px;
+    }
+
+    .icon.hello {
+        margin: 0 auto 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
