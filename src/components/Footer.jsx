@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { siteImages } from "../data/siteImages";
+import Logo from "./Logo";
 
 const footerLinks = [
   { to: "/courses", label: "Courses" },
@@ -50,11 +50,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <img
-                src={siteImages.logo}
-                alt="10X Wealth Creators"
-                className="h-11 w-11 rounded-xl object-cover"
-              />
+              <Logo size="lg" />
               <p className="text-xl font-bold tracking-tight text-text">
                 Wealth <span className="text-primary">Creators</span>
               </p>

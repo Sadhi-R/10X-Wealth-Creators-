@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { siteImages } from "../data/siteImages";
+
+const fallbackImage = siteImages.heroBackground;
 
 export default function CourseCard({ course, showDetails = true, featured = false }) {
+  const [imgSrc, setImgSrc] = useState(course.image);
+
   return (
     <article
       className={`group card card-hover flex flex-col overflow-hidden ${featured ? "lg:flex-row" : ""}`}
@@ -11,8 +17,9 @@ export default function CourseCard({ course, showDetails = true, featured = fals
         }`}
       >
         <img
-          src={course.image}
+          src={imgSrc}
           alt={course.title}
+          onError={() => setImgSrc(fallbackImage)}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           loading="lazy"
         />

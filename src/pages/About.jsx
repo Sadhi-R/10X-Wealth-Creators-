@@ -7,13 +7,15 @@ const mentors = [
     name: "Sampath Kumar",
     role: "Growth Mindset Mentor",
     image: siteImages.mentors.sampath,
-    bio: "Helps individuals shift their mindset for success. Trains on confidence-building, goal-setting, and high-performance habits that support long-term personal and professional growth.",
+    bio: "Sampath Kumar helps individuals shift from limiting beliefs to a success-oriented mindset. He specializes in confidence-building, goal-setting, emotional resilience, and high-performance habits that support long-term personal and professional growth.",
+    focus: ["Mindset transformation", "Goal-setting frameworks", "Confidence & habits", "Emotional clarity"],
   },
   {
     name: "Ram Prasad",
     role: "Business Mentor",
     image: siteImages.mentors.ram,
-    bio: "Guides professionals to start and scale businesses with expertise in digital marketing, business automation, and revenue growth strategies — always grounded in practical, effort-based outcomes.",
+    bio: "Ram Prasad guides professionals and entrepreneurs to start, structure, and scale businesses with practical strategy. His expertise includes digital marketing, business automation, AI-enabled workflows, and revenue growth planning grounded in consistent effort.",
+    focus: ["Business strategy", "Digital marketing", "Automation systems", "AI for business growth"],
   },
 ];
 
@@ -79,22 +81,36 @@ export default function About() {
           <SectionHeader
             eyebrow="Mentors"
             title="Learn from experienced guides"
-            description="Our mentors bring real-world experience in mindset coaching, business strategy, and skill development."
+            description="Our mentors combine mindset coaching and business strategy to help you grow with clarity, consistency, and practical action."
             align="center"
             className="mb-14"
           />
           <div className="grid gap-8 md:grid-cols-2">
             {mentors.map((mentor) => (
               <article key={mentor.name} className="card card-hover overflow-hidden">
-                <img
-                  src={mentor.image}
-                  alt={mentor.name}
-                  className="h-64 w-full object-cover object-top"
-                />
+                <div className="relative aspect-[4/3] overflow-hidden bg-surface-elevated">
+                  <img
+                    src={mentor.image}
+                    alt={mentor.name}
+                    className="h-full w-full object-cover object-top"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                </div>
                 <div className="p-8 sm:p-10">
-                  <h3 className="text-xl font-bold text-text">{mentor.name}</h3>
+                  <h3 className="text-2xl font-bold text-text">{mentor.name}</h3>
                   <p className="mt-1 text-sm font-semibold text-primary">{mentor.role}</p>
-                  <p className="mt-4 text-base leading-relaxed text-text-muted">{mentor.bio}</p>
+                  <p className="mt-5 text-base leading-relaxed text-text-muted">{mentor.bio}</p>
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {mentor.focus.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-primary/20 bg-accent-soft px-3 py-1 text-xs font-medium text-primary"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </article>
             ))}

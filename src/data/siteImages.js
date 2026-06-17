@@ -1,13 +1,19 @@
 export const siteImages = {
-  logo: "/images/Logo1.png",
-  logoIcon: "/images/Logo.png",
-  heroBackground: "/images/Background.png",
+  logo: "/images/logo.png",
+  favicon: "/images/favicon.png",
+  heroBackground: "/images/hero-background.png",
   mentors: {
-    sampath: "/images/Sampathkumar.jpg",
-    ram: "/images/Ramprasad.jpg",
+    sampath: "/images/sampath-kumar.jpg",
+    ram: "/images/ram-prasad.jpg",
   },
   testimonials: {
-    sadhi: "/images/Sadhi%20Thumbnail.jpg",
-    rajitha: "/images/Rajitha%20Thumnail.png",
+    sadhi: "/images/sadhi-thumbnail.jpg",
+    rajitha: "/images/rajitha-thumbnail.png",
+  },
+  courses: {
+    emotionalCleansing: "/images/courses/emotional-cleansing.jpg",
+    businessAbundance: "/images/courses/business-abundance.jpg",
+    selfDiscovery: "/images/courses/self-discovery.jpg",
+    aiTools: "/images/courses/ai-tools-for-growth.jpg",
   },
 };

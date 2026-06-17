@@ -51,9 +51,13 @@ export default function CourseDetail() {
           <div className="lg:col-span-2">
             <section>
               <h2 className="text-2xl font-bold text-text">About this program</h2>
-              <p className="mt-5 text-lg leading-relaxed text-text-muted">
-                {course.description}
-              </p>
+              <div className="mt-5 space-y-5">
+                {course.description.split("\n\n").map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className="text-lg leading-relaxed text-text-muted">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </section>
 
             <section className="mt-12">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import Button from "./ui/Button";
-import { siteImages } from "../data/siteImages";
+import Logo from "./Logo";
 
 const navLinks = [
   { to: "/", label: "Home", end: true },
@@ -31,17 +31,7 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         <Link to="/" className="group flex items-center gap-3">
-          <span className="relative">
-            <img
-              src={siteImages.logo}
-              alt="10X Wealth Creators"
-              className="relative h-10 w-10 rounded-xl object-cover ring-2 ring-primary/20 transition-all duration-300 group-hover:ring-primary/50"
-            />
-            <span
-              className="absolute -inset-1 -z-10 rounded-xl bg-primary/20 blur-md opacity-0 transition-opacity group-hover:opacity-100"
-              aria-hidden="true"
-            />
-          </span>
+          <Logo size="md" showGlow />
           <span className="hidden text-base font-bold tracking-tight text-text sm:block">
             Wealth <span className="text-primary">Creators</span>
           </span>

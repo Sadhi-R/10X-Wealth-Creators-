@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
 import Button from "../components/ui/Button";
+import Logo from "../components/Logo";
 import SectionHeader from "../components/ui/SectionHeader";
 import { courses } from "../data/courses";
 import { siteImages } from "../data/siteImages";
@@ -131,12 +132,7 @@ export default function Home() {
 
             <div className="glass-strong animate-float rounded-3xl p-8 sm:p-10" style={{ animationDelay: "1s" }}>
               <div className="flex items-center gap-4">
-                <img
-                  src={siteImages.logo}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-14 w-14 rounded-2xl object-cover ring-2 ring-primary/30"
-                />
+                <Logo size="lg" />
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                     Our Mission
@@ -282,6 +278,50 @@ export default function Home() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Mentors */}
+      <section className="section-container section-padding">
+        <SectionHeader
+          eyebrow="Meet Your Mentors"
+          title="Guidance from practitioners, not just theory"
+          description="Learn from mentors who focus on mindset, business strategy, and practical skill-building."
+          align="center"
+          className="mb-14"
+        />
+        <div className="grid gap-8 md:grid-cols-2">
+          {[
+            {
+              name: "Sampath Kumar",
+              role: "Growth Mindset Mentor",
+              image: siteImages.mentors.sampath,
+              text: "Helps you build confidence, emotional clarity, and high-performance habits for lasting personal growth.",
+            },
+            {
+              name: "Ram Prasad",
+              role: "Business Mentor",
+              image: siteImages.mentors.ram,
+              text: "Guides you through business planning, digital marketing, automation, and AI-enabled growth strategies.",
+            },
+          ].map((mentor) => (
+            <article key={mentor.name} className="card card-hover overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={mentor.image}
+                  alt={mentor.name}
+                  className="h-full w-full object-cover object-top"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <h3 className="text-xl font-bold">{mentor.name}</h3>
+                  <p className="text-sm text-white/90">{mentor.role}</p>
+                </div>
+              </div>
+              <p className="p-6 text-base leading-relaxed text-text-muted">{mentor.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
