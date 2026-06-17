@@ -9,7 +9,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface/60 text-text-muted backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border/80 bg-surface/60 text-text-muted backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
       {isDark ? (
         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

@@ -20,11 +20,11 @@ export default function CourseCard({ course, showDetails = true, featured = fals
           src={imgSrc}
           alt={course.title}
           onError={() => setImgSrc(fallbackImage)}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <span className="absolute left-5 top-5 rounded-full border border-white/20 bg-black/30 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-md">
           Course
         </span>
@@ -52,10 +52,10 @@ export default function CourseCard({ course, showDetails = true, featured = fals
         {showDetails && (
           <Link
             to={`/courses/${course.slug}`}
-            className="btn-primary mt-7 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+            className="btn-primary mt-7 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200"
           >
             View Details
-            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+            <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
               &rarr;
             </span>
           </Link>

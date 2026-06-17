@@ -15,6 +15,7 @@ const sizes = {
 
 export default function Button({
   to,
+  href,
   variant = "primary",
   size = "md",
   className = "",
@@ -23,11 +24,25 @@ export default function Button({
   ...props
 }) {
   const classes = [
-    "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+    "inline-flex cursor-pointer items-center justify-center gap-2 font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
     variants[variant],
     sizes[size],
     className,
   ].join(" ");
+
+  if (href) {
+    const external = href.startsWith("http");
+    return (
+      <a
+        href={href}
+        className={classes}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
 
   if (to) {
     return (

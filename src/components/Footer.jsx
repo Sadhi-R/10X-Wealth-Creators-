@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import { classplusUrl, contact } from "../data/siteContent";
 
 const footerLinks = [
   { to: "/courses", label: "Courses" },
   { to: "/about", label: "About" },
+  { to: "/testimonials", label: "Testimonials" },
   { to: "/privacy-policy", label: "Privacy Policy" },
   { to: "/terms-and-conditions", label: "Terms & Conditions" },
   { to: "/disclaimer", label: "Disclaimer" },
@@ -44,7 +46,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-8 border-t border-border/60 bg-surface">
+    <footer className="relative mt-8 border-t border-border/60 bg-transparent backdrop-blur-sm">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="section-container py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
@@ -52,17 +54,25 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <Logo size="lg" />
               <p className="text-xl font-bold tracking-tight text-text">
-                Wealth <span className="text-primary">Creators</span>
+                <span className="text-primary">10X</span> Wealth Creators
               </p>
             </div>
             <p className="mt-5 max-w-md text-base leading-relaxed text-text-muted">
               Educational coaching for mindset, purpose, and practical business growth.
-              We help you build clarity and skills — not financial guarantees.
+              Join our mission to help people find passion, build multiple income
+              skills, and grow with community support.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-text-muted">
-              Hyderabad, India &middot; Coaching &amp; education only — not financial,
-              legal, or investment advice.
+              Coaching &amp; education only — not financial, legal, or investment advice.
             </p>
+            <a
+              href={classplusUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover"
+            >
+              Enroll on ClassPlus &rarr;
+            </a>
           </div>
 
           <div className="lg:col-span-3">
@@ -73,7 +83,7 @@ export default function Footer() {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-base text-text-muted transition-colors hover:text-primary"
+                      className="cursor-pointer text-base text-text-muted transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                     >
                       {link.label}
                     </Link>
@@ -87,13 +97,13 @@ export default function Footer() {
             <p className="text-sm font-semibold uppercase tracking-wider text-text">Connect</p>
             <ul className="mt-5 space-y-3 text-base text-text-muted">
               <li>
-                <a href="mailto:10xwealthcreators@gmail.com" className="hover:text-primary">
-                  10xwealthcreators@gmail.com
+                <a href={`mailto:${contact.email}`} className="cursor-pointer transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  {contact.email}
                 </a>
               </li>
               <li>
-                <a href="tel:+919441415563" className="hover:text-primary">
-                  +91 94414 15563
+                <a href={contact.phoneHref} className="cursor-pointer transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  {contact.phone}
                 </a>
               </li>
             </ul>
@@ -105,7 +115,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-surface-elevated/50 text-text-muted backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:text-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border/80 bg-surface-elevated/50 text-text-muted backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:text-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {social.icon}
                 </a>

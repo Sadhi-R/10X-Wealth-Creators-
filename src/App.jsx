@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import Testimonials from "./pages/Testimonials";
 import Disclaimer from "./pages/Disclaimer";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="courses" element={<Courses />} />
         <Route path="courses/:slug" element={<CourseDetail />} />
         <Route path="about" element={<About />} />
+        <Route path="testimonials" element={<Testimonials />} />
         <Route path="contact" element={<Contact />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="terms-and-conditions" element={<TermsAndConditions />} />

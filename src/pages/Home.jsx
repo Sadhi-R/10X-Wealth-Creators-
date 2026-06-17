@@ -1,50 +1,55 @@
 import { Link } from "react-router-dom";
+import TiltCard from "../components/background/TiltCard";
 import CourseCard from "../components/CourseCard";
 import Button from "../components/ui/Button";
+import CheckIcon from "../components/ui/CheckIcon";
 import Logo from "../components/Logo";
 import SectionHeader from "../components/ui/SectionHeader";
 import { courses } from "../data/courses";
+import {
+  aboutStory,
+  brand,
+  classplusUrl,
+  elitePrograms,
+  mentors as mentorData,
+  stats,
+  whyUs,
+} from "../data/siteContent";
 import { siteImages } from "../data/siteImages";
+import { testimonials } from "../data/testimonials";
 
-const stats = [
-  { value: "10,200+", label: "Community members worldwide" },
-  { value: "4", label: "Focused learning programs" },
-  { value: "24/7", label: "Community support access" },
-  { value: "100%", label: "Mindset-first coaching approach" },
-];
+const mentorImages = {
+  sampath: siteImages.mentors.sampath,
+  ram: siteImages.mentors.ram,
+};
 
-const pillars = [
-  {
-    title: "Find Your Purpose",
-    description:
-      "Discover what genuinely drives you and learn how to shape it into meaningful work. Clarity comes before strategy — we help you identify your strengths, values, and direction before you build.",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Growth Mindset",
-    description:
-      "Develop the habits, confidence, and resilience that support long-term progress. Our coaching emphasizes inner shifts — limiting beliefs, self-doubt, and emotional blocks — as the foundation for outer results.",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Practical Strategy",
-    description:
-      "Apply modern tools — including AI — and proven business frameworks to turn insight into action. Learn marketing basics, planning systems, and skill-building approaches you can use immediately.",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-      </svg>
-    ),
-  },
+const pillarIcons = [
+  (
+    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+    </svg>
+  ),
+  (
+    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+    </svg>
+  ),
+  (
+    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  (
+    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
+    </svg>
+  ),
+  (
+    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+    </svg>
+  ),
 ];
 
 const steps = [
@@ -61,7 +66,7 @@ const steps = [
   {
     step: "03",
     title: "Learn Skills",
-    text: "Gain practical knowledge in business planning, AI tools, and modern growth strategies through guided programs.",
+    text: "Gain practical knowledge in business planning, AI tools, automation, and modern growth strategies through guided programs.",
   },
   {
     step: "04",
@@ -70,22 +75,7 @@ const steps = [
   },
 ];
 
-const testimonials = [
-  {
-    id: 1,
-    role: "Illustrative example — tech professional",
-    image: siteImages.testimonials.sadhi,
-    quote:
-      "After years in software engineering, I wanted to share what I'd learned without leaving my values behind. Working with this community helped me shift from employee mindset to mentoring others — using AI tools and business strategy in a way that felt authentic, not rushed.",
-  },
-  {
-    id: 2,
-    role: "Illustrative example — coaching & personal growth",
-    image: siteImages.testimonials.rajitha,
-    quote:
-      "I always sensed my personal growth work and my business goals were connected, but I didn't know how to bridge them. The coaching here helped me align inner clarity with practical steps — and build a practice that reflects who I actually am.",
-  },
-];
+const featuredTestimonials = testimonials.slice(0, 3);
 
 export default function Home() {
   return (
@@ -97,10 +87,10 @@ export default function Home() {
             src={siteImages.heroBackground}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover animate-ken-burns"
+            className="h-full w-full object-cover opacity-35 animate-ken-burns"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/90 to-bg/55" />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-bg/60 via-bg/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent" />
           <div className="hero-pattern absolute inset-0" aria-hidden="true" />
         </div>
 
@@ -110,44 +100,45 @@ export default function Home() {
         <div className="section-container relative flex min-h-[90vh] items-center py-24 lg:py-32">
           <div className="grid w-full items-center gap-14 lg:grid-cols-2 lg:gap-20">
             <div className="animate-fade-up">
-              <p className="badge">Coaching &amp; Education</p>
-              <h1 className="mt-7 text-4xl font-bold tracking-tight text-text sm:text-5xl lg:text-[3.5rem] lg:leading-[1.06]">
-                Transform your mindset.{" "}
-                <span className="gradient-text">Build with purpose.</span>
+              <p className="badge">{brand.name}</p>
+              <h1 className="font-display mt-7 text-[clamp(2.25rem,5.5vw,4rem)] font-bold tracking-tight text-text leading-[1.05]">
+                Transforming lives by helping{" "}
+                <span className="gradient-text">{brand.missionGoal}</span> find their passion
+                &amp; purpose
               </h1>
               <p className="mt-7 text-lg leading-relaxed text-text-muted sm:text-xl">
-                10X Wealth Creators helps you connect inner growth with practical
-                business building — through coaching, community, and skill-based
-                programs designed for real-world application.
+                Join our mission to create financial freedom through purpose-driven
+                entrepreneurship. Unlock your full potential and build sustainable,
+                profitable income sources — with mindset coaching, mentorship, and
+                practical skills.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
-                <Button to="/courses" size="lg">
-                  Explore Courses
+                <Button href={classplusUrl} size="lg">
+                  Start Your Journey
                 </Button>
-                <Button to="/about" variant="secondary" size="lg">
-                  Our Story
+                <Button to="/courses" variant="secondary" size="lg">
+                  Explore Courses
                 </Button>
               </div>
             </div>
 
-            <div className="glass-strong animate-float rounded-3xl p-8 sm:p-10" style={{ animationDelay: "1s" }}>
+            <TiltCard className="glass-strong animate-float rounded-3xl p-8 sm:p-10" style={{ animationDelay: "1s" }}>
               <div className="flex items-center gap-4">
                 <Logo size="lg" />
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                    Our Mission
+                    {brand.tagline}
                   </p>
-                  <p className="text-sm text-text-muted">Purpose-driven growth</p>
+                  <p className="text-sm text-text-muted">Hyderabad, India</p>
                 </div>
               </div>
-              <p className="mt-6 text-2xl font-semibold leading-snug text-text">
-                Helping people find passion, purpose, and the skills to build a life
-                aligned with their values.
+              <p className="mt-6 text-2xl font-semibold leading-snug text-text sm:text-[1.65rem]">
+                {brand.missionStatement}
               </p>
               <p className="mt-5 text-base leading-relaxed text-text-muted">
-                Whether you&apos;re a student, employee, entrepreneur, or career changer
-                — we provide the mindset, strategies, and community to support your
-                growth journey.
+                Whether you&apos;re a student, employee, engineer, entrepreneur, or career
+                changer — we provide mindset coaching, business strategy, and community
+                support for your growth journey.
               </p>
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {stats.slice(0, 2).map((stat) => (
@@ -157,7 +148,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </div>
+            </TiltCard>
           </div>
         </div>
       </section>
@@ -180,27 +171,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pillars */}
+      {/* Why 10X Wealth Creators */}
       <section className="section-container section-padding">
         <SectionHeader
-          eyebrow="What We Offer"
-          title="Mindset, purpose, and practical skills — together"
-          description="Most programs teach tactics without addressing the inner work. We integrate both, because sustainable growth starts from who you are and how you think."
+          eyebrow="Why 10X Wealth Creators?"
+          title="A complete path from purpose to practical action"
+          description="We integrate mindset, financial education, multiple income strategies, and entrepreneurship skills — because sustainable growth requires inner clarity and outer execution."
           align="center"
           className="mb-16"
         />
-        <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
-          {pillars.map((pillar, i) => (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {whyUs.map((pillar, i) => (
             <article
               key={pillar.title}
               className="card card-hover group relative overflow-hidden p-8 sm:p-10"
               style={{ animationDelay: `${i * 100}ms` }}
             >
               <div
-                className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary/5 transition-all duration-500 group-hover:bg-primary/10"
+                className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary/5 transition-all duration-300 group-hover:bg-primary/10"
                 aria-hidden="true"
               />
-              <div className="icon-box">{pillar.icon}</div>
+              <p className="text-sm font-bold text-primary">{pillar.step}</p>
+              <div className="icon-box mt-5">{pillarIcons[i]}</div>
               <h3 className="mt-7 text-xl font-bold text-text">{pillar.title}</h3>
               <p className="mt-4 text-base leading-relaxed text-text-muted">
                 {pillar.description}
@@ -210,72 +202,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Methodology */}
+      {/* Elite Programs */}
       <section className="section-alt border-y border-border/60">
         <div className="section-container section-padding">
           <SectionHeader
-            eyebrow="How It Works"
-            title="A clear path from clarity to action"
-            description="Our approach is structured but flexible — you move at your pace, with guidance at every stage."
+            eyebrow="Elite Programs"
+            title="Transform your life with our programs"
+            description="Four integrated learning paths covering passion discovery, mindset mastery, business planning, and multiple income stream strategies."
             align="center"
-            className="mb-16"
+            className="mb-14"
           />
-          <div className="relative grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            <div
-              className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent xl:block"
-              aria-hidden="true"
-            />
-            {steps.map((item) => (
-              <article key={item.step} className="card card-hover relative p-7 sm:p-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-sm font-bold text-white shadow-lg" style={{ boxShadow: "var(--shadow-glow)" }}>
-                  {item.step}
-                </div>
-                <h3 className="mt-6 text-lg font-bold text-text">{item.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-text-muted">{item.text}</p>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {elitePrograms.map((program) => (
+              <article key={program.title} className="card card-hover p-8 sm:p-10">
+                <h3 className="text-xl font-bold text-text">{program.title}</h3>
+                <p className="mt-4 text-base leading-relaxed text-text-muted">
+                  {program.description}
+                </p>
               </article>
             ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Button href={classplusUrl} size="lg">
+              Discover Comprehensive Solutions
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* About snippet */}
+      {/* Methodology */}
       <section className="section-container section-padding">
-        <div className="grid items-center gap-14 lg:grid-cols-2">
-          <div>
-            <SectionHeader
-              eyebrow="About 10X Wealth Creators"
-              title="Empowering dreams, creating leaders"
-              description="We are a coaching and education brand dedicated to helping individuals unlock their full potential through the right mindset, strategies, and business knowledge."
-            />
-            <p className="mt-6 text-base leading-relaxed text-text-muted">
-              Our community brings together people who want more than quick fixes —
-              they want lasting clarity, practical skills, and a supportive network.{" "}
-              <em className="text-text">[Placeholder — edit this section to match your voice.]</em>
-            </p>
-            <Button to="/about" variant="secondary" className="mt-8">
-              Learn More About Us
-            </Button>
-          </div>
-          <div className="card overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
-            <div className="p-8 sm:p-10">
-              <h3 className="text-xl font-bold text-text">What makes us different</h3>
-              <ul className="mt-7 space-y-5">
-                {[
-                  "Mindset-first coaching before tactics and tools",
-                  "Spiritual and personal growth integrated with business strategy",
-                  "Practical AI and modern skill-building for today's economy",
-                  "Community support — you're not building alone",
-                  "Honest framing — no guaranteed income or results",
-                ].map((item) => (
-                  <li key={item} className="flex gap-4 text-base text-text-muted">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xs font-bold text-primary">
-                      ✓
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+        <SectionHeader
+          eyebrow="How It Works"
+          title="A clear path from clarity to action"
+          description="Our approach is structured but flexible — you move at your pace, with guidance at every stage."
+          align="center"
+          className="mb-16"
+        />
+        <div className="relative grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div
+            className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent xl:block"
+            aria-hidden="true"
+          />
+          {steps.map((item) => (
+            <article key={item.step} className="card card-hover relative p-7 sm:p-8">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-fg shadow-lg" style={{ boxShadow: "var(--shadow-glow)" }}>
+                {item.step}
+              </div>
+              <h3 className="mt-6 text-lg font-bold text-text">{item.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-text-muted">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* About snippet */}
+      <section className="section-alt border-y border-border/60">
+        <div className="section-container section-padding">
+          <div className="grid items-center gap-14 lg:grid-cols-2">
+            <div>
+              <SectionHeader
+                eyebrow="About 10X Wealth Creators"
+                title={aboutStory.headline}
+                description={aboutStory.intro}
+              />
+              <p className="mt-6 text-base leading-relaxed text-text-muted">
+                {aboutStory.extended}
+              </p>
+              <Button to="/about" variant="secondary" className="mt-8">
+                Learn More About Us
+              </Button>
+            </div>
+            <div className="card overflow-hidden">
+              <div className="h-2 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
+              <div className="p-8 sm:p-10">
+                <h3 className="text-xl font-bold text-text">What makes us different</h3>
+                <ul className="mt-7 space-y-5">
+                  {aboutStory.values.map((item) => (
+                    <li key={item} className="flex gap-4 text-base text-text-muted">
+                      <span className="check-badge mt-0.5">
+                        <CheckIcon className="h-3.5 w-3.5" />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -285,30 +297,17 @@ export default function Home() {
       <section className="section-container section-padding">
         <SectionHeader
           eyebrow="Meet Your Mentors"
-          title="Guidance from practitioners, not just theory"
-          description="Learn from mentors who focus on mindset, business strategy, and practical skill-building."
+          title="Sampath Kumar & Ram Prasad"
+          description="Expert mentorship combining growth mindset psychology and engineers-focused business strategy."
           align="center"
           className="mb-14"
         />
         <div className="grid gap-8 md:grid-cols-2">
-          {[
-            {
-              name: "Sampath Kumar",
-              role: "Growth Mindset Mentor",
-              image: siteImages.mentors.sampath,
-              text: "Helps you build confidence, emotional clarity, and high-performance habits for lasting personal growth.",
-            },
-            {
-              name: "Ram Prasad",
-              role: "Business Mentor",
-              image: siteImages.mentors.ram,
-              text: "Guides you through business planning, digital marketing, automation, and AI-enabled growth strategies.",
-            },
-          ].map((mentor) => (
+          {mentorData.map((mentor) => (
             <article key={mentor.name} className="card card-hover overflow-hidden">
               <div className="relative aspect-[16/10] overflow-hidden">
                 <img
-                  src={mentor.image}
+                  src={mentorImages[mentor.imageKey]}
                   alt={mentor.name}
                   className="h-full w-full object-cover object-top"
                   loading="lazy"
@@ -317,9 +316,10 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 p-6 text-white">
                   <h3 className="text-xl font-bold">{mentor.name}</h3>
                   <p className="text-sm text-white/90">{mentor.role}</p>
+                  <p className="mt-1 text-xs text-white/75">{mentor.credentials}</p>
                 </div>
               </div>
-              <p className="p-6 text-base leading-relaxed text-text-muted">{mentor.text}</p>
+              <p className="p-6 text-base leading-relaxed text-text-muted">{mentor.bio}</p>
             </article>
           ))}
         </div>
@@ -330,17 +330,22 @@ export default function Home() {
         <div className="section-container section-padding">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeader
-              eyebrow="Programs"
-              title="Courses designed for real growth"
-              description="Four focused programs covering emotional clarity, abundance mindset, self-discovery, and practical AI skills."
+              eyebrow="In-Demand · Our Courses"
+              title="Programs designed for real growth"
+              description="Focused courses covering emotional clarity, abundance mindset, self-discovery, and practical AI skills — available on our learning platform."
             />
-            <Link
-              to="/courses"
-              className="btn-primary inline-flex shrink-0 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
-            >
-              View all courses
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Button href={classplusUrl} size="md">
+                Enroll on ClassPlus
+              </Button>
+              <Link
+                to="/courses"
+                className="btn-primary inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200"
+              >
+                View all courses
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
           </div>
           <div className="mt-14 grid gap-8 sm:grid-cols-2">
             {courses.map((course) => (
@@ -353,42 +358,44 @@ export default function Home() {
       {/* Testimonials */}
       <section className="section-container section-padding">
         <SectionHeader
-          eyebrow="Community Stories"
-          title="Transformation at the intersection of inner work and action"
-          description="Illustrative examples — not verified testimonials from named individuals."
+          eyebrow="Success Stories"
+          title="Hear from students and professionals who transformed their lives"
+          description="Stories from our community. Individual results vary — these are personal experiences, not guaranteed outcomes."
           align="center"
           className="mb-16"
         />
-        <div className="grid gap-8 lg:grid-cols-2">
-          {testimonials.map((item) => (
-            <blockquote key={item.id} className="card card-hover group overflow-hidden">
+        <div className="grid gap-8 lg:grid-cols-3">
+          {featuredTestimonials.map((item) => (
+            <blockquote key={item.id} className="card card-hover group flex flex-col overflow-hidden">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
                   src={item.image}
                   alt=""
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               </div>
-              <div className="relative p-8 sm:p-10">
-                <span
-                  className="absolute -top-5 left-8 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-lg font-serif text-white"
-                  style={{ boxShadow: "var(--shadow-glow)" }}
-                  aria-hidden="true"
-                >
-                  &ldquo;
-                </span>
-                <p className="mt-4 text-lg leading-relaxed text-text-muted">
-                  {item.quote}
+              <div className="relative flex flex-1 flex-col p-8">
+                <p className="text-sm font-semibold text-primary">{item.title}</p>
+                <p className="mt-4 flex-1 text-base leading-relaxed text-text-muted">
+                  &ldquo;{item.quote}&rdquo;
                 </p>
-                <footer className="mt-6 flex items-center gap-3">
-                  <div className="h-px flex-1 bg-border" />
-                  <span className="text-sm font-semibold text-primary">{item.role}</span>
+                <footer className="mt-6 border-t border-border pt-5">
+                  <cite className="block text-sm font-semibold not-italic text-text">
+                    {item.name}
+                  </cite>
+                  <p className="mt-1 text-xs text-text-muted">{item.role}</p>
+                  <p className="mt-2 text-xs text-primary">Mentor: {item.mentor}</p>
                 </footer>
               </div>
             </blockquote>
           ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Button to="/testimonials" variant="secondary">
+            View All Success Stories
+          </Button>
         </div>
       </section>
 
@@ -401,19 +408,19 @@ export default function Home() {
             <div className="grid lg:grid-cols-2">
               <div className="p-8 sm:p-12 lg:p-14">
                 <p className="badge">Get Started</p>
-                <h2 className="mt-6 text-3xl font-bold tracking-tight text-text sm:text-4xl">
-                  Ready to begin your growth journey?
+                <h2 className="font-display mt-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold tracking-tight text-text leading-[1.1]">
+                  Confused about where to start? Let&apos;s find the right path for you.
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-text-muted">
-                  Explore our courses, connect with our community, or reach out with
-                  questions. We&apos;re here to support your next step.
+                  Reach out today or join our learning platform to take your first step
+                  toward mindset growth, skill-building, and purpose-driven action.
                 </p>
                 <div className="mt-9 flex flex-wrap gap-4">
-                  <Button to="/courses" size="lg">
-                    Browse Courses
+                  <Button href={classplusUrl} size="lg">
+                    Start Your Journey
                   </Button>
                   <Button to="/contact" variant="secondary" size="lg">
-                    Contact Us
+                    Book a Free Call
                   </Button>
                 </div>
               </div>
@@ -430,7 +437,7 @@ export default function Home() {
                 </p>
                 <Link
                   to="/disclaimer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-hover"
+                  className="mt-6 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   Read full disclaimer <span aria-hidden="true">&rarr;</span>
                 </Link>

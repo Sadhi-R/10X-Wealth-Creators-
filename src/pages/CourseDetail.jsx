@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/ui/Button";
+import CheckIcon from "../components/ui/CheckIcon";
 import { getCourseBySlug } from "../data/courses";
+import { classplusUrl } from "../data/siteContent";
 
 export default function CourseDetail() {
   const { slug } = useParams();
@@ -25,7 +27,7 @@ export default function CourseDetail() {
           alt={course.title}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-bg/30 to-transparent" />
         <div className="section-container relative section-padding">
           <Link
             to="/courses"
@@ -41,7 +43,7 @@ export default function CourseDetail() {
             {course.shortDescription}
           </p>
           <p className="mt-3 text-sm font-semibold uppercase tracking-wider text-primary">
-            DRAFT content — pending your review
+            {course.mentor}
           </p>
         </div>
       </section>
@@ -66,10 +68,10 @@ export default function CourseDetail() {
                 {course.learnings.map((item) => (
                   <li key={item} className="card flex gap-4 p-5">
                     <span
-                      className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-sm font-bold text-primary"
+                      className="check-badge mt-1 shrink-0"
                       aria-hidden="true"
                     >
-                      ✓
+                      <CheckIcon className="h-3.5 w-3.5" />
                     </span>
                     <span className="text-base leading-relaxed text-text-muted">{item}</span>
                   </li>
@@ -102,12 +104,14 @@ export default function CourseDetail() {
 
             <div className="card border-primary/20 bg-accent-soft/50 p-6 sm:p-8">
               <p className="text-sm leading-relaxed text-text-muted">
-                This page is informational only. Enrollment and payment are not
-                available on this site yet. Contact us to learn more about joining a
-                program.
+                Enroll and purchase this program on our official ClassPlus learning
+                platform. For questions before enrolling, contact our team directly.
               </p>
-              <Button to="/contact" className="mt-5 w-full">
-                Get in Touch
+              <Button href={classplusUrl} className="mt-5 w-full">
+                Buy Now on ClassPlus
+              </Button>
+              <Button to="/contact" variant="secondary" className="mt-3 w-full">
+                Ask the Expert
               </Button>
             </div>
           </aside>

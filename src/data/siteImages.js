@@ -1,5 +1,5 @@
 export const siteImages = {
-  logo: "/images/logo.png",
+  logo: "/images/Logo.png",
   favicon: "/images/favicon.png",
   heroBackground: "/images/hero-background.png",
   mentors: {

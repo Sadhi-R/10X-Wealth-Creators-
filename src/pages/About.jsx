@@ -1,49 +1,54 @@
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
+import Button from "../components/ui/Button";
+import CheckIcon from "../components/ui/CheckIcon";
+import {
+  aboutStory,
+  classplusUrl,
+  contact,
+  mentors,
+  stats,
+} from "../data/siteContent";
 import { siteImages } from "../data/siteImages";
 
-const mentors = [
-  {
-    name: "Sampath Kumar",
-    role: "Growth Mindset Mentor",
-    image: siteImages.mentors.sampath,
-    bio: "Sampath Kumar helps individuals shift from limiting beliefs to a success-oriented mindset. He specializes in confidence-building, goal-setting, emotional resilience, and high-performance habits that support long-term personal and professional growth.",
-    focus: ["Mindset transformation", "Goal-setting frameworks", "Confidence & habits", "Emotional clarity"],
-  },
-  {
-    name: "Ram Prasad",
-    role: "Business Mentor",
-    image: siteImages.mentors.ram,
-    bio: "Ram Prasad guides professionals and entrepreneurs to start, structure, and scale businesses with practical strategy. His expertise includes digital marketing, business automation, AI-enabled workflows, and revenue growth planning grounded in consistent effort.",
-    focus: ["Business strategy", "Digital marketing", "Automation systems", "AI for business growth"],
-  },
-];
+const mentorImages = {
+  sampath: siteImages.mentors.sampath,
+  ram: siteImages.mentors.ram,
+};
 
 export default function About() {
   return (
     <>
       <PageHero
         eyebrow="Our Story"
-        title="Empowering dreams, creating leaders"
-        description="10X Wealth Creators is a coaching and education brand helping individuals find clarity, build mindset, and take practical steps toward purpose-driven work and business building."
-      />
+        title={aboutStory.headline}
+        description={aboutStory.subheadline}
+      >
+        <div className="mt-8">
+          <Button href={classplusUrl} size="lg">
+            Start Your Journey With Us
+          </Button>
+        </div>
+      </PageHero>
 
       <section className="section-container section-padding">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
             <SectionHeader
               eyebrow="Mission"
-              title="We believe lasting change starts from within"
-              description="Our mission is to help people discover their passion and purpose — then equip them with the mindset, strategies, and skills to build a life aligned with their values."
+              title="Empowering you to achieve financial freedom and growth"
+              description="Transforming mindsets, creating wealth skills, and unlocking success through education and coaching."
             />
             <p className="mt-6 text-lg leading-relaxed text-text-muted">
-              Whether you&apos;re a student exploring options, an employee considering a
-              pivot, or an entrepreneur refining your path — we meet you where you are.
-              Our programs integrate emotional clarity, abundance thinking, and modern
-              tools like AI into a cohesive growth experience.
+              {aboutStory.intro}
             </p>
             <p className="mt-5 text-lg leading-relaxed text-text-muted">
-              <em className="text-text">[Placeholder — edit this section to reflect your brand story.]</em>
+              {aboutStory.extended}
+            </p>
+            <p className="mt-5 text-lg leading-relaxed text-text-muted">
+              Through expert mentorship, proven strategies, and a powerful community,
+              we guide you on the path to personal growth and practical business
+              building — with honesty about what coaching can and cannot guarantee.
             </p>
           </div>
 
@@ -58,15 +63,11 @@ export default function About() {
             <div className="card p-8 sm:p-10">
               <h3 className="text-xl font-bold text-text">Our values</h3>
               <ul className="mt-6 space-y-5">
-                {[
-                  "Integrity — honest about what coaching can and cannot do",
-                  "Growth — mindset-first, always learning, always evolving",
-                  "Community — no one builds alone",
-                  "Practicality — skills and tools you can apply immediately",
-                  "Responsibility — your results depend on your effort and commitment",
-                ].map((item) => (
+                {aboutStory.values.map((item) => (
                   <li key={item} className="flex gap-3 text-base text-text-muted">
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" aria-hidden="true" />
+                    <span className="check-badge mt-0.5">
+                      <CheckIcon className="h-3.5 w-3.5" />
+                    </span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -76,12 +77,25 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface">
+      <section className="section-alt border-y border-border">
+        <div className="section-container section-padding">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.label} className="card p-6 text-center sm:p-8">
+                <p className="text-3xl font-bold gradient-text">{stat.value}</p>
+                <p className="mt-2 text-sm text-text-muted sm:text-base">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/60">
         <div className="section-container section-padding">
           <SectionHeader
             eyebrow="Mentors"
-            title="Learn from experienced guides"
-            description="Our mentors combine mindset coaching and business strategy to help you grow with clarity, consistency, and practical action."
+            title="Sampath Kumar & Ram Prasad"
+            description="At 10X Wealth Creators, we believe true success starts with the right mindset. Our mentors combine psychology-backed growth coaching with engineers-focused business strategy."
             align="center"
             className="mb-14"
           />
@@ -90,7 +104,7 @@ export default function About() {
               <article key={mentor.name} className="card card-hover overflow-hidden">
                 <div className="relative aspect-[4/3] overflow-hidden bg-surface-elevated">
                   <img
-                    src={mentor.image}
+                    src={mentorImages[mentor.imageKey]}
                     alt={mentor.name}
                     className="h-full w-full object-cover object-top"
                     loading="lazy"
@@ -100,6 +114,7 @@ export default function About() {
                 <div className="p-8 sm:p-10">
                   <h3 className="text-2xl font-bold text-text">{mentor.name}</h3>
                   <p className="mt-1 text-sm font-semibold text-primary">{mentor.role}</p>
+                  <p className="mt-1 text-xs text-text-muted">{mentor.credentials}</p>
                   <p className="mt-5 text-base leading-relaxed text-text-muted">{mentor.bio}</p>
                   <ul className="mt-6 flex flex-wrap gap-2">
                     {mentor.focus.map((item) => (
@@ -127,6 +142,45 @@ export default function About() {
             do not guarantee any specific income or financial outcome. Your results
             depend on your effort, commitment, skills, and market conditions.
           </p>
+        </div>
+      </section>
+
+      <section className="section-container pb-24 sm:pb-32">
+        <div className="card p-8 sm:p-12">
+          <SectionHeader
+            eyebrow="Visit Us"
+            title="Get in touch"
+            description="Confused about where to start? Reach out and we'll help you find the right path."
+          />
+          <address className="mt-8 space-y-3 text-base not-italic leading-relaxed text-text-muted">
+            <p>
+              {contact.address.line1}
+              <br />
+              {contact.address.line2}
+              <br />
+              {contact.address.city}
+            </p>
+            <p>
+              <a href={contact.phoneHref} className="text-primary hover:text-primary-hover">
+                {contact.phone}
+              </a>
+              {" · "}
+              <a href={contact.phoneAltHref} className="text-primary hover:text-primary-hover">
+                {contact.phoneAlt}
+              </a>
+            </p>
+            <p>
+              <a
+                href={`mailto:${contact.email}`}
+                className="text-primary hover:text-primary-hover"
+              >
+                {contact.email}
+              </a>
+            </p>
+          </address>
+          <Button to="/contact" variant="secondary" className="mt-8">
+            Contact Us
+          </Button>
         </div>
       </section>
     </>

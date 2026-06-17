@@ -2,55 +2,81 @@ import { useState } from "react";
 import Button from "../components/ui/Button";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
+import { contactChannelIcons } from "../components/ui/ContactIcons";
+import { classplusUrl, contact } from "../data/siteContent";
 
 const contactChannels = [
   {
+    label: "ClassPlus Platform",
+    href: classplusUrl,
+    value: "Enroll & learn online",
+    description: "Access courses, books, and programs on our official learning platform",
+    external: true,
+    icon: "classplus",
+  },
+  {
     label: "WhatsApp Group",
-    href: "https://chat.whatsapp.com/Im4AqA2MjsgAK4very2D6L",
+    href: contact.whatsappGroup,
     value: "Join our community",
     description: "Connect with members and get quick updates",
     external: true,
-    icon: "💬",
+    icon: "whatsapp",
   },
   {
     label: "Phone / WhatsApp",
-    href: "tel:+919441415563",
-    value: "+91 94414 15563",
-    description: "Call or message us directly",
+    href: contact.phoneHref,
+    value: contact.phone,
+    description: "Primary contact — call or message us directly",
     external: false,
-    icon: "📞",
+    icon: "phone",
+  },
+  {
+    label: "Alternate Phone",
+    href: contact.phoneAltHref,
+    value: contact.phoneAlt,
+    description: "Secondary contact number",
+    external: false,
+    icon: "phone",
   },
   {
     label: "Email",
-    href: "mailto:10xwealthcreators@gmail.com",
-    value: "10xwealthcreators@gmail.com",
-    description: "For detailed inquiries",
+    href: `mailto:${contact.email}`,
+    value: contact.email,
+    description: "For detailed inquiries and program questions",
     external: false,
-    icon: "✉️",
+    icon: "email",
+  },
+  {
+    label: "Office Address",
+    href: "https://maps.google.com/?q=Kushaiguda+ECIL+Hyderabad+500062",
+    value: "Hyderabad, Telangana",
+    description: `${contact.address.line1}, ${contact.address.line2}`,
+    external: true,
+    icon: "location",
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/10xwealthcreators",
+    href: contact.social.instagram,
     value: "@10xwealthcreators",
     description: "Daily inspiration and updates",
     external: true,
-    icon: "📷",
+    icon: "instagram",
   },
   {
     label: "YouTube",
-    href: "https://www.youtube.com/@10XWealthCreators",
+    href: contact.social.youtube,
     value: "@10XWealthCreators",
     description: "Video content and teachings",
     external: true,
-    icon: "▶️",
+    icon: "youtube",
   },
   {
     label: "X (Twitter)",
-    href: "https://x.com/10XWC",
+    href: contact.social.x,
     value: "@10XWC",
     description: "News and community highlights",
     external: true,
-    icon: "𝕏",
+    icon: "x",
   },
 ];
 
@@ -66,9 +92,18 @@ export default function Contact() {
     <>
       <PageHero
         eyebrow="Get in Touch"
-        title="We're here to help you take the next step"
-        description="Have questions about our programs, community, or coaching approach? Reach out through any channel below. The contact form is frontend-only for now — no messages are sent yet."
-      />
+        title="Confused about where to start? Let's find the right path for you."
+        description="Reach out today and take your first step toward mindset growth, skill-building, and purpose-driven action. Ask the expert — we're here to help."
+      >
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Button href={classplusUrl} size="lg">
+            Start Your Journey
+          </Button>
+          <Button href={contact.phoneHref} variant="secondary" size="lg">
+            Book a Free Call
+          </Button>
+        </div>
+      </PageHero>
 
       <section className="section-container section-padding">
         <SectionHeader
@@ -79,31 +114,64 @@ export default function Contact() {
         />
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {contactChannels.map((channel) => (
-            <a
-              key={channel.label}
-              href={channel.href}
-              target={channel.external ? "_blank" : undefined}
-              rel={channel.external ? "noopener noreferrer" : undefined}
-              className="card card-hover flex flex-col p-6 sm:p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              <span className="text-3xl" aria-hidden="true">
-                {channel.icon}
-              </span>
-              <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-primary">
-                {channel.label}
-              </p>
-              <p className="mt-2 text-lg font-semibold text-text">{channel.value}</p>
-              <p className="mt-2 text-sm text-text-muted">{channel.description}</p>
-            </a>
-          ))}
+          {contactChannels.map((channel) => {
+            const Icon = contactChannelIcons[channel.icon];
+            return (
+              <a
+                key={channel.label}
+                href={channel.href}
+                target={channel.external ? "_blank" : undefined}
+                rel={channel.external ? "noopener noreferrer" : undefined}
+                className="card card-hover flex flex-col p-6 sm:p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-primary">
+                  <Icon />
+                </span>
+                <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-primary">
+                  {channel.label}
+                </p>
+                <p className="mt-2 text-lg font-semibold text-text">{channel.value}</p>
+                <p className="mt-2 text-sm text-text-muted">{channel.description}</p>
+              </a>
+            );
+          })}
         </div>
 
-        <form onSubmit={handleSubmit} className="card mt-16 p-8 sm:p-12" noValidate>
+        <div className="card mt-16 p-8 sm:p-12">
+          <SectionHeader
+            eyebrow="Office Location"
+            title="Visit us in Hyderabad"
+            description="First Floor, H.No. 1-7-2/1, Kapra Municipal office opposite lane, Kushaiguda, ECIL — Hyderabad, Medchal Malkajgiri, Telangana 500062"
+          />
+          <address className="mt-8 space-y-2 text-base not-italic leading-relaxed text-text-muted">
+            <p>{contact.address.line1}</p>
+            <p>{contact.address.line2}</p>
+            <p>{contact.address.city}</p>
+            <p className="pt-4">
+              <a href={contact.phoneHref} className="font-semibold text-primary hover:text-primary-hover">
+                {contact.phone}
+              </a>
+              {" · "}
+              <a href={contact.phoneAltHref} className="font-semibold text-primary hover:text-primary-hover">
+                {contact.phoneAlt}
+              </a>
+            </p>
+            <p>
+              <a
+                href={`mailto:${contact.email}`}
+                className="font-semibold text-primary hover:text-primary-hover"
+              >
+                {contact.email}
+              </a>
+            </p>
+          </address>
+        </div>
+
+        <form onSubmit={handleSubmit} className="card mt-12 p-8 sm:p-12" noValidate>
           <SectionHeader
             eyebrow="Message Form"
             title="Send us a message"
-            description="Fill out the form below and we'll get back to you. Note: this form is not yet connected to a backend."
+            description="Fill out the form below and we'll get back to you. Note: this form is not yet connected to a backend — use the channels above for immediate contact."
           />
 
           {submitted && (

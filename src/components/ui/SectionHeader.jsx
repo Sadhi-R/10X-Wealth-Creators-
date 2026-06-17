@@ -11,7 +11,7 @@ export default function SectionHeader({
   return (
     <div className={`${alignClass} ${className}`}>
       {eyebrow && <p className="badge mb-5">{eyebrow}</p>}
-      <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl lg:leading-[1.12]">
+      <h2 className="font-display text-[clamp(1.875rem,4vw,3.25rem)] font-bold tracking-tight text-text leading-[1.1]">
         {title}
       </h2>
       {align === "center" && (

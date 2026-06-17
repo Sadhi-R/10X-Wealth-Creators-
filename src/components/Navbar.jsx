@@ -8,12 +8,13 @@ const navLinks = [
   { to: "/", label: "Home", end: true },
   { to: "/courses", label: "Courses" },
   { to: "/about", label: "About" },
+  { to: "/testimonials", label: "Testimonials" },
   { to: "/contact", label: "Contact" },
 ];
 
 function linkClass({ isActive }) {
   return [
-    "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+    "rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
     isActive
       ? "btn-primary shadow-none"
       : "text-text-muted hover:bg-surface-elevated/80 hover:text-text",
@@ -30,10 +31,10 @@ export default function Navbar() {
         style={{ boxShadow: "var(--shadow-nav), var(--shadow-card)" }}
         aria-label="Main navigation"
       >
-        <Link to="/" className="group flex items-center gap-3">
+        <Link to="/" className="group flex cursor-pointer items-center gap-3">
           <Logo size="md" showGlow />
           <span className="hidden text-base font-bold tracking-tight text-text sm:block">
-            Wealth <span className="text-primary">Creators</span>
+            <span className="text-primary">10X</span> Wealth Creators
           </span>
         </Link>
 
@@ -52,7 +53,7 @@ export default function Navbar() {
           </Button>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface/50 text-text backdrop-blur-sm transition-colors hover:bg-surface-elevated lg:hidden"
+            className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border/80 bg-surface/50 text-text backdrop-blur-sm transition-colors duration-200 hover:bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
