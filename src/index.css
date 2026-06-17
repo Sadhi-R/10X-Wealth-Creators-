@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--theme-bg);
+  --color-surface: var(--theme-surface);
+  --color-surface-elevated: var(--theme-surface-elevated);
+  --color-primary: var(--theme-primary);
+  --color-primary-hover: var(--theme-primary-hover);
+  --color-primary-fg: var(--theme-primary-fg);
+  --color-text: var(--theme-text);
+  --color-text-muted: var(--theme-text-muted);
+  --color-border: var(--theme-border);
+  --color-accent-soft: var(--theme-accent-soft);
+  --color-hero-from: var(--theme-hero-from);
+  --color-hero-to: var(--theme-hero-to);
+
+  --font-sans: "Poppins", system-ui, sans-serif;
+
+  --shadow-card: var(--theme-shadow-card);
+  --shadow-nav: var(--theme-shadow-nav);
+}
+
+[data-theme="light"] {
+  --theme-bg: #f4f6fb;
+  --theme-surface: #ffffff;
+  --theme-surface-elevated: #eef1f8;
+  --theme-primary: #c99700;
+  --theme-primary-hover: #a67c00;
+  --theme-primary-fg: #ffffff;
+  --theme-text: #0f172a;
+  --theme-text-muted: #5b6478;
+  --theme-border: #dde3ef;
+  --theme-accent-soft: #fff8e6;
+  --theme-hero-from: #fffdf5;
+  --theme-hero-to: #f4f6fb;
+  --theme-shadow-card: 0 4px 24px rgba(15, 23, 42, 0.06);
+  --theme-shadow-nav: 0 1px 0 rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] {
+  --theme-bg: #09090b;
+  --theme-surface: #121218;
+  --theme-surface-elevated: #1c1c24;
+  --theme-primary: #f5b800;
+  --theme-primary-hover: #e5a100;
+  --theme-primary-fg: #ffffff;
+  --theme-text: #f4f4f5;
+  --theme-text-muted: #a1a1aa;
+  --theme-border: #27272f;
+  --theme-accent-soft: #1f1a08;
+  --theme-hero-from: #12100a;
+  --theme-hero-to: #09090b;
+  --theme-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --theme-shadow-nav: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg font-sans text-text antialiased;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .card {
+    @apply rounded-2xl border border-border bg-surface;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-primary/30;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-border bg-surface-elevated px-4 py-3.5 text-base text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border border-primary/25 bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent;
+  }
+
+  .hero-pattern {
+    background-image: radial-gradient(
+        circle at 20% 20%,
+        color-mix(in srgb, var(--theme-primary) 12%, transparent) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 80% 0%,
+        color-mix(in srgb, var(--theme-primary) 8%, transparent) 0%,
+        transparent 40%
+      );
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out both;
+}
