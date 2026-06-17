@@ -44,7 +44,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="relative mt-8 border-t border-border/60 bg-surface">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="section-container py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -54,7 +55,9 @@ export default function Footer() {
                 alt="10X Wealth Creators"
                 className="h-11 w-11 rounded-xl object-cover"
               />
-              <p className="text-xl font-bold tracking-tight text-text">Wealth Creators</p>
+              <p className="text-xl font-bold tracking-tight text-text">
+                Wealth <span className="text-primary">Creators</span>
+              </p>
             </div>
             <p className="mt-5 max-w-md text-base leading-relaxed text-text-muted">
               Educational coaching for mindset, purpose, and practical business growth.
@@ -106,7 +109,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-border text-text-muted transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-surface-elevated/50 text-text-muted backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:text-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {social.icon}
                 </a>

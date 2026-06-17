@@ -10,10 +10,13 @@ export default function SectionHeader({
 
   return (
     <div className={`${alignClass} ${className}`}>
-      {eyebrow && <p className="badge mb-4">{eyebrow}</p>}
-      <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
+      {eyebrow && <p className="badge mb-5">{eyebrow}</p>}
+      <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl lg:leading-[1.12]">
         {title}
       </h2>
+      {align === "center" && (
+        <div className="divider-gradient mx-auto mt-6 w-24" aria-hidden="true" />
+      )}
       {description && (
         <p className="mt-5 text-lg leading-relaxed text-text-muted sm:text-xl">
           {description}

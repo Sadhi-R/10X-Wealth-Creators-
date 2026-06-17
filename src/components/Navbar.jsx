@@ -13,10 +13,10 @@ const navLinks = [
 
 function linkClass({ isActive }) {
   return [
-    "rounded-xl px-4 py-2.5 text-sm font-medium transition-colors",
+    "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
     isActive
-      ? "bg-primary text-white"
-      : "text-text-muted hover:bg-surface-elevated hover:text-text",
+      ? "btn-primary shadow-none"
+      : "text-text-muted hover:bg-surface-elevated/80 hover:text-text",
   ].join(" ");
 }
 
@@ -24,22 +24,26 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 border-b border-border bg-surface/90 backdrop-blur-md"
-      style={{ boxShadow: "var(--shadow-nav)" }}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
       <nav
-        className="section-container flex h-[4.5rem] items-center justify-between"
+        className="glass-strong section-container flex h-16 items-center justify-between rounded-2xl px-4 sm:px-6 lg:rounded-full"
+        style={{ boxShadow: "var(--shadow-nav), var(--shadow-card)" }}
         aria-label="Main navigation"
       >
         <Link to="/" className="group flex items-center gap-3">
-          <img
-            src={siteImages.logo}
-            alt="10X Wealth Creators"
-            className="h-10 w-10 rounded-xl object-cover"
-          />
+          <span className="relative">
+            <img
+              src={siteImages.logo}
+              alt="10X Wealth Creators"
+              className="relative h-10 w-10 rounded-xl object-cover ring-2 ring-primary/20 transition-all duration-300 group-hover:ring-primary/50"
+            />
+            <span
+              className="absolute -inset-1 -z-10 rounded-xl bg-primary/20 blur-md opacity-0 transition-opacity group-hover:opacity-100"
+              aria-hidden="true"
+            />
+          </span>
           <span className="hidden text-base font-bold tracking-tight text-text sm:block">
-            Wealth Creators
+            Wealth <span className="text-primary">Creators</span>
           </span>
         </Link>
 
@@ -53,12 +57,12 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button to="/courses" size="sm" className="hidden text-white sm:inline-flex">
+          <Button to="/courses" size="sm" className="hidden sm:inline-flex">
             Explore Courses
           </Button>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border text-text hover:bg-surface-elevated lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface/50 text-text backdrop-blur-sm transition-colors hover:bg-surface-elevated lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -76,7 +80,11 @@ export default function Navbar() {
       </nav>
 
       {menuOpen && (
-        <div id="mobile-menu" className="border-t border-border bg-surface px-4 py-4 lg:hidden">
+        <div
+          id="mobile-menu"
+          className="glass-strong section-container mt-2 rounded-2xl px-4 py-4 lg:hidden"
+          style={{ boxShadow: "var(--shadow-card)" }}
+        >
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <NavLink
@@ -89,7 +97,7 @@ export default function Navbar() {
                 {link.label}
               </NavLink>
             ))}
-            <Button to="/courses" className="mt-3 w-full text-white" onClick={() => setMenuOpen(false)}>
+            <Button to="/courses" className="mt-3 w-full" onClick={() => setMenuOpen(false)}>
               Explore Courses
             </Button>
           </div>

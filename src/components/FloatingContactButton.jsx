@@ -129,7 +129,7 @@ export default function FloatingContactButton() {
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label={open ? "Close contact menu" : "Open contact menu"}
-        className="flex h-14 min-h-[44px] w-14 min-w-[44px] items-center justify-center rounded-full bg-primary text-white shadow-lg transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="btn-primary flex h-14 min-h-[44px] w-14 min-w-[44px] items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {open ? (
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

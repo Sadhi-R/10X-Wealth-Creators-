@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 
 const variants = {
-  primary:
-    "bg-primary text-white hover:bg-primary-hover shadow-sm",
+  primary: "btn-primary",
   secondary:
-    "border border-border bg-surface text-text hover:border-primary/40 hover:bg-surface-elevated",
-  ghost: "text-primary hover:bg-accent-soft",
+    "border border-border/80 bg-surface/80 text-text shadow-sm backdrop-blur-sm hover:border-primary/30 hover:bg-surface-elevated hover:shadow-md",
+  ghost: "text-primary hover:bg-accent-soft/80",
 };
 
 const sizes = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-sm",
-  lg: "px-8 py-4 text-base",
+  sm: "px-5 py-2.5 text-sm rounded-full",
+  md: "px-7 py-3 text-sm rounded-full",
+  lg: "px-8 py-4 text-base rounded-full",
 };
 
 export default function Button({
@@ -24,7 +23,7 @@ export default function Button({
   ...props
 }) {
   const classes = [
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+    "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
     variants[variant],
     sizes[size],
     className,

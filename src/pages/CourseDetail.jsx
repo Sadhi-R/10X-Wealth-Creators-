@@ -102,7 +102,7 @@ export default function CourseDetail() {
                 available on this site yet. Contact us to learn more about joining a
                 program.
               </p>
-              <Button to="/contact" className="mt-5 w-full text-white">
+              <Button to="/contact" className="mt-5 w-full">
                 Get in Touch
               </Button>
             </div>
