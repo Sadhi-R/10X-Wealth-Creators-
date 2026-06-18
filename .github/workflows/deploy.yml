@@ -44,6 +44,7 @@ jobs:
           fi
           if ! grep -q 'src="/docs/assets/' docs/index.html; then
             echo "Build failed: docs/index.html is missing bundled assets."
+            cat docs/index.html
             exit 1
           fi
 

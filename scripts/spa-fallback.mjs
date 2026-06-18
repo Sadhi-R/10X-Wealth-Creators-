@@ -1,12 +1,12 @@
 import { copyFileSync, existsSync } from "node:fs";
 
-const indexPath = "dist/index.html";
-const fallbackPath = "dist/404.html";
+const builtHtml = existsSync("dist/index.html") ? "dist/index.html" : "dist/app.html";
 
-if (!existsSync(indexPath)) {
-  console.error("dist/index.html not found. Run `npm run build` first.");
+if (!existsSync(builtHtml)) {
+  console.error("No built HTML found in dist/. Run `npm run build` first.");
   process.exit(1);
 }
 
-copyFileSync(indexPath, fallbackPath);
-console.log("Copied dist/index.html to dist/404.html for SPA routing.");
+copyFileSync(builtHtml, "dist/index.html");
+copyFileSync(builtHtml, "dist/404.html");
+console.log(`Copied ${builtHtml} to dist/index.html and dist/404.html for SPA routing.`);
