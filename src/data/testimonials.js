@@ -26,7 +26,7 @@ export const testimonials = [
     title: "Life-Changing Mindset Shift!",
     name: "Community member",
     role: "Student · Mindset transformation",
-    image: siteImages.mentors.sampath,
+    image: siteImages.courses.person,
     quote:
       "Before joining 10X Wealth Creators, I was stuck in a fixed mindset, struggling with self-doubt. With the guidance of Sampath Kumar sir, I transformed my thinking, took action, and started seeing real progress in my personal and professional growth.",
     mentor: "Sampath Kumar",
@@ -36,7 +36,7 @@ export const testimonials = [
     title: "From Single Income to Multiple Streams!",
     name: "Community member",
     role: "Employee · Side business builder",
-    image: siteImages.mentors.ram,
+    image: siteImages.courses.person,
     quote:
       "I always believed a 9-to-5 job was the only way to earn. Thanks to Ram Prasad sir, I discovered new income sources and built a side business without quitting my job. Now I have more financial stability and peace of mind.",
     mentor: "Ram Prasad",
