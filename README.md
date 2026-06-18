@@ -120,9 +120,17 @@ Privacy Policy, Terms & Conditions, and Disclaimer contain **placeholder text** 
 
 ## Deployment
 
-This is a static SPA after build. Deploy the `dist/` folder to any static host (e.g. GitHub Pages, Netlify, Vercel).
+This is a static SPA. **Always deploy the built `dist/` folder** — never serve the repo root. If the live site tries to load `/src/main.jsx`, the host is serving source files instead of the production build.
 
-For GitHub Pages with a custom domain, the existing `CNAME` file can be placed in `public/` so it is copied to `dist/` on build.
+### GitHub Pages (recommended)
+
+1. Push to `master` — the workflow in `.github/workflows/deploy.yml` runs `npm run build` and deploys `dist/`.
+2. In the repo on GitHub: **Settings → Pages → Build and deployment → Source** → choose **GitHub Actions** (not “Deploy from a branch”).
+3. Custom domain `10xwealthcreators.com` is set via `public/CNAME` (copied into `dist/` on build).
+
+### Netlify / Vercel
+
+Connect the repo — `netlify.toml` and `vercel.json` already set build command, output directory, and SPA routing.
 
 ## Contact
 
