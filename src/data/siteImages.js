@@ -1,21 +1,23 @@
+const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 export const siteImages = {
-  logo: "/images/Logo.png",
-  favicon: "/images/favicon.png",
-  heroBackground: "/images/hero-background.png",
+  logo: withBase("/images/Logo.png"),
+  favicon: withBase("/images/favicon.png"),
+  heroBackground: withBase("/images/hero-background.png"),
   mentors: {
-    sampath: "/images/sampath-kumar.jpg",
-    ram: "/images/ram-prasad.jpg",
+    sampath: withBase("/images/sampath-kumar.jpg"),
+    ram: withBase("/images/ram-prasad.jpg"),
   },
   testimonials: {
-    sadhi: "/images/sadhi-thumbnail.jpg",
-    rajitha: "/images/rajitha-thumbnail.png",
-    meditation: "/images/Meditation.png",
+    sadhi: withBase("/images/sadhi-thumbnail.jpg"),
+    rajitha: withBase("/images/rajitha-thumbnail.png"),
+    meditation: withBase("/images/Meditation.png"),
   },
   courses: {
-    emotionalCleansing: "/images/courses/Emotional Cleansing Session.png",
-    businessAbundance: "/images/courses/Business Abundance.png",
-    selfDiscovery: "/images/courses/Self Discovery.png",
-    aiTools: "/images/courses/AI Tools For Growth.png",
-    person: "/images/courses/person.png",
+    emotionalCleansing: withBase("/images/courses/Emotional Cleansing Session.png"),
+    businessAbundance: withBase("/images/courses/Business Abundance.png"),
+    selfDiscovery: withBase("/images/courses/Self Discovery.png"),
+    aiTools: withBase("/images/courses/AI Tools For Growth.png"),
+    person: withBase("/images/courses/person.png"),
   },
 };

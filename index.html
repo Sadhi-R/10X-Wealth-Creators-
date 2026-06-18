@@ -12,6 +12,18 @@
     />
     <script>
       (function () {
+        var host = window.location.hostname;
+        var isLocal = host === "localhost" || host === "127.0.0.1";
+        var isDocs = window.location.pathname.startsWith("/docs");
+        if (!isLocal && !isDocs) {
+          window.location.replace(
+            "/docs" + window.location.pathname + window.location.search + window.location.hash
+          );
+        }
+      })();
+    </script>
+    <script>
+      (function () {
         var theme = localStorage.getItem("10x-theme");
         if (theme !== "light" && theme !== "dark") theme = "light";
         document.documentElement.setAttribute("data-theme", theme);

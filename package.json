@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:pages": "node scripts/build-pages.mjs",
     "postbuild": "node scripts/spa-fallback.mjs",
+    "publish:pages": "npm run build:pages && node scripts/publish-docs.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
