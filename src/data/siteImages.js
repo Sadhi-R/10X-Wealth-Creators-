@@ -16,5 +16,6 @@ export const siteImages = {
     businessAbundance: "/images/courses/Business Abundance.png",
     selfDiscovery: "/images/courses/Self Discovery.png",
     aiTools: "/images/courses/AI Tools For Growth.png",
+    person: "/images/courses/person.png",
   },
 };
