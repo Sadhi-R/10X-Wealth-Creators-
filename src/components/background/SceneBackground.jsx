@@ -1,53 +1,45 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
-const PETAL_COUNT = 16;
-const CHAKRA_COUNT = 7;
-const WISP_COUNT = 40;
+const STAR_COUNT = 420;
+const SHOOTING_STAR_INTERVAL = 3800;
 
-const CHAKRA_PALETTE = {
-  light: [
-    "rgba(220, 38, 38, 0.07)",
-    "rgba(234, 88, 12, 0.07)",
-    "rgba(202, 138, 4, 0.08)",
-    "rgba(22, 163, 74, 0.07)",
-    "rgba(37, 99, 235, 0.07)",
-    "rgba(79, 70, 229, 0.07)",
-    "rgba(147, 51, 234, 0.08)",
-  ],
-  dark: [
-    "rgba(248, 113, 113, 0.1)",
-    "rgba(251, 146, 60, 0.1)",
-    "rgba(250, 204, 21, 0.11)",
-    "rgba(74, 222, 128, 0.09)",
-    "rgba(96, 165, 250, 0.09)",
-    "rgba(129, 140, 248, 0.1)",
-    "rgba(192, 132, 252, 0.11)",
-  ],
-};
-
-function createWisps(width, height) {
-  return Array.from({ length: WISP_COUNT }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    z: Math.random() * 0.8 + 0.2,
-    size: Math.random() * 3 + 1,
-    drift: Math.random() * 0.4 + 0.15,
-    phase: Math.random() * Math.PI * 2,
-    sway: Math.random() * 0.8 + 0.3,
-  }));
+function createStars(width, height) {
+  return Array.from({ length: STAR_COUNT }, () => {
+    const roll = Math.random();
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      z: Math.random() * 0.85 + 0.15,
+      size: Math.random() * 2.8 + 0.6,
+      opacity: Math.random() * 0.45 + 0.45,
+      twinkle: Math.random() * Math.PI * 2,
+      twinkleSpeed: Math.random() * 0.0025 + 0.0012,
+      tint: roll > 0.88 ? "violet" : roll > 0.72 ? "gold" : "white",
+      sparkle: Math.random() > 0.82,
+    };
+  });
 }
 
-function drawLotusPetal(ctx, radius, width, height) {
-  ctx.moveTo(0, 0);
-  ctx.bezierCurveTo(radius * 0.15, -radius * 0.35, radius * 0.55, -radius * 0.55, radius * 0.85, -radius * 0.2);
-  ctx.bezierCurveTo(radius * 0.55, -radius * 0.05, radius * 0.2, radius * 0.05, 0, 0);
+function createShootingStar(width, height) {
+  const fromLeft = Math.random() > 0.5;
+  return {
+    x: fromLeft ? Math.random() * width * 0.4 : width * 0.6 + Math.random() * width * 0.4,
+    y: Math.random() * height * 0.45,
+    length: 100 + Math.random() * 140,
+    speed: 7 + Math.random() * 9,
+    angle: fromLeft ? Math.PI / 4 + Math.random() * 0.25 : (Math.PI * 3) / 4 - Math.random() * 0.25,
+    life: 1,
+    decay: 0.011 + Math.random() * 0.007,
+  };
 }
 
 export default function SceneBackground() {
   const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: 0.5, y: 0.5 });
-  const wispsRef = useRef([]);
+  const mouseRef = useRef({ x: 0.5, y: 0.5, smoothX: 0.5, smoothY: 0.5 });
+  const starsRef = useRef([]);
+  const shootingRef = useRef(null);
+  const lastShootRef = useRef(0);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -69,248 +61,212 @@ export default function SceneBackground() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      wispsRef.current = createWisps(width, height);
+      starsRef.current = createStars(width, height);
     }
 
     function onMove(event) {
-      mouseRef.current = {
-        x: event.clientX / width,
-        y: event.clientY / height,
-      };
+      mouseRef.current.x = event.clientX / width;
+      mouseRef.current.y = event.clientY / height;
     }
 
-    function center() {
-      const parallaxX = (mouseRef.current.x - 0.5) * 80;
-      const parallaxY = (mouseRef.current.y - 0.5) * 60;
-      return {
-        x: width * 0.5 + parallaxX,
-        y: height * 0.42 + parallaxY,
-      };
-    }
-
-    function drawAura(time, cx, cy) {
-      const isDark = theme === "dark";
-      const breath = 0.92 + Math.sin(time * 0.0012) * 0.08;
-      const base = isDark ? "rgba(245, 197, 24," : "rgba(184, 134, 11,";
-
-      for (let i = 3; i >= 0; i--) {
-        const r = (140 + i * 55) * breath;
-        const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        gradient.addColorStop(0, `${base} ${0.14 - i * 0.02})`);
-        gradient.addColorStop(0.5, `${base} ${0.06 - i * 0.01})`);
-        gradient.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.fill();
+    function drawCosmicBase(isDark) {
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      if (isDark) {
+        gradient.addColorStop(0, "rgba(30, 27, 75, 0.35)");
+        gradient.addColorStop(0.45, "rgba(9, 9, 11, 0.08)");
+        gradient.addColorStop(1, "rgba(24, 24, 27, 0.2)");
+      } else {
+        gradient.addColorStop(0, "rgba(99, 102, 241, 0.12)");
+        gradient.addColorStop(0.5, "rgba(250, 250, 250, 0.02)");
+        gradient.addColorStop(1, "rgba(184, 134, 11, 0.08)");
       }
-
-      const sage = ctx.createRadialGradient(cx, cy, 0, cx, cy, 220 * breath);
-      sage.addColorStop(0, isDark ? "rgba(134, 239, 172, 0.06)" : "rgba(74, 222, 128, 0.05)");
-      sage.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = sage;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 220 * breath, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
     }
 
-    function drawChakraRings(time, cx, cy) {
-      const palette = theme === "dark" ? CHAKRA_PALETTE.dark : CHAKRA_PALETTE.light;
-      const breath = 0.95 + Math.sin(time * 0.0012) * 0.05;
+    function drawNebula(isDark, mx, my) {
+      const parallaxX = (mx - 0.5) * 80;
+      const parallaxY = (my - 0.5) * 60;
 
-      palette.forEach((color, i) => {
-        const radius = (70 + i * 38) * breath;
-        const wobble = Math.sin(time * 0.0008 + i) * 3;
-        ctx.beginPath();
-        ctx.arc(cx + wobble, cy - wobble * 0.5, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.4;
-        ctx.stroke();
+      const nebulae = isDark
+        ? [
+            { cx: width * 0.18 + parallaxX, cy: height * 0.22 + parallaxY, r: width * 0.5, c: "rgba(99, 102, 241, 0.2)" },
+            { cx: width * 0.8 - parallaxX * 0.7, cy: height * 0.52 + parallaxY * 0.5, r: width * 0.42, c: "rgba(139, 92, 246, 0.16)" },
+            { cx: width * 0.5 + parallaxX * 0.4, cy: height * 0.82 - parallaxY, r: width * 0.55, c: "rgba(245, 197, 24, 0.12)" },
+          ]
+        : [
+            { cx: width * 0.12 + parallaxX, cy: height * 0.18 + parallaxY, r: width * 0.48, c: "rgba(99, 102, 241, 0.16)" },
+            { cx: width * 0.85 - parallaxX * 0.6, cy: height * 0.48 + parallaxY * 0.45, r: width * 0.4, c: "rgba(184, 134, 11, 0.14)" },
+            { cx: width * 0.52, cy: height * 0.78, r: width * 0.45, c: "rgba(139, 92, 246, 0.12)" },
+          ];
+
+      nebulae.forEach((n) => {
+        const g = ctx.createRadialGradient(n.cx, n.cy, 0, n.cx, n.cy, n.r);
+        g.addColorStop(0, n.c);
+        g.addColorStop(0.55, n.c.replace(/[\d.]+\)$/, (m) => `${parseFloat(m) * 0.45})`));
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, width, height);
       });
     }
 
-    function drawMandala(time, cx, cy) {
-      const isDark = theme === "dark";
-      const rotation = reduced ? 0 : time * 0.00015;
-      const breath = 0.9 + Math.sin(time * 0.0012) * 0.1;
-      const petalStroke = isDark ? "rgba(245, 197, 24, 0.22)" : "rgba(184, 134, 11, 0.24)";
-      const petalFill = isDark ? "rgba(245, 197, 24, 0.04)" : "rgba(184, 134, 11, 0.05)";
-      const innerRadius = 90 * breath;
-
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(rotation);
-
-      for (let i = 0; i < PETAL_COUNT; i++) {
-        const angle = (i / PETAL_COUNT) * Math.PI * 2;
-        ctx.save();
-        ctx.rotate(angle);
-        ctx.beginPath();
-        drawLotusPetal(ctx, innerRadius, width, height);
-        ctx.closePath();
-        ctx.fillStyle = petalFill;
-        ctx.fill();
-        ctx.strokeStyle = petalStroke;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.restore();
+    function starColor(tint, isDark, alpha) {
+      const a = Math.min(alpha, 1);
+      if (tint === "gold") {
+        return isDark
+          ? `rgba(245, 197, 24, ${a})`
+          : `rgba(161, 98, 7, ${a})`;
       }
+      if (tint === "violet") {
+        return isDark
+          ? `rgba(192, 132, 252, ${a})`
+          : `rgba(109, 40, 217, ${a})`;
+      }
+      return isDark
+        ? `rgba(255, 255, 255, ${a})`
+        : `rgba(15, 23, 42, ${a})`;
+    }
 
+    function drawSparkle(px, py, size, color, alpha) {
+      const arm = size * 2.8;
+      ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${alpha * 0.7})`);
+      ctx.lineWidth = 0.8;
       ctx.beginPath();
-      ctx.arc(0, 0, 28 * breath, 0, Math.PI * 2);
-      ctx.fillStyle = isDark ? "rgba(245, 197, 24, 0.12)" : "rgba(184, 134, 11, 0.14)";
-      ctx.fill();
-      ctx.strokeStyle = isDark ? "rgba(245, 197, 24, 0.35)" : "rgba(184, 134, 11, 0.38)";
-      ctx.lineWidth = 1.5;
+      ctx.moveTo(px - arm, py);
+      ctx.lineTo(px + arm, py);
+      ctx.moveTo(px, py - arm);
+      ctx.lineTo(px, py + arm);
       ctx.stroke();
-      ctx.restore();
-
-      const outerRotation = reduced ? 0 : -time * 0.00008;
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(outerRotation);
-      for (let i = 0; i < 8; i++) {
-        const angle = (i / 8) * Math.PI * 2;
-        const ox = Math.cos(angle) * innerRadius * 1.35;
-        const oy = Math.sin(angle) * innerRadius * 1.35;
-        ctx.save();
-        ctx.translate(ox, oy);
-        ctx.rotate(angle + Math.PI / 2);
-        ctx.beginPath();
-        drawLotusPetal(ctx, innerRadius * 0.55, width, height);
-        ctx.closePath();
-        ctx.strokeStyle = isDark ? "rgba(167, 139, 250, 0.18)" : "rgba(139, 92, 246, 0.14)";
-        ctx.lineWidth = 0.9;
-        ctx.stroke();
-        ctx.restore();
-      }
-      ctx.restore();
     }
 
-    function drawEnergyRays(time, cx, cy) {
-      const isDark = theme === "dark";
-      const rayCount = 12;
-      const breath = 0.95 + Math.sin(time * 0.0012) * 0.05;
+    function drawStars(time, isDark, mx, my) {
+      const mousePx = mx * width;
+      const mousePy = my * height;
+      const lightBoost = isDark ? 1 : 1.35;
 
-      for (let i = 0; i < rayCount; i++) {
-        const angle = (i / rayCount) * Math.PI * 2 + (reduced ? 0 : time * 0.0001);
-        const length = (180 + Math.sin(time * 0.0015 + i) * 30) * breath;
-        const ex = cx + Math.cos(angle) * length;
-        const ey = cy + Math.sin(angle) * length;
+      starsRef.current.forEach((star) => {
+        const depth = star.z;
+        const parallaxX = (mx - 0.5) * 140 * depth;
+        const parallaxY = (my - 0.5) * 110 * depth;
 
-        const gradient = ctx.createLinearGradient(cx, cy, ex, ey);
-        gradient.addColorStop(0, isDark ? "rgba(245, 197, 24, 0.12)" : "rgba(184, 134, 11, 0.1)");
-        gradient.addColorStop(1, "rgba(0,0,0,0)");
+        let px = star.x + parallaxX;
+        let py = star.y + parallaxY;
 
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(ex, ey);
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-      }
-    }
-
-    function drawRipples(time, cx, cy) {
-      const isDark = theme === "dark";
-
-      for (let i = 0; i < 3; i++) {
-        const progress = ((time * 0.0004 + i * 0.33) % 1);
-        const radius = 60 + progress * 280;
-        const alpha = (1 - progress) * 0.35;
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = isDark
-          ? `rgba(134, 239, 172, ${alpha})`
-          : `rgba(74, 222, 128, ${alpha})`;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-      }
-    }
-
-    function drawWisps(time) {
-      const isDark = theme === "dark";
-      const wispColor = isDark ? "rgba(192, 132, 252, 0.55)" : "rgba(139, 92, 246, 0.45)";
-      const goldWisp = isDark ? "rgba(245, 197, 24, 0.45)" : "rgba(184, 134, 11, 0.4)";
-
-      wispsRef.current.forEach((w, i) => {
         if (!reduced) {
-          w.y -= w.drift;
-          w.x += Math.sin(time * 0.001 + w.phase) * w.sway * 0.08;
-          if (w.y < -20) {
-            w.y = height + 20;
-            w.x = Math.random() * width;
+          py -= time * 0.01 * depth;
+          if (py < -10) {
+            py = height + 10;
+            star.x = Math.random() * width;
           }
         }
 
-        const px = w.x + (mouseRef.current.x - 0.5) * 50 * w.z;
-        const py = w.y + (mouseRef.current.y - 0.5) * 40 * w.z;
-        const pulse = 0.6 + Math.sin(time * 0.002 + w.phase) * 0.4;
+        const twinkle = 0.55 + Math.sin(time * star.twinkleSpeed + star.twinkle) * 0.45;
+        let alpha = star.opacity * twinkle * depth * lightBoost;
+
+        const dx = px - mousePx;
+        const dy = py - mousePy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 220) {
+          alpha += (1 - dist / 220) * 0.55 * depth;
+        }
+
+        const size = star.size * (0.7 + depth * 0.65);
+        const color = starColor(star.tint, isDark, Math.min(alpha, 1));
 
         ctx.beginPath();
-        ctx.arc(px, py, w.size * pulse * w.z, 0, Math.PI * 2);
-        ctx.fillStyle = i % 3 === 0 ? goldWisp : wispColor;
-        ctx.globalAlpha = 0.25 + w.z * 0.35;
+        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+
+        if (depth > 0.55) {
+          ctx.shadowBlur = isDark ? 10 : 6;
+          ctx.shadowColor =
+            star.tint === "gold"
+              ? "rgba(245, 197, 24, 0.75)"
+              : star.tint === "violet"
+                ? "rgba(167, 139, 250, 0.65)"
+                : isDark
+                  ? "rgba(255, 255, 255, 0.55)"
+                  : "rgba(99, 102, 241, 0.45)";
+        }
+
         ctx.fill();
-        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+
+        if (star.sparkle && alpha > 0.45) {
+          drawSparkle(px, py, size, color, alpha);
+        }
       });
     }
 
-    function drawYogaSilhouetteHints(cx, cy, time) {
-      const isDark = theme === "dark";
-      const stroke = isDark ? "rgba(245, 197, 24, 0.08)" : "rgba(184, 134, 11, 0.07)";
-      const breath = Math.sin(time * 0.0012) * 8;
+    function drawShootingStar(isDark) {
+      const s = shootingRef.current;
+      if (!s || s.life <= 0) return;
 
-      ctx.save();
-      ctx.translate(cx, cy + 120 + breath);
-      ctx.strokeStyle = stroke;
-      ctx.lineWidth = 1.5;
-      ctx.lineCap = "round";
+      const ex = s.x + Math.cos(s.angle) * s.length * s.life;
+      const ey = s.y + Math.sin(s.angle) * s.length * s.life;
 
-      ctx.beginPath();
-      ctx.arc(0, -55, 12, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(0, -43);
-      ctx.lineTo(0, 10);
-      ctx.stroke();
+      const gradient = ctx.createLinearGradient(s.x, s.y, ex, ey);
+      gradient.addColorStop(0, "rgba(0,0,0,0)");
+      gradient.addColorStop(
+        0.35,
+        isDark ? "rgba(255,255,255,0.95)" : "rgba(180, 120, 10, 0.85)"
+      );
+      gradient.addColorStop(1, "rgba(0,0,0,0)");
 
       ctx.beginPath();
-      ctx.moveTo(0, -20);
-      ctx.lineTo(-35, 5);
-      ctx.moveTo(0, -20);
-      ctx.lineTo(35, 5);
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(ex, ey);
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = isDark ? 2 : 1.8;
       ctx.stroke();
 
+      s.x += Math.cos(s.angle) * s.speed;
+      s.y += Math.sin(s.angle) * s.speed;
+      s.life -= s.decay;
+    }
+
+    function drawMouseAura(isDark, mx, my) {
+      const cx = mx * width;
+      const cy = my * height;
+      const radius = isDark ? 280 : 240;
+
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+      if (isDark) {
+        g.addColorStop(0, "rgba(245, 197, 24, 0.18)");
+        g.addColorStop(0.4, "rgba(139, 92, 246, 0.12)");
+        g.addColorStop(0.7, "rgba(99, 102, 241, 0.06)");
+      } else {
+        g.addColorStop(0, "rgba(184, 134, 11, 0.16)");
+        g.addColorStop(0.4, "rgba(99, 102, 241, 0.12)");
+        g.addColorStop(0.7, "rgba(139, 92, 246, 0.07)");
+      }
+      g.addColorStop(1, "rgba(0,0,0,0)");
+
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.moveTo(0, 10);
-      ctx.lineTo(-22, 55);
-      ctx.moveTo(0, 10);
-      ctx.lineTo(22, 55);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(-22, 55);
-      ctx.lineTo(-38, 30);
-      ctx.moveTo(22, 55);
-      ctx.lineTo(38, 30);
-      ctx.stroke();
-
-      ctx.restore();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.fill();
     }
 
     function render(time) {
-      ctx.clearRect(0, 0, width, height);
-      const { x: cx, y: cy } = center();
+      const isDark = theme === "dark";
+      const mouse = mouseRef.current;
 
-      drawWisps(time);
-      drawAura(time, cx, cy);
-      drawRipples(time, cx, cy);
-      drawChakraRings(time, cx, cy);
-      drawEnergyRays(time, cx, cy);
-      drawMandala(time, cx, cy);
-      drawYogaSilhouetteHints(cx, cy, time);
+      mouse.smoothX += (mouse.x - mouse.smoothX) * 0.07;
+      mouse.smoothY += (mouse.y - mouse.smoothY) * 0.07;
+
+      ctx.clearRect(0, 0, width, height);
+
+      drawCosmicBase(isDark);
+      drawNebula(isDark, mouse.smoothX, mouse.smoothY);
+      drawStars(time, isDark, mouse.smoothX, mouse.smoothY);
+      drawMouseAura(isDark, mouse.smoothX, mouse.smoothY);
+
+      if (!reduced && time - lastShootRef.current > SHOOTING_STAR_INTERVAL) {
+        shootingRef.current = createShootingStar(width, height);
+        lastShootRef.current = time;
+      }
+      drawShootingStar(isDark);
 
       if (!reduced) {
         animationId = requestAnimationFrame(render);
@@ -320,6 +276,8 @@ export default function SceneBackground() {
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", onMove, { passive: true });
+
+    lastShootRef.current = performance.now();
 
     if (reduced) {
       render(0);

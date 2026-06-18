@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
+import CourseImage from "../components/CourseImage";
 import { getCourseBySlug } from "../data/courses";
-import { classplusUrl } from "../data/siteContent";
+import { enrollPath } from "../data/siteContent";
 
 export default function CourseDetail() {
   const { slug } = useParams();
@@ -21,30 +22,31 @@ export default function CourseDetail() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border">
-        <img
-          src={course.image}
-          alt={course.title}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-bg/30 to-transparent" />
-        <div className="section-container relative section-padding">
-          <Link
-            to="/courses"
-            className="inline-flex text-sm font-semibold text-primary hover:text-primary-hover"
-          >
-            &larr; Back to Courses
-          </Link>
-          <p className="badge mt-6">Course Overview</p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-text sm:text-5xl lg:text-6xl">
-            {course.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted sm:text-xl">
-            {course.shortDescription}
-          </p>
-          <p className="mt-3 text-sm font-semibold uppercase tracking-wider text-primary">
-            {course.mentor}
-          </p>
+      <section className="section-container section-padding">
+        <Link
+          to="/courses"
+          className="inline-flex text-sm font-semibold text-primary hover:text-primary-hover"
+        >
+          &larr; Back to Courses
+        </Link>
+        <div className="mt-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div>
+            <p className="badge">Course Overview</p>
+            <h1 className="mt-6 text-4xl font-bold tracking-tight text-text sm:text-5xl lg:text-6xl">
+              {course.title}
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-text-muted sm:text-xl">
+              {course.shortDescription}
+            </p>
+            <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-primary">
+              {course.mentor}
+            </p>
+          </div>
+          <CourseImage
+            src={course.image}
+            alt={course.title}
+            className="aspect-[4/3] rounded-3xl"
+          />
         </div>
       </section>
 
@@ -81,13 +83,14 @@ export default function CourseDetail() {
           </div>
 
           <aside className="space-y-6">
-            <div className="card overflow-hidden">
-              <img
+            <div className="card overflow-hidden p-4 sm:p-5">
+              <CourseImage
                 src={course.image}
                 alt={course.title}
-                className="h-48 w-full object-cover"
+                className="aspect-video rounded-2xl"
+                padding="compact"
               />
-              <div className="p-6 sm:p-8">
+              <div className="px-1 pt-5 sm:px-2">
                 <h2 className="text-lg font-bold text-text">Mentor</h2>
                 <p className="mt-3 text-base text-text-muted">{course.mentor}</p>
               </div>
@@ -107,8 +110,8 @@ export default function CourseDetail() {
                 Enroll and purchase this program on our official ClassPlus learning
                 platform. For questions before enrolling, contact our team directly.
               </p>
-              <Button href={classplusUrl} className="mt-5 w-full">
-                Buy Now on ClassPlus
+              <Button to={enrollPath} className="mt-5 w-full">
+                View Enrollment Plans
               </Button>
               <Button to="/contact" variant="secondary" className="mt-3 w-full">
                 Ask the Expert

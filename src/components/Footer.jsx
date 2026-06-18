@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { classplusUrl, contact } from "../data/siteContent";
+import { enrollPath, contact, mobileAppUrl } from "../data/siteContent";
 
 const footerLinks = [
+  { to: "/plans", label: "Plans" },
   { to: "/courses", label: "Courses" },
   { to: "/about", label: "About" },
   { to: "/testimonials", label: "Testimonials" },
   { to: "/privacy-policy", label: "Privacy Policy" },
   { to: "/terms-and-conditions", label: "Terms & Conditions" },
+  { to: "/refund-policy", label: "Refund Policy" },
   { to: "/disclaimer", label: "Disclaimer" },
   { to: "/contact", label: "Contact" },
 ];
@@ -46,8 +48,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-8 border-t border-border/60 bg-transparent backdrop-blur-sm">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+    <footer className="relative mt-8 bg-transparent backdrop-blur-sm">
       <div className="section-container py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -65,13 +66,19 @@ export default function Footer() {
             <p className="mt-4 text-sm leading-relaxed text-text-muted">
               Coaching &amp; education only — not financial, legal, or investment advice.
             </p>
-            <a
-              href={classplusUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={enrollPath}
               className="mt-4 inline-flex text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover"
             >
-              Enroll on ClassPlus &rarr;
+              View Enrollment Plans &rarr;
+            </Link>
+            <a
+              href={mobileAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 block text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover"
+            >
+              Download Mobile App &rarr;
             </a>
           </div>
 
@@ -124,9 +131,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-border pt-8 text-sm text-text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 border-t border-border pt-8 text-sm text-text-muted">
           <p>&copy; {year} 10X Wealth Creators. All rights reserved.</p>
-          <p>Results vary. No income or success guarantees.</p>
         </div>
       </div>
     </footer>

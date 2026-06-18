@@ -15,8 +15,8 @@
   --color-hero-to: var(--theme-hero-to);
   --color-glow: var(--theme-glow);
 
-  --font-sans: "Quicksand", system-ui, sans-serif;
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
 
   --shadow-card: var(--theme-shadow-card);
   --shadow-card-hover: var(--theme-shadow-card-hover);
@@ -108,13 +108,15 @@
 }
 
 [data-theme="light"] {
-  --theme-body-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(184, 134, 11, 0.06), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(99, 102, 241, 0.03), transparent);
+  --theme-body-mesh: radial-gradient(ellipse 100% 70% at 50% -10%, rgba(99, 102, 241, 0.14), transparent),
+    radial-gradient(ellipse 80% 55% at 100% 45%, rgba(184, 134, 11, 0.12), transparent),
+    radial-gradient(ellipse 70% 50% at 0% 75%, rgba(139, 92, 246, 0.1), transparent);
 }
 
 [data-theme="dark"] {
-  --theme-body-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 197, 24, 0.06), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(99, 102, 241, 0.05), transparent);
+  --theme-body-mesh: radial-gradient(ellipse 100% 70% at 50% -10%, rgba(99, 102, 241, 0.22), transparent),
+    radial-gradient(ellipse 80% 55% at 100% 40%, rgba(245, 197, 24, 0.14), transparent),
+    radial-gradient(ellipse 70% 50% at 0% 70%, rgba(139, 92, 246, 0.18), transparent);
 }
 
 @layer components {
@@ -131,7 +133,7 @@
   }
 
   .card {
-    @apply rounded-3xl border border-border/80 bg-surface/90 backdrop-blur-md;
+    @apply rounded-3xl border border-border/80 bg-surface/78 backdrop-blur-md;
     box-shadow: var(--shadow-card);
   }
 
@@ -153,7 +155,7 @@
   }
 
   .glass-strong {
-    background: color-mix(in srgb, var(--theme-surface) 92%, transparent);
+    background: color-mix(in srgb, var(--theme-surface) 82%, transparent);
     backdrop-filter: blur(24px) saturate(1.5);
     -webkit-backdrop-filter: blur(24px) saturate(1.5);
     border: 1px solid color-mix(in srgb, var(--theme-border) 80%, transparent);
@@ -257,22 +259,41 @@
 
   .scene-canvas {
     opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  [data-theme="light"] .scene-canvas {
+    opacity: 1;
+  }
+
+  [data-theme="dark"] .scene-canvas {
+    opacity: 1;
   }
 
   .mouse-glow {
-    width: 32rem;
-    height: 32rem;
+    width: 30rem;
+    height: 30rem;
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--theme-primary) 14%, transparent) 0%,
-      color-mix(in srgb, #86efac 10%, transparent) 35%,
-      color-mix(in srgb, #c4b5fd 8%, transparent) 55%,
+      color-mix(in srgb, var(--theme-primary) 28%, transparent) 0%,
+      color-mix(in srgb, #a78bfa 18%, transparent) 28%,
+      color-mix(in srgb, #6366f1 12%, transparent) 48%,
       transparent 70%
     );
-    filter: blur(40px);
-    mix-blend-mode: soft-light;
-    transition: opacity 0.3s ease;
+    filter: blur(42px);
+    will-change: transform;
+    transition: opacity 0.35s ease;
+  }
+
+  [data-theme="light"] .mouse-glow {
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+  }
+
+  [data-theme="dark"] .mouse-glow {
+    mix-blend-mode: screen;
+    opacity: 0.85;
   }
 
   .depth-orb {
@@ -284,6 +305,33 @@
   .hero-3d-layer {
     transform-style: preserve-3d;
     perspective: 1200px;
+  }
+
+  .course-image-frame {
+    @apply relative flex h-full w-full items-center justify-center overflow-hidden;
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--theme-accent-soft) 80%, var(--theme-surface)),
+      var(--theme-surface-elevated)
+    );
+    border: 1px solid color-mix(in srgb, var(--theme-primary) 18%, var(--theme-border));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--theme-primary) 12%, transparent);
+  }
+
+  [data-theme="dark"] .course-image-frame {
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--theme-accent-soft) 55%, var(--theme-surface)),
+      color-mix(in srgb, var(--theme-bg) 35%, var(--theme-surface))
+    );
+  }
+
+  .course-image {
+    @apply h-full w-full object-contain transition-transform duration-500 ease-out;
+  }
+
+  .group:hover .course-image {
+    transform: scale(1.02);
   }
 }
 

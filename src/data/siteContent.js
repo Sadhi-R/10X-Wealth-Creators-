@@ -1,4 +1,76 @@
-export const classplusUrl = "https://classplusapp.com/w/10xwealthcreators";
+export const classplusPlatformUrl = "https://classplusapp.com/w/10xwealthcreators";
+export const mobileAppUrl = "https://clpdiy.page.link/hvkY";
+export const enrollPath = "/plans";
+/** @deprecated Use enrollPath or Link to="/plans" */
+export const classplusUrl = enrollPath;
+
+export const planProgression =
+  "Silver = mindset + clarity → Gold = strategy + execution tools → Diamond = direct mentorship + lifetime community + certification.";
+
+export const enrollmentPlans = [
+  {
+    id: "silver",
+    name: "Silver Plan",
+    tagline: "Start with clarity",
+    tier: "Foundation",
+    description:
+      "The entry point — build mindset and self-discovery foundations before taking business action. Get clear on who you are and what you want before building anything.",
+    includesPrevious: null,
+    features: [
+      "Growth Mindset Foundation",
+      "Discovering Your Passion & Purpose",
+      "Niche Clarity & Business Ideation",
+      "Weekly Group Coaching",
+      "Community Access",
+      "10X Life Goal Planner",
+      "Guided Visualization & Affirmation Audios",
+    ],
+    paymentUrl: "https://rzp.io/rzp/JjJKAqa",
+    highlighted: false,
+  },
+  {
+    id: "gold",
+    name: "Gold Plan",
+    tagline: "Build your business",
+    tier: "Build & Execute",
+    description:
+      "Everything in Silver, plus the tools to turn clarity into a business — strategy, marketing, subconscious programming, and monthly accountability check-ins.",
+    includesPrevious: "Everything in Silver",
+    features: [
+      "Productization & Monetization Strategies",
+      "Marketing & Branding Blueprint",
+      "Personal Roadmap to Financial Freedom",
+      "Business Strategy Worksheets",
+      "Subconscious Mind Programming",
+      "Six Sigma Basics for Entrepreneurs",
+      "Emotional & Stress Management Tools",
+      "Monthly Progress Review Calls",
+    ],
+    paymentUrl: "https://rzp.io/rzp/rS3IZvP",
+    highlighted: true,
+  },
+  {
+    id: "diamond",
+    name: "Diamond Plan",
+    tagline: "Go all-in with 1-on-1 mentorship",
+    tier: "Premium",
+    description:
+      "Everything in Gold, plus direct mentorship from Sampath Kumar & Ram Prasad, lifetime mastermind access, certification, and done-for-you business planning templates.",
+    includesPrevious: "Everything in Gold",
+    features: [
+      "1-on-1 Mentorship from Sampath Kumar & Ram Prasad",
+      "Business Blueprint & Launch Strategy",
+      "Lifetime Access to Mastermind Sessions",
+      "Diamond-Only Mastermind Group Access",
+      "Advanced Financial Planning & Wealth Creation Systems",
+      "Certification in Stress Management & Six Sigma Basics",
+      "Done-for-You Business Planning Templates",
+      "Mind-Body Alignment Practices for Peak Performance",
+    ],
+    paymentUrl: "https://rzp.io/rzp/Ld9D3bPg",
+    highlighted: false,
+  },
+];
 
 export const brand = {
   name: "10X Wealth Creators",
@@ -15,12 +87,13 @@ export const contact = {
   phoneHref: "tel:+917981088978",
   phoneAltHref: "tel:+919441415563",
   address: {
-    line1: "First Floor, H.No. 1-7-2/1",
-    line2: "Kapra Municipal office opposite lane, Kushaiguda, ECIL",
-    city: "Hyderabad, Medchal Malkajgiri, Telangana 500062",
+    line1: "ECIL",
+    line2: "Hyderabad",
+    city: "Telangana 500062",
     country: "India",
   },
   whatsappGroup: "https://chat.whatsapp.com/Im4AqA2MjsgAK4very2D6L",
+  mobileAppUrl,
   social: {
     instagram: "https://www.instagram.com/10xwealthcreators",
     youtube: "https://www.youtube.com/@10XWealthCreators",
@@ -30,7 +103,6 @@ export const contact = {
 
 export const stats = [
   { value: "10M+", label: "People we aim to empower worldwide" },
-  { value: "500+", label: "Active students in our community" },
   { value: "20+", label: "Courses and learning experiences" },
   { value: "15+", label: "Years of combined mentor experience" },
 ];

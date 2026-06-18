@@ -25,8 +25,8 @@ export default function Testimonials() {
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
                   src={item.image}
-                  alt=""
-                  className="h-full w-full object-cover"
+                  alt={item.name}
+                  className="h-full w-full object-cover object-top"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

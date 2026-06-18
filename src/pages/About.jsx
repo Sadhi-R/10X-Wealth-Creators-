@@ -4,7 +4,7 @@ import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
 import {
   aboutStory,
-  classplusUrl,
+  enrollPath,
   contact,
   mentors,
   stats,
@@ -25,7 +25,7 @@ export default function About() {
         description={aboutStory.subheadline}
       >
         <div className="mt-8">
-          <Button href={classplusUrl} size="lg">
+          <Button to={enrollPath} size="lg">
             Start Your Journey With Us
           </Button>
         </div>
@@ -77,9 +77,9 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section-alt border-y border-border">
+      <section className="section-alt">
         <div className="section-container section-padding">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.label} className="card p-6 text-center sm:p-8">
                 <p className="text-3xl font-bold gradient-text">{stat.value}</p>
@@ -90,7 +90,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-b border-border/60">
+      <section>
         <div className="section-container section-padding">
           <SectionHeader
             eyebrow="Mentors"

@@ -3,7 +3,7 @@ import Button from "../components/ui/Button";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
 import { courses } from "../data/courses";
-import { classplusUrl, elitePrograms } from "../data/siteContent";
+import { enrollPath, elitePrograms } from "../data/siteContent";
 
 export default function Courses() {
   return (
@@ -14,8 +14,8 @@ export default function Courses() {
         description="Each program combines guided coaching with actionable frameworks for passion discovery, mindset growth, business planning, and multiple income stream strategies."
       >
         <div className="mt-8 flex flex-wrap gap-4">
-          <Button href={classplusUrl} size="lg">
-            Enroll on ClassPlus
+          <Button to={enrollPath} size="lg">
+            View Enrollment Plans
           </Button>
           <Button to="/contact" variant="secondary" size="lg">
             Ask the Expert
@@ -42,7 +42,7 @@ export default function Courses() {
         </div>
       </section>
 
-      <section className="section-alt border-y border-border/60">
+      <section className="section-alt">
         <div className="section-container section-padding">
           <SectionHeader
             eyebrow="All Courses"
@@ -52,12 +52,12 @@ export default function Courses() {
           />
           <div className="grid gap-8">
             {courses.map((course) => (
-              <CourseCard key={course.slug} course={course} featured />
+              <CourseCard key={course.slug} course={course} featured expanded />
             ))}
           </div>
           <div className="mt-14 text-center">
-            <Button href={classplusUrl} size="lg">
-              Buy Now on ClassPlus
+            <Button to={enrollPath} size="lg">
+              Enroll Now
             </Button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext(null);
-const THEME_KEY = "theme";
+const THEME_KEY = "10x-theme";
 const DEFAULT_THEME = "light";
 
 function getInitialTheme() {

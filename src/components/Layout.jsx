@@ -4,6 +4,7 @@ import SceneBackground from "./background/SceneBackground";
 import MouseGlow from "./background/MouseGlow";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ScrollToTop from "./ScrollToTop";
 import FloatingContactButton from "./FloatingContactButton";
 
 export default function Layout() {
@@ -12,6 +13,7 @@ export default function Layout() {
       <SceneBackground />
       <MouseGlow />
       <div className="relative z-10 flex min-h-screen flex-col">
+        <ScrollToTop />
         <Navbar />
         <main className="flex-1 pt-24">
           <Outlet />

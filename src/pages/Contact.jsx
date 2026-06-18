@@ -1,18 +1,27 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/ui/Button";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
 import { contactChannelIcons } from "../components/ui/ContactIcons";
-import { classplusUrl, contact } from "../data/siteContent";
+import { enrollPath, contact, mobileAppUrl } from "../data/siteContent";
 
 const contactChannels = [
   {
-    label: "ClassPlus Platform",
-    href: classplusUrl,
-    value: "Enroll & learn online",
-    description: "Access courses, books, and programs on our official learning platform",
-    external: true,
+    label: "Enrollment Plans",
+    href: enrollPath,
+    value: "Silver, Gold & Diamond",
+    description: "Choose a plan and enroll securely through our payment links",
+    external: false,
     icon: "classplus",
+  },
+  {
+    label: "Mobile App",
+    href: mobileAppUrl,
+    value: "10X Wealth Creators",
+    description: "Download our Android app on Google Play — learn on the go",
+    external: true,
+    icon: "mobileApp",
   },
   {
     label: "WhatsApp Group",
@@ -96,7 +105,7 @@ export default function Contact() {
         description="Reach out today and take your first step toward mindset growth, skill-building, and purpose-driven action. Ask the expert — we're here to help."
       >
         <div className="mt-8 flex flex-wrap gap-4">
-          <Button href={classplusUrl} size="lg">
+          <Button to={enrollPath} size="lg">
             Start Your Journey
           </Button>
           <Button href={contact.phoneHref} variant="secondary" size="lg">
@@ -116,14 +125,11 @@ export default function Contact() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {contactChannels.map((channel) => {
             const Icon = contactChannelIcons[channel.icon];
-            return (
-              <a
-                key={channel.label}
-                href={channel.href}
-                target={channel.external ? "_blank" : undefined}
-                rel={channel.external ? "noopener noreferrer" : undefined}
-                className="card card-hover flex flex-col p-6 sm:p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
+            const className =
+              "card card-hover flex flex-col p-6 sm:p-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+            const content = (
+              <>
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-primary">
                   <Icon />
                 </span>
@@ -132,6 +138,34 @@ export default function Contact() {
                 </p>
                 <p className="mt-2 text-lg font-semibold text-text">{channel.value}</p>
                 <p className="mt-2 text-sm text-text-muted">{channel.description}</p>
+              </>
+            );
+
+            if (channel.external) {
+              return (
+                <a
+                  key={channel.label}
+                  href={channel.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={className}
+                >
+                  {content}
+                </a>
+              );
+            }
+
+            if (channel.href.startsWith("/")) {
+              return (
+                <Link key={channel.label} to={channel.href} className={className}>
+                  {content}
+                </Link>
+              );
+            }
+
+            return (
+              <a key={channel.label} href={channel.href} className={className}>
+                {content}
               </a>
             );
           })}
@@ -141,7 +175,7 @@ export default function Contact() {
           <SectionHeader
             eyebrow="Office Location"
             title="Visit us in Hyderabad"
-            description="First Floor, H.No. 1-7-2/1, Kapra Municipal office opposite lane, Kushaiguda, ECIL — Hyderabad, Medchal Malkajgiri, Telangana 500062"
+            description="ECIL — Hyderabad, Medchal Malkajgiri, Telangana 500062"
           />
           <address className="mt-8 space-y-2 text-base not-italic leading-relaxed text-text-muted">
             <p>{contact.address.line1}</p>

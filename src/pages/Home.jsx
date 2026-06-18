@@ -9,7 +9,7 @@ import { courses } from "../data/courses";
 import {
   aboutStory,
   brand,
-  classplusUrl,
+  enrollPath,
   elitePrograms,
   mentors as mentorData,
   stats,
@@ -81,39 +81,48 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[90vh] overflow-hidden">
+      <section className="relative min-h-[88vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={siteImages.heroBackground}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover opacity-35 animate-ken-burns"
+            className="h-full w-full object-cover object-center opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-bg/60 via-bg/20 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent" />
-          <div className="hero-pattern absolute inset-0" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-br from-bg/90 via-bg/70 to-bg/50" />
         </div>
 
-        <div className="glow-orb left-1/4 top-1/4 h-72 w-72 opacity-50" aria-hidden="true" />
-        <div className="glow-orb bottom-1/4 right-1/4 h-96 w-96 opacity-30" aria-hidden="true" />
-
-        <div className="section-container relative flex min-h-[90vh] items-center py-24 lg:py-32">
-          <div className="grid w-full items-center gap-14 lg:grid-cols-2 lg:gap-20">
-            <div className="animate-fade-up">
+        <div className="section-container relative flex min-h-[88vh] items-center py-20 lg:py-28">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+            <div className="max-w-2xl animate-fade-up">
               <p className="badge">{brand.name}</p>
-              <h1 className="font-display mt-7 text-[clamp(2.25rem,5.5vw,4rem)] font-bold tracking-tight text-text leading-[1.05]">
+              <h1 className="font-display mt-6 text-[clamp(2.25rem,5vw,3.75rem)] font-bold tracking-tight text-text leading-[1.08]">
                 Transforming lives by helping{" "}
                 <span className="gradient-text">{brand.missionGoal}</span> find their passion
                 &amp; purpose
               </h1>
-              <p className="mt-7 text-lg leading-relaxed text-text-muted sm:text-xl">
-                Join our mission to create financial freedom through purpose-driven
-                entrepreneurship. Unlock your full potential and build sustainable,
-                profitable income sources — with mindset coaching, mentorship, and
-                practical skills.
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted sm:text-xl">
+                Purpose-driven entrepreneurship, mindset coaching, and practical skills —
+                so you can build sustainable income with clarity and confidence.
               </p>
+
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-text-muted sm:text-base">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Mindset &amp; self-discovery
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Expert mentorship
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Business growth tools
+                </li>
+              </ul>
+
               <div className="mt-10 flex flex-wrap gap-4">
-                <Button href={classplusUrl} size="lg">
+                <Button to={enrollPath} size="lg">
                   Start Your Journey
                 </Button>
                 <Button to="/courses" variant="secondary" size="lg">
@@ -122,31 +131,44 @@ export default function Home() {
               </div>
             </div>
 
-            <TiltCard className="glass-strong animate-float rounded-3xl p-8 sm:p-10" style={{ animationDelay: "1s" }}>
-              <div className="flex items-center gap-4">
-                <Logo size="lg" />
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                    {brand.tagline}
-                  </p>
-                  <p className="text-sm text-text-muted">Hyderabad, India</p>
-                </div>
-              </div>
-              <p className="mt-6 text-2xl font-semibold leading-snug text-text sm:text-[1.65rem]">
-                {brand.missionStatement}
-              </p>
-              <p className="mt-5 text-base leading-relaxed text-text-muted">
-                Whether you&apos;re a student, employee, engineer, entrepreneur, or career
-                changer — we provide mindset coaching, business strategy, and community
-                support for your growth journey.
-              </p>
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                {stats.slice(0, 2).map((stat) => (
-                  <div key={stat.label} className="stat-card">
-                    <p className="text-2xl font-bold gradient-text">{stat.value}</p>
-                    <p className="mt-1 text-sm leading-snug text-text-muted">{stat.label}</p>
+            <TiltCard
+              className="glass-strong overflow-hidden rounded-3xl border-primary/15 p-0"
+            >
+              <div className="h-1.5 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
+              <div className="p-8 sm:p-10">
+                <div className="flex items-center gap-4">
+                  <Logo size="lg" />
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                      {brand.tagline}
+                    </p>
+                    <p className="text-sm text-text-muted">Hyderabad, India</p>
                   </div>
-                ))}
+                </div>
+
+                <p className="mt-6 text-xl font-semibold leading-snug text-text sm:text-2xl">
+                  {brand.missionStatement}
+                </p>
+
+                <ul className="mt-8 space-y-4">
+                  {[
+                    "Growth mindset & emotional clarity",
+                    "Business strategy & AI-powered skills",
+                    "Community support on your journey",
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3 text-base text-text-muted">
+                      <span className="check-badge mt-0.5 shrink-0">
+                        <CheckIcon className="h-3.5 w-3.5" />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="stat-card mt-8 text-center">
+                  <p className="text-3xl font-bold gradient-text">{stats[0].value}</p>
+                  <p className="mt-1 text-sm leading-snug text-text-muted">{stats[0].label}</p>
+                </div>
               </div>
             </TiltCard>
           </div>
@@ -154,17 +176,17 @@ export default function Home() {
       </section>
 
       {/* Stats */}
-      <section className="relative z-10 -mt-8 px-4 sm:px-6">
+      <section className="relative z-10 -mt-6 px-4 sm:px-6">
         <div
-          className="section-container glass-strong grid gap-6 rounded-3xl p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4"
+          className="section-container glass-strong grid gap-8 rounded-3xl p-8 sm:grid-cols-3 sm:p-10"
           style={{ boxShadow: "var(--shadow-card-hover)" }}
         >
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`text-center sm:text-left ${i > 0 ? "lg:border-l lg:border-border/60 lg:pl-8" : ""}`}
+              className={`text-center ${i > 0 ? "sm:border-l sm:border-border/50 sm:pl-8" : ""}`}
             >
-              <p className="text-3xl font-bold gradient-text">{stat.value}</p>
+              <p className="text-3xl font-bold gradient-text sm:text-4xl">{stat.value}</p>
               <p className="mt-2 text-sm leading-relaxed text-text-muted sm:text-base">{stat.label}</p>
             </div>
           ))}
@@ -203,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* Elite Programs */}
-      <section className="section-alt border-y border-border/60">
+      <section className="section-alt">
         <div className="section-container section-padding">
           <SectionHeader
             eyebrow="Elite Programs"
@@ -223,7 +245,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-12 text-center">
-            <Button href={classplusUrl} size="lg">
+            <Button to={enrollPath} size="lg">
               Discover Comprehensive Solutions
             </Button>
           </div>
@@ -257,7 +279,7 @@ export default function Home() {
       </section>
 
       {/* About snippet */}
-      <section className="section-alt border-y border-border/60">
+      <section className="section-alt">
         <div className="section-container section-padding">
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
@@ -326,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* Courses */}
-      <section className="section-alt border-t border-border/60">
+      <section className="section-alt">
         <div className="section-container section-padding">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeader
@@ -335,8 +357,8 @@ export default function Home() {
               description="Focused courses covering emotional clarity, abundance mindset, self-discovery, and practical AI skills — available on our learning platform."
             />
             <div className="flex flex-wrap gap-3">
-              <Button href={classplusUrl} size="md">
-                Enroll on ClassPlus
+              <Button to={enrollPath} size="md">
+                View Enrollment Plans
               </Button>
               <Link
                 to="/courses"
@@ -370,8 +392,8 @@ export default function Home() {
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
                   src={item.image}
-                  alt=""
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt={item.name}
+                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -402,8 +424,7 @@ export default function Home() {
       {/* CTA */}
       <section className="section-container pb-24 sm:pb-32">
         <div className="relative overflow-hidden rounded-3xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-transparent" />
-          <div className="glow-orb -left-20 top-0 h-64 w-64" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent" />
           <div className="card relative overflow-hidden border-primary/20">
             <div className="grid lg:grid-cols-2">
               <div className="p-8 sm:p-12 lg:p-14">
@@ -416,7 +437,7 @@ export default function Home() {
                   toward mindset growth, skill-building, and purpose-driven action.
                 </p>
                 <div className="mt-9 flex flex-wrap gap-4">
-                  <Button href={classplusUrl} size="lg">
+                  <Button to={enrollPath} size="lg">
                     Start Your Journey
                   </Button>
                   <Button to="/contact" variant="secondary" size="lg">
