@@ -124,9 +124,8 @@ This is a static SPA. **Always deploy the built `dist/` folder** — never serve
 
 ### GitHub Pages (recommended)
 
-1. Push to `master` — the workflow in `.github/workflows/deploy.yml` runs `npm run build` and publishes the `dist/` folder to the `gh-pages` branch.
-2. In the repo on GitHub: **Settings → Pages → Build and deployment → Source** → **Deploy from a branch** → Branch: **`gh-pages`** → Folder: **`/ (root)`**.  
-   Do **not** use the `master` branch as the Pages source; that serves raw source files and causes the `text/jsx` MIME error.
+1. Push to `master` — the workflow in `.github/workflows/deploy.yml` builds `dist/`, configures Pages to use **GitHub Actions**, and deploys the production bundle.
+2. After the first successful workflow run, the live site should load `/assets/index-*.js` (not `/src/main.jsx`). If it still does not, open **Settings → Pages → Build and deployment** and confirm **Source** is **GitHub Actions**.
 3. Custom domain `10xwealthcreators.com` is set via `public/CNAME` (copied into `dist/` on build).
 
 ### Netlify / Vercel
