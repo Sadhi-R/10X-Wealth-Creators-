@@ -7,12 +7,22 @@ export const classplusUrl = enrollPath;
 export const planProgression =
   "Silver = mindset + clarity → Gold = strategy + execution tools → Diamond = direct mentorship + lifetime community + certification.";
 
+export const planCtaDefaults = {
+  eyebrow: "Membership Plans",
+  title: "Choose Silver, Gold, or Diamond",
+  description:
+    "Three clear tiers — start with mindset foundations, build your business, or go all-in with 1-on-1 mentorship from Sampath Kumar & Ram Prasad.",
+};
+
 export const enrollmentPlans = [
   {
     id: "silver",
     name: "Silver Plan",
+    shortName: "Silver",
     tagline: "Start with clarity",
     tier: "Foundation",
+    idealFor: "Best for getting clear on passion, purpose, and your first steps.",
+    ctaLabel: "Enroll in Silver",
     description:
       "The entry point — build mindset and self-discovery foundations before taking business action. Get clear on who you are and what you want before building anything.",
     includesPrevious: null,
@@ -27,12 +37,16 @@ export const enrollmentPlans = [
     ],
     paymentUrl: "https://rzp.io/rzp/JjJKAqa",
     highlighted: false,
+    badge: null,
   },
   {
     id: "gold",
     name: "Gold Plan",
+    shortName: "Gold",
     tagline: "Build your business",
     tier: "Build & Execute",
+    idealFor: "Best for turning clarity into strategy, marketing, and consistent action.",
+    ctaLabel: "Enroll in Gold",
     description:
       "Everything in Silver, plus the tools to turn clarity into a business — strategy, marketing, subconscious programming, and monthly accountability check-ins.",
     includesPrevious: "Everything in Silver",
@@ -48,12 +62,16 @@ export const enrollmentPlans = [
     ],
     paymentUrl: "https://rzp.io/rzp/rS3IZvP",
     highlighted: true,
+    badge: "Most Popular",
   },
   {
     id: "diamond",
     name: "Diamond Plan",
+    shortName: "Diamond",
     tagline: "Go all-in with 1-on-1 mentorship",
     tier: "Premium",
+    idealFor: "Best for direct mentorship, certification, and lifetime mastermind access.",
+    ctaLabel: "Enroll in Diamond",
     description:
       "Everything in Gold, plus direct mentorship from Sampath Kumar & Ram Prasad, lifetime mastermind access, certification, and done-for-you business planning templates.",
     includesPrevious: "Everything in Gold",
@@ -69,6 +87,7 @@ export const enrollmentPlans = [
     ],
     paymentUrl: "https://rzp.io/rzp/Ld9D3bPg",
     highlighted: false,
+    badge: "Premium",
   },
 ];
 

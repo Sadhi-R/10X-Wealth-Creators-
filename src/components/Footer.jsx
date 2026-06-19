@@ -70,7 +70,7 @@ export default function Footer() {
               to={enrollPath}
               className="mt-4 inline-flex text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover"
             >
-              View Enrollment Plans &rarr;
+              Silver, Gold &amp; Diamond Plans &rarr;
             </Link>
             <a
               href={mobileAppUrl}

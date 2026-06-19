@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/ui/Button";
+import PlanTierStrip from "../components/PlanTierStrip";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
 import { contactChannelIcons } from "../components/ui/ContactIcons";
@@ -101,17 +102,18 @@ export default function Contact() {
     <>
       <PageHero
         eyebrow="Get in Touch"
-        title="Confused about where to start? Let's find the right path for you."
-        description="Reach out today and take your first step toward mindset growth, skill-building, and purpose-driven action. Ask the expert — we're here to help."
+        title="Questions before enrolling? We're here to help."
+        description="Not sure which plan fits — Silver, Gold, or Diamond? Reach out and we'll help you choose the right membership for your goals."
       >
         <div className="mt-8 flex flex-wrap gap-4">
           <Button to={enrollPath} size="lg">
-            Start Your Journey
+            View Silver, Gold &amp; Diamond
           </Button>
           <Button href={contact.phoneHref} variant="secondary" size="lg">
             Book a Free Call
           </Button>
         </div>
+        <PlanTierStrip className="mt-6" />
       </PageHero>
 
       <section className="section-container section-padding">

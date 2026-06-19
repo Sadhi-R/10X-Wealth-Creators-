@@ -1,4 +1,6 @@
 import CourseCard from "../components/CourseCard";
+import PlanCTASection from "../components/PlanCTASection";
+import PlanTierStrip from "../components/PlanTierStrip";
 import Button from "../components/ui/Button";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -10,18 +12,27 @@ export default function Courses() {
     <>
       <PageHero
         eyebrow="In-Demand · Learning Programs"
-        title="Transform your life with our elite programs"
-        description="Each program combines guided coaching with actionable frameworks for passion discovery, mindset growth, business planning, and multiple income stream strategies."
+        title="Courses included in Silver, Gold & Diamond"
+        description="Every program below is part of our membership plans. Choose Silver to start with clarity, Gold to build your business, or Diamond for premium 1-on-1 mentorship."
       >
         <div className="mt-8 flex flex-wrap gap-4">
           <Button to={enrollPath} size="lg">
-            View Enrollment Plans
+            View Membership Plans
           </Button>
           <Button to="/contact" variant="secondary" size="lg">
             Ask the Expert
           </Button>
         </div>
+        <PlanTierStrip className="mt-6" />
       </PageHero>
+
+      <PlanCTASection
+        variant="compact"
+        showProgression={false}
+        title="Enroll in the plan that fits your goals"
+        description="Secure checkout via Razorpay. Access all course materials on ClassPlus after enrollment."
+        className="section-alt !pb-12 !pt-12"
+      />
 
       <section className="section-container section-padding">
         <SectionHeader
@@ -47,7 +58,7 @@ export default function Courses() {
           <SectionHeader
             eyebrow="All Courses"
             title="Our full course catalog"
-            description="Focused programs covering emotional clarity, abundance mindset, self-discovery, and practical AI skills. Enroll and purchase through our ClassPlus learning platform."
+            description="Focused programs covering emotional clarity, abundance mindset, self-discovery, and practical AI skills — included with your membership plan."
             className="mb-12"
           />
           <div className="grid gap-8">
@@ -57,7 +68,7 @@ export default function Courses() {
           </div>
           <div className="mt-14 text-center">
             <Button to={enrollPath} size="lg">
-              Enroll Now
+              Enroll — Silver, Gold or Diamond
             </Button>
           </div>
         </div>

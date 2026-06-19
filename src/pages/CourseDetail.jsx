@@ -3,7 +3,7 @@ import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
 import CourseImage from "../components/CourseImage";
 import { getCourseBySlug } from "../data/courses";
-import { enrollPath } from "../data/siteContent";
+import { enrollmentPlans, enrollPath } from "../data/siteContent";
 
 export default function CourseDetail() {
   const { slug } = useParams();
@@ -105,16 +105,30 @@ export default function CourseDetail() {
               </p>
             </div>
 
-            <div className="card border-primary/20 bg-accent-soft/50 p-6 sm:p-8">
-              <p className="text-sm leading-relaxed text-text-muted">
-                Enroll and purchase this program on our official ClassPlus learning
-                platform. For questions before enrolling, contact our team directly.
+            <div className="card glossy-panel border-primary/20 p-6 sm:p-8">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Enroll via membership
               </p>
-              <Button to={enrollPath} className="mt-5 w-full">
-                View Enrollment Plans
+              <p className="mt-3 text-base leading-relaxed text-text-muted">
+                This course is included in our Silver, Gold, and Diamond plans. Choose the
+                tier that matches how much support and mentorship you need.
+              </p>
+              <div className="mt-6 space-y-3">
+                {enrollmentPlans.map((plan) => (
+                  <Button
+                    key={plan.id}
+                    href={plan.paymentUrl}
+                    className={`plan-cta plan-cta--${plan.id} w-full`}
+                  >
+                    {plan.ctaLabel}
+                  </Button>
+                ))}
+              </div>
+              <Button to={enrollPath} variant="secondary" className="mt-3 w-full">
+                Compare all plans
               </Button>
-              <Button to="/contact" variant="secondary" className="mt-3 w-full">
-                Ask the Expert
+              <Button to="/contact" variant="ghost" className="mt-3 w-full">
+                Ask before enrolling
               </Button>
             </div>
           </aside>

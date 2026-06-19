@@ -2,6 +2,8 @@ import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
+import PlanCTASection from "../components/PlanCTASection";
+import PlanTierStrip from "../components/PlanTierStrip";
 import {
   aboutStory,
   enrollPath,
@@ -26,8 +28,9 @@ export default function About() {
       >
         <div className="mt-8">
           <Button to={enrollPath} size="lg">
-            Start Your Journey With Us
+            View Silver, Gold &amp; Diamond Plans
           </Button>
+          <PlanTierStrip className="mt-6" />
         </div>
       </PageHero>
 
@@ -183,6 +186,14 @@ export default function About() {
           </Button>
         </div>
       </section>
+
+      <PlanCTASection
+        className="section-alt"
+        variant="compact"
+        showProgression={false}
+        title="Join with Silver, Gold, or Diamond"
+        description="Every plan includes community access and guided coaching — pick the level of mentorship and business support that's right for you."
+      />
     </>
   );
 }

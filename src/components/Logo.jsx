@@ -6,11 +6,11 @@ const sizes = {
   lg: "h-14 w-14",
 };
 
-export default function Logo({ size = "md", showGlow = false, className = "" }) {
+export default function Logo({ size = "md", className = "" }) {
   return (
     <span className={`relative inline-flex shrink-0 ${className}`}>
       <span
-        className={`${sizes[size]} flex items-center justify-center overflow-hidden rounded-xl bg-[#0c0c10] p-1.5 ring-2 ring-primary/25 transition-all duration-300 group-hover:ring-primary/50`}
+        className={`${sizes[size]} flex items-center justify-center overflow-hidden rounded-xl bg-[#0c0c10] p-1.5 ring-2 ring-primary/25 transition-colors duration-200 group-hover:ring-primary/50`}
       >
         <img
           src={siteImages.logo}
@@ -18,12 +18,6 @@ export default function Logo({ size = "md", showGlow = false, className = "" }) 
           className="h-full w-full object-contain"
         />
       </span>
-      {showGlow && (
-        <span
-          className="absolute -inset-1 -z-10 rounded-xl bg-primary/25 blur-md opacity-0 transition-opacity group-hover:opacity-100"
-          aria-hidden="true"
-        />
-      )}
     </span>
   );
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import TiltCard from "../components/background/TiltCard";
 import CourseCard from "../components/CourseCard";
+import PlanCTASection from "../components/PlanCTASection";
+import PlanTierStrip from "../components/PlanTierStrip";
 import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
 import Logo from "../components/Logo";
@@ -87,14 +88,14 @@ export default function Home() {
             src={siteImages.heroBackground}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover object-center opacity-20"
+            className="h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-bg/90 via-bg/70 to-bg/50" />
+          <div className="hero-glossy-overlay absolute inset-0" />
         </div>
 
         <div className="section-container relative flex min-h-[88vh] items-center py-20 lg:py-28">
           <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-            <div className="max-w-2xl animate-fade-up">
+            <div className="max-w-2xl">
               <p className="badge">{brand.name}</p>
               <h1 className="font-display mt-6 text-[clamp(2.25rem,5vw,3.75rem)] font-bold tracking-tight text-text leading-[1.08]">
                 Transforming lives by helping{" "}
@@ -123,17 +124,16 @@ export default function Home() {
 
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button to={enrollPath} size="lg">
-                  Start Your Journey
+                  Choose Your Plan
                 </Button>
                 <Button to="/courses" variant="secondary" size="lg">
                   Explore Courses
                 </Button>
               </div>
+              <PlanTierStrip className="mt-6" />
             </div>
 
-            <TiltCard
-              className="glass-strong overflow-hidden rounded-3xl border-primary/15 p-0"
-            >
+            <div className="glass-strong glossy-panel overflow-hidden rounded-3xl border-primary/15 p-0">
               <div className="h-1.5 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
               <div className="p-8 sm:p-10">
                 <div className="flex items-center gap-4">
@@ -170,7 +170,7 @@ export default function Home() {
                   <p className="mt-1 text-sm leading-snug text-text-muted">{stats[0].label}</p>
                 </div>
               </div>
-            </TiltCard>
+            </div>
           </div>
         </div>
       </section>
@@ -178,8 +178,7 @@ export default function Home() {
       {/* Stats */}
       <section className="relative z-10 -mt-6 px-4 sm:px-6">
         <div
-          className="section-container glass-strong grid gap-8 rounded-3xl p-8 sm:grid-cols-3 sm:p-10"
-          style={{ boxShadow: "var(--shadow-card-hover)" }}
+          className="section-container glass-strong glossy-panel grid gap-8 rounded-3xl p-8 sm:grid-cols-3 sm:p-10"
         >
           {stats.map((stat, i) => (
             <div
@@ -192,6 +191,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Membership Plans — primary CTA */}
+      <PlanCTASection className="section-alt !pt-16" />
 
       {/* Why 10X Wealth Creators */}
       <section className="section-container section-padding">
@@ -206,13 +208,8 @@ export default function Home() {
           {whyUs.map((pillar, i) => (
             <article
               key={pillar.title}
-              className="card card-hover group relative overflow-hidden p-8 sm:p-10"
-              style={{ animationDelay: `${i * 100}ms` }}
+              className="card card-hover glossy-panel relative overflow-hidden p-8 sm:p-10"
             >
-              <div
-                className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary/5 transition-all duration-300 group-hover:bg-primary/10"
-                aria-hidden="true"
-              />
               <p className="text-sm font-bold text-primary">{pillar.step}</p>
               <div className="icon-box mt-5">{pillarIcons[i]}</div>
               <h3 className="mt-7 text-xl font-bold text-text">{pillar.title}</h3>
@@ -245,8 +242,11 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-12 text-center">
+            <p className="mb-6 text-base text-text-muted">
+              All programs are included across our Silver, Gold, and Diamond membership tiers.
+            </p>
             <Button to={enrollPath} size="lg">
-              Discover Comprehensive Solutions
+              Compare Silver, Gold &amp; Diamond
             </Button>
           </div>
         </div>
@@ -358,7 +358,7 @@ export default function Home() {
             />
             <div className="flex flex-wrap gap-3">
               <Button to={enrollPath} size="md">
-                View Enrollment Plans
+                Enroll — View Plans
               </Button>
               <Link
                 to="/courses"
@@ -393,7 +393,7 @@ export default function Home() {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover object-top"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -421,50 +421,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-container pb-24 sm:pb-32">
-        <div className="relative overflow-hidden rounded-3xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent" />
-          <div className="card relative overflow-hidden border-primary/20">
-            <div className="grid lg:grid-cols-2">
-              <div className="p-8 sm:p-12 lg:p-14">
-                <p className="badge">Get Started</p>
-                <h2 className="font-display mt-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold tracking-tight text-text leading-[1.1]">
-                  Confused about where to start? Let&apos;s find the right path for you.
-                </h2>
-                <p className="mt-5 text-lg leading-relaxed text-text-muted">
-                  Reach out today or join our learning platform to take your first step
-                  toward mindset growth, skill-building, and purpose-driven action.
-                </p>
-                <div className="mt-9 flex flex-wrap gap-4">
-                  <Button to={enrollPath} size="lg">
-                    Start Your Journey
-                  </Button>
-                  <Button to="/contact" variant="secondary" size="lg">
-                    Book a Free Call
-                  </Button>
-                </div>
-              </div>
-              <div className="border-t border-border/60 bg-surface-elevated/50 p-8 backdrop-blur-sm sm:p-12 lg:border-l lg:border-t-0 lg:p-14">
-                <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                  Important Notice
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-text-muted">
-                  10X Wealth Creators provides educational content and coaching
-                  services only. We do not offer professional financial, legal, or
-                  investment advice. Results mentioned are individual examples and are
-                  not typical. Your outcomes depend on your effort, commitment, skills,
-                  and market conditions.
-                </p>
-                <Link
-                  to="/disclaimer"
-                  className="mt-6 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                >
-                  Read full disclaimer <span aria-hidden="true">&rarr;</span>
-                </Link>
-              </div>
-            </div>
-          </div>
+      {/* Final enrollment CTA */}
+      <section className="section-alt pb-24 sm:pb-32">
+        <PlanCTASection
+          eyebrow="Ready to Enroll?"
+          title="Pick Silver, Gold, or Diamond and start today"
+          description="Secure your spot with a plan that matches your goals — from mindset foundations to premium 1-on-1 mentorship."
+          variant="compact"
+          showProgression={false}
+          className="!pb-0"
+        />
+        <div className="section-container mt-10 max-w-3xl text-center">
+          <p className="text-sm leading-relaxed text-text-muted">
+            10X Wealth Creators provides educational content and coaching services only.
+            We do not offer professional financial, legal, or investment advice.{" "}
+            <Link to="/disclaimer" className="font-semibold text-primary hover:text-primary-hover">
+              Read full disclaimer
+            </Link>
+          </p>
         </div>
       </section>
     </>

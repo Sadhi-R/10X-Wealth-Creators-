@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <title>10X Wealth Creators</title>
     <script>
-      location.replace(
-        "/docs" + location.pathname + location.search + location.hash
-      );
+      (function () {
+        var host = window.location.hostname;
+        if (host !== "localhost" && host !== "127.0.0.1") {
+          location.replace(
+            "/docs" + location.pathname + location.search + location.hash
+          );
+        }
+      })();
     </script>
   </head>
   <body>
