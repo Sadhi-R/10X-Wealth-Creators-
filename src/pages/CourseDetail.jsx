@@ -3,11 +3,17 @@ import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
 import CourseImage from "../components/CourseImage";
 import { getCourseBySlug } from "../data/courses";
-import { enrollmentPlans, enrollPath } from "../data/siteContent";
+import { enrollPath } from "../data/siteContent";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function CourseDetail() {
   const { slug } = useParams();
   const course = getCourseBySlug(slug);
+
+  usePageMeta({
+    title: course?.title ?? "Course Not Found",
+    description: course?.shortDescription ?? "The requested course could not be found.",
+  });
 
   if (!course) {
     return (
@@ -107,28 +113,20 @@ export default function CourseDetail() {
 
             <div className="card glossy-panel border-primary/20 p-6 sm:p-8">
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                Enroll via membership
+                Included with membership
               </p>
               <p className="mt-3 text-base leading-relaxed text-text-muted">
-                This course is included in our Silver, Gold, and Diamond plans. Choose the
-                tier that matches how much support and mentorship you need.
+                This course is part of our Silver, Gold, and Diamond programs. Book a
+                discovery call to find the right fit, or compare plans when you are ready.
               </p>
-              <div className="mt-6 space-y-3">
-                {enrollmentPlans.map((plan) => (
-                  <Button
-                    key={plan.id}
-                    href={plan.paymentUrl}
-                    className={`plan-cta plan-cta--${plan.id} w-full`}
-                  >
-                    {plan.ctaLabel}
-                  </Button>
-                ))}
-              </div>
-              <Button to={enrollPath} variant="secondary" className="mt-3 w-full">
-                Compare all plans
+              <Button to={enrollPath} size="lg" className="mt-6 w-full">
+                Find Your Plan
               </Button>
-              <Button to="/contact" variant="ghost" className="mt-3 w-full">
-                Ask before enrolling
+              <Button to="/contact" variant="secondary" className="mt-3 w-full">
+                Book a Discovery Call
+              </Button>
+              <Button to="/faq" variant="ghost" className="mt-3 w-full">
+                Read FAQs
               </Button>
             </div>
           </aside>

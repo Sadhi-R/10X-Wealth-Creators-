@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { contact } from "../data/siteContent";
 
 const actions = [
@@ -40,28 +41,49 @@ const actions = [
 ];
 
 export default function FloatingContactButton() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div
-      className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
-      aria-label="Quick contact"
-    >
-      {actions.map((action) => (
-        <a
-          key={action.id}
-          href={action.href}
-          target={action.external ? "_blank" : undefined}
-          rel={action.external ? "noopener noreferrer" : undefined}
-          aria-label={action.label}
-          title={action.label}
-          className="group relative flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          style={{ backgroundColor: action.color }}
-        >
-          {action.icon}
-          <span className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-lg bg-surface px-3 py-1.5 text-xs font-medium text-text opacity-0 shadow-md transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-            {action.label}
-          </span>
-        </a>
-      ))}
+    <div className="fab-anchor fixed z-50 flex flex-col items-end gap-3" aria-label="Quick contact">
+      {open && (
+        <div className="flex flex-col items-end gap-3">
+          {actions.map((action) => (
+            <a
+              key={action.id}
+              href={action.href}
+              target={action.external ? "_blank" : undefined}
+              rel={action.external ? "noopener noreferrer" : undefined}
+              aria-label={action.label}
+              title={action.label}
+              className="group relative flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              style={{ backgroundColor: action.color }}
+            >
+              {action.icon}
+              <span className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-lg bg-surface px-3 py-1.5 text-xs font-medium text-text opacity-0 shadow-md transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                {action.label}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        aria-label={open ? "Close contact menu" : "Open contact menu"}
+        className="btn-primary flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        {open ? (
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        ) : (
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        )}
+      </button>
     </div>
   );
 }

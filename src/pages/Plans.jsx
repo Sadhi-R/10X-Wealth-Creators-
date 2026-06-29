@@ -5,17 +5,31 @@ import PlanCards from "../components/PlanCards";
 import SectionHeader from "../components/ui/SectionHeader";
 import {
   classplusPlatformUrl,
+  contact,
   mobileAppUrl,
+  pageMeta,
 } from "../data/siteContent";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Plans() {
+  usePageMeta(pageMeta.plans);
+
   return (
     <>
       <PageHero
-        eyebrow="Enroll & Learn"
-        title="Silver, Gold & Diamond — choose your path"
-        description="Every plan is a step forward. Start with mindset clarity, build your business with proven tools, or unlock premium 1-on-1 mentorship. Secure enrollment via Razorpay."
-      />
+        eyebrow="Membership"
+        title="Become a member when you're ready"
+        description="Silver, Gold, and Diamond are structured paths — not just price tiers. Start with mindset clarity, build your business, or go all-in with 1-on-1 mentorship. Book a call if you're unsure which fits."
+      >
+        <div className="mt-8 cta-group">
+          <Button href={contact.phoneHref} size="lg">
+            Book a Discovery Call
+          </Button>
+          <Button to="/faq" variant="secondary" size="lg">
+            Read FAQs
+          </Button>
+        </div>
+      </PageHero>
 
       <section className="section-container pb-8 pt-4">
         <PlanCards variant="full" showProgression />

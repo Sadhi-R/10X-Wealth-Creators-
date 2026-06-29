@@ -67,17 +67,26 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   html {
     background-color: var(--theme-bg);
     background-image: var(--theme-body-mesh);
-    background-attachment: fixed;
+    background-attachment: scroll;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      background-attachment: fixed;
+    }
   }
 
   body {
     @apply font-sans text-text antialiased;
     background: transparent;
+    overflow-x: clip;
+    min-width: 0;
   }
 
   h1,
@@ -129,7 +138,11 @@
   }
 
   .section-padding {
-    @apply py-20 sm:py-24 lg:py-32;
+    @apply py-14 sm:py-20 lg:py-32;
+  }
+
+  .main-with-fab {
+    padding-bottom: max(5.5rem, calc(env(safe-area-inset-bottom) + 4.5rem));
   }
 
   .card {
@@ -212,17 +225,41 @@
   .glossy-background__orb--primary {
     top: -8rem;
     right: -6rem;
-    width: 28rem;
-    height: 28rem;
+    width: 16rem;
+    height: 16rem;
     background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary) 22%, transparent), transparent 70%);
   }
 
   .glossy-background__orb--accent {
     bottom: -10rem;
     left: -8rem;
-    width: 32rem;
-    height: 32rem;
+    width: 18rem;
+    height: 18rem;
     background: radial-gradient(circle, color-mix(in srgb, #6366f1 14%, transparent), transparent 70%);
+  }
+
+  @media (min-width: 640px) {
+    .glossy-background__orb--primary {
+      width: 22rem;
+      height: 22rem;
+    }
+
+    .glossy-background__orb--accent {
+      width: 26rem;
+      height: 26rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .glossy-background__orb--primary {
+      width: 28rem;
+      height: 28rem;
+    }
+
+    .glossy-background__orb--accent {
+      width: 32rem;
+      height: 32rem;
+    }
   }
 
   [data-theme="dark"] .glossy-background__orb--accent {
@@ -252,11 +289,11 @@
   }
 
   .input-field {
-    @apply w-full rounded-2xl border border-border/80 bg-surface-elevated/80 px-4 py-3.5 text-base text-text backdrop-blur-sm placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10;
+    @apply w-full min-h-11 rounded-2xl border border-border/80 bg-surface-elevated/80 px-4 py-3.5 text-base text-text backdrop-blur-sm placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10;
   }
 
   .badge {
-    @apply inline-flex items-center gap-2 rounded-full border border-primary/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-primary;
+    @apply inline-flex max-w-full items-center gap-2 rounded-full border border-primary/20 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-primary sm:px-4 sm:text-xs sm:tracking-[0.15em];
     background: linear-gradient(135deg, var(--theme-accent-soft), transparent);
   }
 
@@ -378,10 +415,29 @@
   }
 
   .plan-card__badge {
-    @apply rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider;
+    @apply max-w-[calc(100%-2rem)] rounded-full px-3 py-1.5 text-center text-[0.65rem] font-bold uppercase leading-tight tracking-wider sm:px-4 sm:text-xs;
     background: linear-gradient(135deg, var(--theme-primary), var(--theme-primary-hover));
     color: var(--theme-primary-fg);
     box-shadow: var(--shadow-glow);
+  }
+
+  .cta-group {
+    @apply flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4;
+  }
+
+  .cta-group > a,
+  .cta-group > button {
+    @apply w-full sm:w-auto;
+  }
+
+  .contact-break {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .fab-anchor {
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+    right: max(1.25rem, env(safe-area-inset-right));
   }
 
   .plan-card--silver {
@@ -527,6 +583,29 @@
 
   .plan-tier-pill--diamond .plan-tier-pill__dot {
     background: #6366f1;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
   }
 }
 

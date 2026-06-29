@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/ui/Button";
-import PlanTierStrip from "../components/PlanTierStrip";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
 import { contactChannelIcons } from "../components/ui/ContactIcons";
-import { enrollPath, contact, mobileAppUrl } from "../data/siteContent";
+import { enrollPath, contact, mobileAppUrl, pageMeta } from "../data/siteContent";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const contactChannels = [
   {
@@ -92,6 +92,7 @@ const contactChannels = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  usePageMeta(pageMeta.contact);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -102,18 +103,17 @@ export default function Contact() {
     <>
       <PageHero
         eyebrow="Get in Touch"
-        title="Questions before enrolling? We're here to help."
-        description="Not sure which plan fits — Silver, Gold, or Diamond? Reach out and we'll help you choose the right membership for your goals."
+        title="Not sure where to start? Let's talk."
+        description="Whether you're exploring our framework, joining the community, or ready for membership — we're here to help you find the right path."
       >
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button to={enrollPath} size="lg">
-            View Silver, Gold &amp; Diamond
-          </Button>
-          <Button href={contact.phoneHref} variant="secondary" size="lg">
+        <div className="mt-8 cta-group">
+          <Button href={contact.phoneHref} size="lg">
             Book a Free Call
           </Button>
+          <Button href={contact.whatsappGroup} variant="secondary" size="lg">
+            Join WhatsApp Community
+          </Button>
         </div>
-        <PlanTierStrip className="mt-6" />
       </PageHero>
 
       <section className="section-container section-padding">
@@ -138,7 +138,7 @@ export default function Contact() {
                 <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-primary">
                   {channel.label}
                 </p>
-                <p className="mt-2 text-lg font-semibold text-text">{channel.value}</p>
+                <p className="mt-2 text-base font-semibold text-text contact-break sm:text-lg">{channel.value}</p>
                 <p className="mt-2 text-sm text-text-muted">{channel.description}</p>
               </>
             );

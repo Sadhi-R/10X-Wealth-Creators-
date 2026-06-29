@@ -11,6 +11,9 @@ import Testimonials from "./pages/Testimonials";
 import Disclaimer from "./pages/Disclaimer";
 import Plans from "./pages/Plans";
 import RefundPolicy from "./pages/RefundPolicy";
+import WealthFramework from "./pages/WealthFramework";
+import Community from "./pages/Community";
+import FAQ from "./pages/FAQ";
 
 export default function App() {
   return (
@@ -19,8 +22,11 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="courses" element={<Courses />} />
         <Route path="courses/:slug" element={<CourseDetail />} />
+        <Route path="wealth-framework" element={<WealthFramework />} />
         <Route path="about" element={<About />} />
+        <Route path="community" element={<Community />} />
         <Route path="testimonials" element={<Testimonials />} />
+        <Route path="faq" element={<FAQ />} />
         <Route path="contact" element={<Contact />} />
         <Route path="plans" element={<Plans />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />

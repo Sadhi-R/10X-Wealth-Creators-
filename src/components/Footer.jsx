@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { enrollPath, contact, mobileAppUrl } from "../data/siteContent";
+import { contact, enrollPath, mobileAppUrl } from "../data/siteContent";
 
 const footerLinks = [
-  { to: "/plans", label: "Plans" },
-  { to: "/courses", label: "Courses" },
+  { to: "/courses", label: "Programs" },
+  { to: "/wealth-framework", label: "Wealth Framework" },
   { to: "/about", label: "About" },
-  { to: "/testimonials", label: "Testimonials" },
+  { to: "/community", label: "Community" },
+  { to: "/testimonials", label: "Success Stories" },
+  { to: "/faq", label: "FAQs" },
+  { to: "/plans", label: "Membership Plans" },
+  { to: "/contact", label: "Contact" },
+];
+
+const legalLinks = [
   { to: "/privacy-policy", label: "Privacy Policy" },
   { to: "/terms-and-conditions", label: "Terms & Conditions" },
   { to: "/refund-policy", label: "Refund Policy" },
   { to: "/disclaimer", label: "Disclaimer" },
-  { to: "/contact", label: "Contact" },
 ];
 
 const socialLinks = [
@@ -59,9 +65,9 @@ export default function Footer() {
               </p>
             </div>
             <p className="mt-5 max-w-md text-base leading-relaxed text-text-muted">
-              Educational coaching for mindset, purpose, and practical business growth.
-              Join our mission to help people find passion, build multiple income
-              skills, and grow with community support.
+              A mentorship-led education movement for mindset, purpose, and practical
+              business growth. Join our community, explore our framework, and grow with
+              expert guidance.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-text-muted">
               Coaching &amp; education only — not financial, legal, or investment advice.
@@ -70,7 +76,7 @@ export default function Footer() {
               to={enrollPath}
               className="mt-4 inline-flex text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary-hover"
             >
-              Silver, Gold &amp; Diamond Plans &rarr;
+              Membership Plans &rarr;
             </Link>
             <a
               href={mobileAppUrl}
@@ -83,7 +89,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <p className="text-sm font-semibold uppercase tracking-wider text-text">Navigate</p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-text">Explore</p>
             <nav aria-label="Footer navigation" className="mt-5">
               <ul className="space-y-3">
                 {footerLinks.map((link) => (
@@ -104,7 +110,7 @@ export default function Footer() {
             <p className="text-sm font-semibold uppercase tracking-wider text-text">Connect</p>
             <ul className="mt-5 space-y-3 text-base text-text-muted">
               <li>
-                <a href={`mailto:${contact.email}`} className="cursor-pointer transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <a href={`mailto:${contact.email}`} className="contact-break cursor-pointer transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                   {contact.email}
                 </a>
               </li>
@@ -128,6 +134,17 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            <nav aria-label="Legal links" className="mt-8">
+              <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-text-muted">
+                {legalLinks.map((link) => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="hover:text-primary">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
 

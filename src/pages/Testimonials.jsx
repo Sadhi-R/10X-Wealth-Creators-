@@ -1,21 +1,36 @@
+import FinalInviteSection from "../components/FinalInviteSection";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
+import Button from "../components/ui/Button";
+import { usePageMeta } from "../hooks/usePageMeta";
+import { contact, pageMeta } from "../data/siteContent";
 import { testimonials } from "../data/testimonials";
 
 export default function Testimonials() {
+  usePageMeta(pageMeta.testimonials);
+
   return (
     <>
       <PageHero
-        eyebrow="Testimonials"
-        title="Success stories from 10X Wealth Creators"
-        description="Hear from students and professionals who have transformed their lives through our programs. Individual results vary — these reflect personal experiences, not guaranteed outcomes."
-      />
+        eyebrow="Success Stories"
+        title="Real stories from our learning community"
+        description="Hear from students and professionals who have transformed their mindset and growth journey. Individual results vary — these reflect personal experiences, not guaranteed outcomes."
+      >
+        <div className="mt-8 cta-group">
+          <Button href={contact.whatsappGroup} size="lg">
+            Join the Community
+          </Button>
+          <Button to="/contact" variant="secondary" size="lg">
+            Book a Discovery Call
+          </Button>
+        </div>
+      </PageHero>
 
       <section className="section-container section-padding">
         <SectionHeader
           eyebrow="Community Voices"
-          title="Real stories from our learning community"
-          description="Mindset shifts, new income approaches, and practical growth — shared by members who worked with our mentors."
+          title="Mindset shifts, new skills, and practical growth"
+          description="Shared by members who worked with our mentors."
           align="center"
           className="mb-14"
         />
@@ -48,6 +63,8 @@ export default function Testimonials() {
           ))}
         </div>
       </section>
+
+      <FinalInviteSection className="section-alt pb-24 sm:pb-32" />
     </>
   );
 }

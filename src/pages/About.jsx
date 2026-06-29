@@ -2,16 +2,18 @@ import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import CheckIcon from "../components/ui/CheckIcon";
-import PlanCTASection from "../components/PlanCTASection";
-import PlanTierStrip from "../components/PlanTierStrip";
+import FinalInviteSection from "../components/FinalInviteSection";
 import {
   aboutStory,
-  enrollPath,
   contact,
+  founderStory,
   mentors,
+  pageMeta,
   stats,
+  visionMission,
 } from "../data/siteContent";
 import { siteImages } from "../data/siteImages";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const mentorImages = {
   sampath: siteImages.mentors.sampath,
@@ -19,6 +21,8 @@ const mentorImages = {
 };
 
 export default function About() {
+  usePageMeta(pageMeta.about);
+
   return (
     <>
       <PageHero
@@ -26,11 +30,13 @@ export default function About() {
         title={aboutStory.headline}
         description={aboutStory.subheadline}
       >
-        <div className="mt-8">
-          <Button to={enrollPath} size="lg">
-            View Silver, Gold &amp; Diamond Plans
+        <div className="mt-8 cta-group">
+          <Button to="/wealth-framework" size="lg">
+            Explore the Framework
           </Button>
-          <PlanTierStrip className="mt-6" />
+          <Button to="/contact" variant="secondary" size="lg">
+            Book a Discovery Call
+          </Button>
         </div>
       </PageHero>
 
@@ -38,28 +44,21 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
             <SectionHeader
-              eyebrow="Mission"
-              title="Empowering you to achieve financial freedom and growth"
-              description="Transforming mindsets, creating wealth skills, and unlocking success through education and coaching."
+              eyebrow="Founder Story"
+              title={founderStory.headline}
+              description={founderStory.intro}
             />
-            <p className="mt-6 text-lg leading-relaxed text-text-muted">
-              {aboutStory.intro}
-            </p>
-            <p className="mt-5 text-lg leading-relaxed text-text-muted">
-              {aboutStory.extended}
-            </p>
-            <p className="mt-5 text-lg leading-relaxed text-text-muted">
-              Through expert mentorship, proven strategies, and a powerful community,
-              we guide you on the path to personal growth and practical business
-              building — with honesty about what coaching can and cannot guarantee.
-            </p>
+            <p className="mt-6 text-lg leading-relaxed text-text-muted">{founderStory.extended}</p>
+            <blockquote className="mt-6 border-l-4 border-primary/40 pl-6 text-lg italic leading-relaxed text-text-muted">
+              &ldquo;{founderStory.quote}&rdquo;
+            </blockquote>
           </div>
 
           <div className="space-y-6">
             <div className="card overflow-hidden">
               <img
                 src={siteImages.heroBackground}
-                alt="10X Wealth Creators community"
+                alt="10X Wealth Creators community and mentorship"
                 className="h-56 w-full object-cover sm:h-72"
               />
             </div>
@@ -82,18 +81,31 @@ export default function About() {
 
       <section className="section-alt">
         <div className="section-container section-padding">
-          <div className="grid gap-6 sm:grid-cols-3">
-            {stats.map((stat) => (
-              <div key={stat.label} className="card p-6 text-center sm:p-8">
-                <p className="text-3xl font-bold gradient-text">{stat.value}</p>
-                <p className="mt-2 text-sm text-text-muted sm:text-base">{stat.label}</p>
-              </div>
-            ))}
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="card p-8 sm:p-10">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">Vision</p>
+              <p className="mt-4 text-lg leading-relaxed text-text-muted">{visionMission.vision}</p>
+            </div>
+            <div className="card p-8 sm:p-10">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">Mission</p>
+              <p className="mt-4 text-lg leading-relaxed text-text-muted">{visionMission.mission}</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section>
+      <section className="section-container section-padding">
+        <div className="grid gap-6 sm:grid-cols-3">
+          {stats.map((stat) => (
+            <div key={stat.label} className="card p-6 text-center sm:p-8">
+              <p className="text-3xl font-bold gradient-text">{stat.value}</p>
+              <p className="mt-2 text-sm text-text-muted sm:text-base">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-alt">
         <div className="section-container section-padding">
           <SectionHeader
             eyebrow="Mentors"
@@ -148,12 +160,12 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section-container pb-24 sm:pb-32">
+      <section className="section-container pb-8">
         <div className="card p-8 sm:p-12">
           <SectionHeader
             eyebrow="Visit Us"
             title="Get in touch"
-            description="Confused about where to start? Reach out and we'll help you find the right path."
+            description="Not sure where to start? Reach out and we'll help you find the right path."
           />
           <address className="mt-8 space-y-3 text-base not-italic leading-relaxed text-text-muted">
             <p>
@@ -187,13 +199,7 @@ export default function About() {
         </div>
       </section>
 
-      <PlanCTASection
-        className="section-alt"
-        variant="compact"
-        showProgression={false}
-        title="Join with Silver, Gold, or Diamond"
-        description="Every plan includes community access and guided coaching — pick the level of mentorship and business support that's right for you."
-      />
+      <FinalInviteSection className="section-alt pb-24 sm:pb-32" />
     </>
   );
 }

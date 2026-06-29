@@ -1,59 +1,77 @@
 # 10X Wealth Creators Website
 
-A modern React website for **10X Wealth Creators** — a coaching and education brand focused on mindset, purpose, and practical business growth.
+A modern React website for **10X Wealth Creators** — a mentorship-led education movement focused on mindset, purpose, practical business growth, and community.
 
-> **Note:** 10X Wealth Creators provides educational content and coaching only. It does not offer financial, legal, or investment advice.
+> **Important:** 10X Wealth Creators provides educational content and coaching only. It does not offer financial, legal, or investment advice.
 
-## Overview
+## What This Site Is
 
-This site is a full rebuild of the original static HTML website. It includes course listings, about/mentor content, contact channels, and legal pages. Course content is driven from a single data file for easy updates.
+This is not a pricing-first landing page. The site is structured to guide visitors through:
+
+**Awareness → Trust → Education → Community → Enrollment**
+
+Visitors can explore the **10X Wealth Framework**, read success stories, join the community, and book a discovery call **before** being asked to choose a membership plan.
 
 ## Features
 
-- **React + Vite** — fast dev server and optimized production builds
-- **React Router** — client-side navigation across all pages
-- **Tailwind CSS v4** — utility-first styling with a custom design system
-- **Light & dark themes** — light mode by default, toggle saved in `localStorage`
+- **React 19 + Vite 6** — fast development and optimized production builds
+- **React Router 7** — client-side navigation across all pages
+- **Tailwind CSS v4** — custom gold-forward design system with glass panels
+- **Light & dark themes** — persisted in `localStorage`
+- **Trust-first homepage** — mission, framework, mentors, and stories before membership CTAs
+- **Per-page SEO titles** — via `usePageMeta` hook
+- **Floating contact FAB** — WhatsApp, call, and email in one menu
+- **Skip-to-content link** — accessibility improvement
 - **Fully responsive** — mobile-first layout
-- **Floating contact button** — WhatsApp, call, email, Instagram, YouTube
-- **No backend yet** — contact form is frontend-only; course pages are informational
 
-## Pages / Routes
+## Pages & Routes
 
-| Route | Page |
-|-------|------|
-| `/` | Home |
-| `/courses` | Course listing |
-| `/courses/:slug` | Course detail |
-| `/about` | About & mentors |
-| `/contact` | Contact channels & form |
-| `/privacy-policy` | Privacy Policy (DRAFT) |
-| `/terms-and-conditions` | Terms & Conditions (DRAFT) |
-| `/disclaimer` | Disclaimer (DRAFT) |
+| Route | Page | Purpose |
+|-------|------|---------|
+| `/` | Home | Mission-led journey: framework, mentors, stories, community |
+| `/wealth-framework` | Wealth Framework | Five-pillar methodology and transformation journey |
+| `/courses` | Programs | Course catalog and learning paths |
+| `/courses/:slug` | Course Detail | Individual program overview |
+| `/about` | About | Founder story, vision, mentors, values |
+| `/community` | Community | WhatsApp, app, and social channels |
+| `/testimonials` | Success Stories | Member testimonials |
+| `/faq` | FAQs | Common questions and objections |
+| `/contact` | Contact | Discovery call, channels, contact form |
+| `/plans` | Membership Plans | Silver, Gold, Diamond enrollment |
+| `/privacy-policy` | Privacy Policy | Legal (review before launch) |
+| `/terms-and-conditions` | Terms & Conditions | Legal (review before launch) |
+| `/refund-policy` | Refund Policy | Refund eligibility and process |
+| `/disclaimer` | Disclaimer | Educational coaching disclaimer |
 
-## Project Structure
+## Homepage Section Order
 
-```
-.
-├── public/
-│   └── images/              # Static assets (logo, mentors, backgrounds)
-├── src/
-│   ├── components/          # Navbar, Footer, CourseCard, FloatingContactButton, UI
-│   ├── context/             # ThemeContext (light/dark)
-│   ├── data/
-│   │   ├── courses.js       # Course content — edit here
-│   │   └── siteImages.js    # Image path constants
-│   ├── pages/               # Route pages
-│   ├── App.jsx              # Router setup
-│   ├── main.jsx             # Entry point
-│   └── index.css            # Tailwind + theme tokens
-├── legacy/                  # Backup of original static index.html
-├── html/                    # Original static legal/about pages (archived)
-├── images/                  # Source image assets (also copied to public/images)
-├── index.html               # Vite HTML shell
-├── package.json
-└── vite.config.js
-```
+1. Hero — “Start Your Journey” + “Join Community”
+2. Impact stats
+3. Problems we solve
+4. Vision & Mission
+5. 10X Wealth Framework (preview)
+6. Transformation journey (4 steps)
+7. Founder story
+8. Mentors
+9. Core learning paths
+10. Success stories
+11. Community
+12. Free learning resources
+13. Course catalog
+14. FAQ preview
+15. Final invite CTA (Community · Discovery Call · Membership)
+
+Membership pricing cards appear on `/plans` only — not above the fold on the homepage.
+
+## CTA Strategy
+
+| CTA | Where it appears |
+|-----|------------------|
+| **Start Your Journey** | Home hero → `/wealth-framework` |
+| **Join the Community** | Home hero, nav, community sections → WhatsApp |
+| **Book a Discovery Call** | Mentors, contact, plans → phone / contact page |
+| **Explore Programs** | Framework, courses pages |
+| **Become a Member** | Final CTA, footer → `/plans` |
 
 ## Tech Stack
 
@@ -67,25 +85,25 @@ This site is a full rebuild of the original static HTML website. It includes cou
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 18+ recommended
+- [Node.js](https://nodejs.org/) 18 or newer
 
-### Install & run
+### Install and run locally
 
 ```bash
-# Clone the repo
+# Clone the repository
 git clone <repository-url>
 cd 10X-Wealth-Creators-
 
 # Install dependencies
 npm install
 
-# Start dev server
+# Start the development server
 npm run dev
 ```
 
-Open the URL shown in the terminal (usually `http://localhost:5173`).
+Open the URL shown in the terminal (usually **http://localhost:5173**).
 
-### Build for production
+### Production build
 
 ```bash
 npm run build
@@ -94,50 +112,91 @@ npm run preview   # preview the production build locally
 
 Output is written to `dist/`.
 
+## Project Structure
+
+```
+.
+├── public/
+│   └── images/                 # Logo, mentors, courses, hero background
+├── src/
+│   ├── components/             # Navbar, Footer, cards, FinalInviteSection
+│   ├── context/                # ThemeContext (light/dark)
+│   ├── data/
+│   │   ├── siteContent.js      # Brand copy, framework, FAQs, plans, mentors
+│   │   ├── courses.js          # Course content
+│   │   ├── testimonials.js     # Success stories
+│   │   └── siteImages.js       # Image path helpers
+│   ├── hooks/
+│   │   └── usePageMeta.js      # Per-page title and meta description
+│   ├── pages/                  # Route pages
+│   ├── App.jsx                 # Router setup
+│   ├── main.jsx                # Entry point
+│   └── index.css               # Tailwind + theme tokens
+├── app.html                    # Vite HTML shell (dev)
+├── package.json
+└── vite.config.js
+```
+
 ## Editing Content
+
+### Brand, framework, FAQs, and plans
+
+Edit **`src/data/siteContent.js`** — this is the single source of truth for:
+
+- Hero copy and vision/mission
+- Wealth framework pillars
+- FAQs
+- Membership plans (Silver, Gold, Diamond)
+- Mentor bios
+- Community highlights
+- Per-page SEO metadata (`pageMeta`)
 
 ### Courses
 
-Edit `src/data/courses.js` — each course has `slug`, `title`, `shortDescription`, `description`, `image`, `mentor`, and `learnings`. Descriptions are marked as DRAFT pending final review.
+Edit **`src/data/courses.js`** — each course has `slug`, `title`, `shortDescription`, `description`, `image`, `mentor`, and `learnings`.
+
+### Testimonials
+
+Edit **`src/data/testimonials.js`**.
 
 ### Images
 
-Brand and course images are served from `public/images/`:
+Assets are served from `public/images/`:
 
 | File | Usage |
 |------|--------|
-| `logo.png` | Navbar, footer, hero (lotus logo on dark pill — works on light & dark themes) |
+| `Logo.png` | Navbar, footer, hero card |
 | `favicon.png` | Browser tab icon |
 | `hero-background.png` | Home hero background |
 | `sampath-kumar.jpg` / `ram-prasad.jpg` | Mentor photos |
-| `courses/*.jpg` | Course cover images (local — no external URLs) |
+| `courses/*` | Course cover images |
 
-Update paths in `src/data/siteImages.js` and `src/data/courses.js` if you rename or add files.
-
-### Legal pages
-
-Privacy Policy, Terms & Conditions, and Disclaimer contain **placeholder text** marked for legal review before launch.
+Update paths in `src/data/siteImages.js` if you rename or add files.
 
 ## Deployment
 
-This is a static SPA. **Always deploy the built `dist/` folder** — never serve the repo root. If the live site tries to load `/src/main.jsx`, the host is serving source files instead of the production build.
+This is a static SPA. **Always deploy the built `dist/` folder** — never serve the repo root.
 
-### GitHub Pages (recommended)
+### GitHub Pages
 
-GitHub Pages is configured to serve the `master` branch root. The workflow builds the app into `docs/` and the root `index.html` redirects visitors to `/docs/`, so no manual Pages setting changes are required.
+Push to `master` — `.github/workflows/deploy.yml` runs `npm run publish:pages` and commits the built site to `docs/`. The root `index.html` redirects visitors to `/docs/`.
 
-1. Push to `master` — `.github/workflows/deploy.yml` runs `npm run publish:pages` and commits the built site to `docs/`.
-2. The live site should load `/docs/assets/index-*.js` (not `/src/main.jsx`).
-3. Custom domain `10xwealthcreators.com` is set via `public/CNAME` (copied into `docs/` on build).
+Custom domain: `10xwealthcreators.com` via `public/CNAME`.
 
 ### Netlify / Vercel
 
-Connect the repo — `netlify.toml` and `vercel.json` already set build command, output directory, and SPA routing.
+Connect the repo — build command `npm run build`, output directory `dist`.
+
+## Known Limitations
+
+- **Contact form** — frontend only; not connected to a backend. Use WhatsApp, phone, or email for immediate contact.
+- **Legal pages** — marked for legal review before public launch.
+- **Community member count** — update `impactStats` in `siteContent.js` with verified numbers as you grow.
 
 ## Contact
 
 - **Email:** 10xwealthcreators@gmail.com
-- **Phone / WhatsApp:** +91 94414 15563
+- **Phone / WhatsApp:** +91 79810 88978
 - **WhatsApp Group:** [Join community](https://chat.whatsapp.com/Im4AqA2MjsgAK4very2D6L)
 - **Instagram:** [@10xwealthcreators](https://www.instagram.com/10xwealthcreators)
 - **YouTube:** [@10XWealthCreators](https://www.youtube.com/@10XWealthCreators)

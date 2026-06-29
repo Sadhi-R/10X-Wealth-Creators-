@@ -78,7 +78,7 @@ export default function CourseCard({
         {showDetails && (
           <Link
             to={`/courses/${course.slug}`}
-            className="btn-primary mt-6 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200"
+            className="btn-primary mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 sm:w-fit"
           >
             View Details
             <span

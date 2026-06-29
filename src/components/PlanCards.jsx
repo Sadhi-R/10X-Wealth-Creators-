@@ -41,7 +41,7 @@ export default function PlanCards({
               } ${compact ? "p-6 sm:p-8" : "p-8 sm:p-10"}`}
             >
               {plan.badge && (
-                <span className="plan-card__badge absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                <span className="plan-card__badge absolute -top-3 left-1/2 max-w-[calc(100%-1.5rem)] -translate-x-1/2">
                   {plan.badge}
                 </span>
               )}
