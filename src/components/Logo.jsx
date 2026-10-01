@@ -10,7 +10,7 @@ export default function Logo({ size = "md", className = "" }) {
   return (
     <span className={`relative inline-flex shrink-0 ${className}`}>
       <span
-        className={`${sizes[size]} flex items-center justify-center overflow-hidden rounded-xl bg-[#0c0c10] p-1.5 ring-2 ring-primary/25 transition-colors duration-200 group-hover:ring-primary/50`}
+        className={`${sizes[size]} flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#fff8e8] to-[#ffe9b8] p-1 ring-2 ring-primary/30 transition-all duration-200 group-hover:ring-primary/55 group-hover:shadow-[0_0_18px_rgba(255,168,0,0.35)]`}
       >
         <img
           src={siteImages.logo}
