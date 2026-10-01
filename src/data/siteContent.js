@@ -96,10 +96,10 @@ export const brand = {
   tagline: "Mindset. Skills. Community. Wealth.",
   missionGoal: "10 Million People",
   missionStatement:
-    "Transforming lives by helping people find their passion and purpose — and build sustainable, profitable income through purpose-driven entrepreneurship.",
-  heroHeadline: "Build wealth with clarity, confidence, and community",
+    "Helping people find purpose and build sustainable income.",
+  heroHeadline: "Clarity. Confidence. Community.",
   heroSubheadline:
-    "10X Wealth Creators is a mentorship-led education movement helping professionals discover their purpose, master mindset and modern skills, and build sustainable income — with honesty, structure, and support.",
+    "Mentorship for mindset, skills, and purposeful income — with honesty and support.",
 };
 
 /** Featured sub-programs under the 10X Wealth Creators platform */

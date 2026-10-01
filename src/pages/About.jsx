@@ -1,17 +1,7 @@
 import PageHero from "../components/ui/PageHero";
-import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
-import CheckIcon from "../components/ui/CheckIcon";
 import FinalInviteSection from "../components/FinalInviteSection";
-import {
-  aboutStory,
-  contact,
-  founderStory,
-  mentors,
-  pageMeta,
-  stats,
-  visionMission,
-} from "../data/siteContent";
+import { aboutStory, contact, mentors, pageMeta, stats } from "../data/siteContent";
 import { siteImages } from "../data/siteImages";
 import { usePageMeta } from "../hooks/usePageMeta";
 
@@ -26,121 +16,52 @@ export default function About() {
   return (
     <>
       <PageHero
-        eyebrow="Our Story"
-        title={aboutStory.headline}
-        description={aboutStory.subheadline}
+        eyebrow="About"
+        title="Who we are"
+        description="Mentorship for mindset, purpose, and practical growth."
       >
         <div className="mt-8 cta-group">
-          <Button to="/wealth-framework" size="lg">
-            Explore the Framework
+          <Button to="/contact" size="lg">
+            Book a Call
           </Button>
-          <Button to="/contact" variant="secondary" size="lg">
-            Book a Discovery Call
+          <Button href={contact.whatsappGroup} variant="secondary" size="lg">
+            Join Community
           </Button>
         </div>
       </PageHero>
 
       <section className="section-container section-padding">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <SectionHeader
-              eyebrow="Founder Story"
-              title={founderStory.headline}
-              description={founderStory.intro}
-            />
-            <p className="mt-6 text-lg leading-relaxed text-text-muted">{founderStory.extended}</p>
-            <blockquote className="mt-6 border-l-4 border-primary/40 pl-6 text-lg italic leading-relaxed text-text-muted">
-              &ldquo;{founderStory.quote}&rdquo;
-            </blockquote>
-          </div>
-
-          <div className="space-y-6">
-            <div className="card overflow-hidden">
-              <img
-                src={siteImages.heroBackground}
-                alt="10X Wealth Creators community and mentorship"
-                className="h-56 w-full object-cover sm:h-72"
-              />
-            </div>
-            <div className="card p-8 sm:p-10">
-              <h3 className="text-xl font-bold text-text">Our values</h3>
-              <ul className="mt-6 space-y-5">
-                {aboutStory.values.map((item) => (
-                  <li key={item} className="flex gap-3 text-base text-text-muted">
-                    <span className="check-badge mt-0.5">
-                      <CheckIcon className="h-3.5 w-3.5" />
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-alt">
-        <div className="section-container section-padding">
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div className="card p-8 sm:p-10">
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">Vision</p>
-              <p className="mt-4 text-lg leading-relaxed text-text-muted">{visionMission.vision}</p>
-            </div>
-            <div className="card p-8 sm:p-10">
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">Mission</p>
-              <p className="mt-4 text-lg leading-relaxed text-text-muted">{visionMission.mission}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-container section-padding">
         <div className="grid gap-6 sm:grid-cols-3">
           {stats.map((stat) => (
-            <div key={stat.label} className="card p-6 text-center sm:p-8">
+            <div key={stat.label} className="card p-6 text-center">
               <p className="text-3xl font-bold gradient-text">{stat.value}</p>
-              <p className="mt-2 text-sm text-text-muted sm:text-base">{stat.label}</p>
+              <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
             </div>
           ))}
         </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center text-base text-text-muted">
+          {aboutStory.subheadline}
+        </p>
       </section>
 
       <section className="section-alt">
         <div className="section-container section-padding">
-          <SectionHeader
-            eyebrow="Mentors"
-            title="Sampath Kumar & Ram Prasad"
-            description="At 10X Wealth Creators, we believe true success starts with the right mindset. Our mentors combine psychology-backed growth coaching with engineers-focused business strategy."
-            align="center"
-            className="mb-14"
-          />
-          <div className="grid gap-8 md:grid-cols-2">
+          <h2 className="font-display text-center text-2xl font-bold text-text">Mentors</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
             {mentors.map((mentor) => (
-              <article key={mentor.name} className="card card-hover overflow-hidden">
-                <div className="relative aspect-[4/3] overflow-hidden bg-surface-elevated">
+              <article key={mentor.name} className="card overflow-hidden">
+                <div className="relative aspect-[16/10] overflow-hidden">
                   <img
                     src={mentorImages[mentor.imageKey]}
                     alt={mentor.name}
                     className="h-full w-full object-cover object-top"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                </div>
-                <div className="p-8 sm:p-10">
-                  <h3 className="text-2xl font-bold text-text">{mentor.name}</h3>
-                  <p className="mt-1 text-sm font-semibold text-primary">{mentor.role}</p>
-                  <p className="mt-1 text-xs text-text-muted">{mentor.credentials}</p>
-                  <p className="mt-5 text-base leading-relaxed text-text-muted">{mentor.bio}</p>
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {mentor.focus.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-full border border-primary/20 bg-accent-soft px-3 py-1 text-xs font-medium text-primary"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-0 p-4 text-white">
+                    <h3 className="text-lg font-bold">{mentor.name}</h3>
+                    <p className="text-sm text-white/90">{mentor.role}</p>
+                  </div>
                 </div>
               </article>
             ))}
@@ -148,58 +69,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section-container section-padding">
-        <div className="card border-primary/20 bg-accent-soft/30 p-8 sm:p-12">
-          <h2 className="text-2xl font-bold text-text">Educational content only</h2>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-text-muted">
-            10X Wealth Creators provides educational content and coaching services only
-            and does not offer professional financial, legal, or investment advice. We
-            do not guarantee any specific income or financial outcome. Your results
-            depend on your effort, commitment, skills, and market conditions.
-          </p>
-        </div>
-      </section>
-
-      <section className="section-container pb-8">
-        <div className="card p-8 sm:p-12">
-          <SectionHeader
-            eyebrow="Visit Us"
-            title="Get in touch"
-            description="Not sure where to start? Reach out and we'll help you find the right path."
-          />
-          <address className="mt-8 space-y-3 text-base not-italic leading-relaxed text-text-muted">
-            <p>
-              {contact.address.line1}
-              <br />
-              {contact.address.line2}
-              <br />
-              {contact.address.city}
-            </p>
-            <p>
-              <a href={contact.phoneHref} className="text-primary hover:text-primary-hover">
-                {contact.phone}
-              </a>
-              {" · "}
-              <a href={contact.phoneAltHref} className="text-primary hover:text-primary-hover">
-                {contact.phoneAlt}
-              </a>
-            </p>
-            <p>
-              <a
-                href={`mailto:${contact.email}`}
-                className="text-primary hover:text-primary-hover"
-              >
-                {contact.email}
-              </a>
-            </p>
-          </address>
-          <Button to="/contact" variant="secondary" className="mt-8">
-            Contact Us
-          </Button>
-        </div>
-      </section>
-
-      <FinalInviteSection className="section-alt pb-24 sm:pb-32" />
+      <FinalInviteSection className="pb-24 sm:pb-32" />
     </>
   );
 }
