@@ -19,7 +19,7 @@ export default function Layout() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <ScrollToTop />
         <Navbar />
-        <main id="main-content" className="main-with-fab flex-1 pt-[4.75rem] sm:pt-24">
+        <main id="main-content" className="main-with-fab flex-1 pt-[4.85rem] sm:pt-24">
           <Outlet />
         </main>
         <Footer />

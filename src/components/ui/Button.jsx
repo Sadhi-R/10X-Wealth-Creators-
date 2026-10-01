@@ -27,6 +27,7 @@ export default function Button({
     "inline-flex cursor-pointer items-center justify-center gap-2 font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
     variants[variant],
     sizes[size],
+    variant === "primary" ? "btn-shine" : "",
     className,
   ].join(" ");
 
