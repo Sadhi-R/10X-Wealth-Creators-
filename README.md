@@ -179,15 +179,20 @@ Update paths in `src/data/siteImages.js` if you rename or add files.
 
 ## Deployment
 
-This is a static SPA. **Serve from the site root (`/`)** — never from `/docs/`.
+This is a static SPA. **The live site must load at `/` (never `/docs`).**
 
-### GitHub Pages (required)
+### GitHub Pages (current)
 
-1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**
-2. Push to `master` — `.github/workflows/deploy.yml` builds with `VITE_BASE_PATH=/` and deploys `dist/` to Pages
-3. Custom domain: `10xwealthcreators.com` (`public/CNAME` + root `CNAME`)
+Repo Pages is set to **Deploy from branch → `master` / root**. After UI changes:
 
-Legacy `/docs` URLs redirect to `/`. Do **not** use “Deploy from a branch → /docs folder”.
+```bash
+npm run publish:pages
+git add -A && git commit -m "Publish site" && git push
+```
+
+That builds with `VITE_BASE_PATH=/` and copies `dist/` → repo root (`index.html`, `assets/`, `images/`). Legacy `/docs` URLs redirect to `/`.
+
+**Preferred (when you can change Settings):** Pages → Source → **GitHub Actions**. Then a normal push to `master` deploys `dist/` via `.github/workflows/deploy.yml` with no root publish step.
 
 ### Netlify / Vercel
 

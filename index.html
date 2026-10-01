@@ -18,7 +18,6 @@
         var theme = localStorage.getItem("10x-theme");
         if (theme !== "light" && theme !== "dark") theme = "light";
         document.documentElement.setAttribute("data-theme", theme);
-        // Legacy /docs path → root (old GitHub Pages layout)
         var path = location.pathname || "/";
         if (path === "/docs" || path.indexOf("/docs/") === 0) {
           var next = path.replace(/^\/docs\/?/, "/") || "/";
@@ -31,9 +30,10 @@
       name="description"
       content="Learn mindset, business skills, and wealth creation strategies with expert mentors Sampath Kumar and Ram Prasad. Community-led education in Hyderabad and online."
     />
+    <script type="module" crossorigin src="/assets/main-BEjFVbnA.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-qN5hCNMS.css">
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="root"></div>
   </body>
 </html>

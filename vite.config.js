@@ -5,13 +5,30 @@ import { resolve } from 'node:path'
 
 const base = process.env.VITE_BASE_PATH || '/'
 
+/** Serve app.html at / during local dev. */
+function devAppEntry() {
+  return {
+    name: 'dev-app-entry',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const [pathname] = (req.url ?? '/').split('?')
+        if (pathname === '/' || pathname === '/index.html') {
+          req.url = '/app.html'
+        }
+        next()
+      })
+    },
+  }
+}
+
 export default defineConfig({
   base,
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), devAppEntry()],
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main: resolve(__dirname, 'app.html'),
       },
     },
   },
