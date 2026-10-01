@@ -1,16 +1,28 @@
 import { Link } from "react-router-dom";
+import CourseCard from "../components/CourseCard";
 import FinalInviteSection from "../components/FinalInviteSection";
 import Button from "../components/ui/Button";
+import CheckIcon from "../components/ui/CheckIcon";
 import Logo from "../components/Logo";
 import SectionHeader from "../components/ui/SectionHeader";
+import { courses } from "../data/courses";
 import { usePageMeta } from "../hooks/usePageMeta";
 import {
+  aboutStory,
   brand,
+  communityContent,
   contact,
+  corePrograms,
   featuredPrograms,
+  founderStory,
   impactStats,
   mentors as mentorData,
   pageMeta,
+  problemsWeSolve,
+  transformationSteps,
+  visionMission,
+  visionStat,
+  whyUs,
 } from "../data/siteContent";
 import { siteImages } from "../data/siteImages";
 import { testimonials } from "../data/testimonials";
@@ -20,57 +32,83 @@ const mentorImages = {
   ram: siteImages.mentors.ram,
 };
 
-const featuredTestimonials = testimonials.slice(0, 2);
+const featuredTestimonials = testimonials.slice(0, 3);
 
 export default function Home() {
   usePageMeta(pageMeta.home);
 
   return (
     <>
-      <section className="relative min-h-[88svh] overflow-hidden">
+      {/* Hero */}
+      <section className="relative min-h-[92svh] overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={siteImages.heroBackground}
             alt="Happy family living with freedom and peace"
             className="h-full w-full object-cover object-[center_35%]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/96 via-white/85 to-white/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/45" />
         </div>
 
-        <div className="section-container relative flex min-h-[88svh] items-center pb-14 pt-28 sm:pb-16 sm:pt-32">
-          <div className="grid w-full min-w-0 items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
-            <div className="min-w-0 max-w-xl">
+        <div className="section-container relative flex min-h-[92svh] items-center pb-16 pt-28 sm:pb-20 sm:pt-32">
+          <div className="grid w-full min-w-0 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+            <div className="min-w-0 max-w-2xl">
               <p className="badge">{brand.name}</p>
-              <h1 className="font-display mt-5 text-[clamp(2.2rem,5vw,3.5rem)] font-bold tracking-tight text-text leading-[1.08]">
+              <h1 className="font-display mt-5 text-[clamp(2.3rem,5vw,3.7rem)] font-bold tracking-tight text-text leading-[1.08]">
                 {brand.heroHeadline}
               </h1>
-              <p className="mt-4 max-w-lg text-base leading-relaxed text-text-muted sm:text-lg">
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-muted">
                 {brand.heroSubheadline}
               </p>
-              <div className="cta-group mt-8">
+
+              <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-text-muted sm:text-base">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Mindset mentorship
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Business skills
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Growing community
+                </li>
+              </ul>
+
+              <div className="cta-group mt-9">
                 <Button to="/wealth-framework" size="lg">
-                  Start Your Journey
+                  Explore the Framework
                 </Button>
                 <Button href={contact.whatsappGroup} variant="secondary" size="lg">
-                  Join Community
+                  Join the Community
                 </Button>
               </div>
             </div>
 
-            <div className="glass-strong min-w-0 overflow-hidden rounded-3xl border-primary/15 shadow-[var(--shadow-card)]">
+            <div className="glass-strong glossy-panel min-w-0 overflow-hidden rounded-3xl border-primary/15 shadow-[var(--shadow-card)]">
               <img
                 src={siteImages.heroFamily}
                 alt="A happy family enjoying freedom together"
                 className="aspect-[4/3] w-full object-cover"
               />
-              <div className="flex items-center gap-3 p-5">
-                <Logo size="md" />
+              <div className="space-y-4 p-6">
+                <div className="flex items-center gap-3">
+                  <Logo size="md" />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                      {brand.tagline}
+                    </p>
+                    <p className="text-sm text-text-muted">Hyderabad, India</p>
+                  </div>
+                </div>
+                <p className="text-base leading-relaxed text-text-muted">
+                  {brand.missionStatement}
+                </p>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                    {brand.tagline}
-                  </p>
-                  <p className="text-sm text-text-muted">Hyderabad, India</p>
+                  <p className="text-2xl font-bold gradient-text">{visionStat.value}</p>
+                  <p className="mt-1 text-xs text-text-muted">{visionStat.label}</p>
                 </div>
               </div>
             </div>
@@ -78,103 +116,365 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Impact */}
       <section className="relative z-10 -mt-4 sm:-mt-8">
-        <div className="section-container glass-strong grid gap-4 rounded-3xl p-5 sm:grid-cols-3 sm:gap-6 sm:p-8">
+        <div className="section-container glass-strong glossy-panel grid gap-5 rounded-3xl p-6 sm:grid-cols-3 sm:gap-8 sm:p-9">
           {impactStats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`text-center ${i > 0 ? "sm:border-l sm:border-border/50 sm:pl-6" : ""}`}
+              className={`text-center ${i > 0 ? "sm:border-l sm:border-border/50 sm:pl-8" : ""}`}
             >
-              <p className="text-3xl font-bold gradient-text">{stat.value}</p>
-              <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
+              <p className="text-3xl font-bold gradient-text sm:text-4xl">{stat.value}</p>
+              <p className="mt-2 text-sm text-text-muted">{stat.label}</p>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Brand story */}
       <section className="section-container section-padding">
-        <SectionHeader title="Our programs" description="Two paths. One ecosystem." />
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {featuredPrograms.map((program) => (
-            <a
-              key={program.id}
-              href={program.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card card-hover group flex flex-col p-6"
-            >
-              <span className="badge w-fit">{program.badge}</span>
-              <h3 className="font-display mt-3 text-xl font-bold text-text group-hover:text-primary">
-                {program.name}
-              </h3>
-              <p className="mt-1 text-sm font-semibold text-primary">{program.tagline}</p>
-              <span className="mt-5 text-sm font-bold text-primary">
-                {program.cta} →
-              </span>
-            </a>
-          ))}
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div>
+            <SectionHeader
+              eyebrow="The Brand"
+              title={founderStory.headline}
+              description={founderStory.intro}
+            />
+            <p className="mt-5 text-base leading-relaxed text-text-muted">
+              {founderStory.extended}
+            </p>
+            <blockquote className="mt-6 border-l-4 border-primary/40 pl-5 text-base italic leading-relaxed text-text-muted">
+              &ldquo;{founderStory.quote}&rdquo;
+            </blockquote>
+            <Button to="/about" variant="secondary" className="mt-8">
+              About 10X Wealth Creators
+            </Button>
+          </div>
+          <div className="space-y-5">
+            <div className="overflow-hidden rounded-3xl border border-border/80 shadow-[var(--shadow-card)]">
+              <img
+                src={siteImages.sectionMentorship}
+                alt="Mentorship at 10X Wealth Creators"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="card p-7">
+              <h3 className="text-lg font-bold text-text">What we stand for</h3>
+              <ul className="mt-5 space-y-3">
+                {aboutStory.values.slice(0, 4).map((item) => (
+                  <li key={item} className="flex gap-3 text-sm text-text-muted sm:text-base">
+                    <span className="check-badge mt-0.5 shrink-0">
+                      <CheckIcon className="h-3.5 w-3.5" />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* Challenges */}
       <section className="section-alt">
         <div className="section-container section-padding">
-          <SectionHeader title="Your mentors" description="Clarity + business strategy." align="center" />
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {mentorData.map((mentor) => (
-              <article key={mentor.name} className="card overflow-hidden">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={mentorImages[mentor.imageKey]}
-                    alt={mentor.name}
-                    className="h-full w-full object-cover object-top"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 p-4 text-white">
-                    <h3 className="text-lg font-bold">{mentor.name}</h3>
-                    <p className="text-sm text-white/90">{mentor.role}</p>
-                  </div>
-                </div>
+          <SectionHeader
+            eyebrow="Why 10XWC Exists"
+            title="Sound familiar?"
+            description="Most people are not short on ambition — they need clarity, structure, and the right mentors."
+            align="center"
+            className="mb-12"
+          />
+          <div className="grid gap-5 sm:grid-cols-2">
+            {problemsWeSolve.map((problem) => (
+              <article key={problem.title} className="card card-hover p-6 sm:p-7">
+                <h3 className="text-lg font-bold text-text">{problem.title}</h3>
+                <p className="mt-3 text-base leading-relaxed text-text-muted">
+                  {problem.description}
+                </p>
               </article>
             ))}
           </div>
-          <div className="mt-8 text-center">
-            <Button to="/contact" size="lg">
-              Book a Call
+        </div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="section-container section-padding">
+        <SectionHeader
+          eyebrow="Vision & Mission"
+          title="A brand built for purposeful growth"
+          description="We combine inner clarity with practical execution — so wealth and wellbeing grow together."
+          align="center"
+          className="mb-10"
+        />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="card p-8">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Vision</p>
+            <p className="mt-4 text-base leading-relaxed text-text-muted sm:text-lg">
+              {visionMission.vision}
+            </p>
+          </div>
+          <div className="card p-8">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Mission</p>
+            <p className="mt-4 text-base leading-relaxed text-text-muted sm:text-lg">
+              {visionMission.mission}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Framework */}
+      <section className="section-alt">
+        <div className="section-container section-padding">
+          <SectionHeader
+            eyebrow="10X Wealth Framework"
+            title="Five pillars from purpose to action"
+            description="A clear path: purpose, mindset, financial freedom, multiple income streams, and entrepreneurship."
+            align="center"
+            className="mb-12"
+          />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {whyUs.map((pillar) => (
+              <article key={pillar.title} className="card card-hover p-7">
+                <p className="text-sm font-bold text-primary">{pillar.step}</p>
+                <h3 className="mt-3 text-lg font-bold text-text">{pillar.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">
+                  {pillar.description}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Button to="/wealth-framework" size="lg">
+              Explore Full Framework
             </Button>
           </div>
         </div>
       </section>
 
+      {/* Journey */}
       <section className="section-container section-padding">
-        <SectionHeader title="Stories" description="Real people. Real journeys." align="center" />
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <SectionHeader
+          eyebrow="Your Journey"
+          title="From clarity to consistent action"
+          description="A simple four-step path — move at your pace with guidance when you need it."
+          align="center"
+          className="mb-12"
+        />
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {transformationSteps.map((item) => (
+            <article key={item.step} className="card p-6">
+              <div
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-fg"
+                style={{ boxShadow: "var(--shadow-glow)" }}
+              >
+                {item.step}
+              </div>
+              <h3 className="mt-5 text-lg font-bold text-text">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Ecosystem programs */}
+      <section className="section-alt">
+        <div className="section-container section-padding">
+          <SectionHeader
+            eyebrow="Under 10X Wealth Creators"
+            title="Flagship programs in our ecosystem"
+            description="Magical Mornings and Dhruva Foundation serve different stages of the same growth journey."
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {featuredPrograms.map((program) => (
+              <a
+                key={program.id}
+                href={program.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card card-hover group flex flex-col p-7 sm:p-8"
+              >
+                <span className="badge w-fit">{program.badge}</span>
+                <h3 className="font-display mt-4 text-2xl font-bold text-text group-hover:text-primary">
+                  {program.name}
+                </h3>
+                <p className="mt-1 text-sm font-semibold text-primary">{program.tagline}</p>
+                <p className="mt-4 flex-1 text-base leading-relaxed text-text-muted">
+                  {program.description}
+                </p>
+                <span className="mt-6 text-sm font-bold text-primary">{program.cta} →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mentors */}
+      <section className="section-container section-padding">
+        <SectionHeader
+          eyebrow="Mentors"
+          title="Sampath Kumar & Ram Prasad"
+          description="Psychology-backed mindset coaching meets engineers-focused business strategy."
+          align="center"
+          className="mb-12"
+        />
+        <div className="grid gap-7 md:grid-cols-2">
+          {mentorData.map((mentor) => (
+            <article key={mentor.name} className="card card-hover overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={mentorImages[mentor.imageKey]}
+                  alt={mentor.name}
+                  className="h-full w-full object-cover object-top"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <div className="absolute bottom-0 p-5 text-white">
+                  <h3 className="text-xl font-bold">{mentor.name}</h3>
+                  <p className="text-sm text-white/90">{mentor.role}</p>
+                  <p className="mt-1 text-xs text-white/75">{mentor.credentials}</p>
+                </div>
+              </div>
+              <p className="p-6 text-base leading-relaxed text-text-muted">{mentor.bio}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Button to="/contact" size="lg">
+            Book a Discovery Call
+          </Button>
+        </div>
+      </section>
+
+      {/* Learning paths */}
+      <section className="section-alt">
+        <div className="section-container section-padding">
+          <SectionHeader
+            eyebrow="Learning Paths"
+            title="Programs built for real life"
+            description="Passion discovery, mindset mastery, business planning, and multiple income strategies."
+            align="center"
+            className="mb-10"
+          />
+          <div className="grid gap-5 sm:grid-cols-2">
+            {corePrograms.map((program) => (
+              <article key={program.title} className="card p-7">
+                <h3 className="text-lg font-bold text-text">{program.title}</h3>
+                <p className="mt-3 text-base leading-relaxed text-text-muted">
+                  {program.description}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Button to="/courses" size="lg">
+              Explore All Programs
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Stories */}
+      <section className="section-container section-padding">
+        <SectionHeader
+          eyebrow="Success Stories"
+          title="Voices from the community"
+          description="Personal journeys from our members. Results vary — these are experiences, not guarantees."
+          align="center"
+          className="mb-12"
+        />
+        <div className="grid gap-6 lg:grid-cols-3">
           {featuredTestimonials.map((item) => (
-            <blockquote key={item.id} className="card p-6">
-              <p className="text-base leading-relaxed text-text-muted">
-                &ldquo;{item.quote.length > 140 ? `${item.quote.slice(0, 140).trim()}…` : item.quote}&rdquo;
-              </p>
-              <footer className="mt-4 text-sm font-semibold text-text">
-                {item.name}
-                <span className="mt-0.5 block text-xs font-normal text-text-muted">{item.role}</span>
-              </footer>
+            <blockquote key={item.id} className="card card-hover flex flex-col overflow-hidden">
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full w-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <p className="text-sm font-semibold text-primary">{item.title}</p>
+                <p className="mt-3 flex-1 text-base leading-relaxed text-text-muted">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <footer className="mt-5 border-t border-border pt-4">
+                  <cite className="block text-sm font-semibold not-italic text-text">
+                    {item.name}
+                  </cite>
+                  <p className="mt-1 text-xs text-text-muted">{item.role}</p>
+                </footer>
+              </div>
             </blockquote>
           ))}
         </div>
-        <div className="mt-8 text-center">
+        <div className="mt-10 text-center">
           <Button to="/testimonials" variant="secondary">
-            More Stories
+            View All Stories
           </Button>
+        </div>
+      </section>
+
+      {/* Community */}
+      <section className="section-alt">
+        <div className="section-container section-padding">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <SectionHeader
+              eyebrow="Community"
+              title={communityContent.headline}
+              description={communityContent.description}
+            />
+            <ul className="space-y-4">
+              {communityContent.highlights.map((item) => (
+                <li key={item} className="card flex gap-4 p-5">
+                  <span className="check-badge mt-0.5 shrink-0">
+                    <CheckIcon className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-base text-text-muted">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="cta-group mt-10 justify-center">
+            <Button href={contact.whatsappGroup} size="lg">
+              Join WhatsApp Community
+            </Button>
+            <Button to="/community" variant="secondary" size="lg">
+              Learn About Community
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Courses preview */}
+      <section className="section-container section-padding">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeader
+            eyebrow="Courses"
+            title="Start with focused learning"
+            description="Emotional clarity, abundance mindset, self-discovery, and AI tools for growth."
+          />
+          <Button to="/courses" variant="secondary" className="w-full sm:w-auto">
+            View all courses →
+          </Button>
+        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {courses.slice(0, 4).map((course) => (
+            <CourseCard key={course.slug} course={course} />
+          ))}
         </div>
       </section>
 
       <section className="pb-8">
         <FinalInviteSection />
-        <div className="section-container mt-4 max-w-2xl pb-20 text-center sm:pb-24">
-          <p className="text-xs text-text-muted">
-            Education &amp; coaching only — not financial advice.{" "}
+        <div className="section-container mt-6 max-w-3xl pb-24 text-center sm:pb-28">
+          <p className="text-sm leading-relaxed text-text-muted">
+            10X Wealth Creators provides educational content and coaching only.
+            We do not offer financial, legal, or investment advice.{" "}
             <Link to="/disclaimer" className="font-semibold text-primary hover:text-primary-hover">
-              Disclaimer
+              Read disclaimer
             </Link>
           </p>
         </div>

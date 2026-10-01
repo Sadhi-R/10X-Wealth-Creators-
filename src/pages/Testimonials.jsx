@@ -1,14 +1,10 @@
 import FinalInviteSection from "../components/FinalInviteSection";
 import PageHero from "../components/ui/PageHero";
+import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { contact, pageMeta } from "../data/siteContent";
 import { testimonials } from "../data/testimonials";
-
-function shortQuote(quote, max = 120) {
-  if (quote.length <= max) return quote;
-  return `${quote.slice(0, max).trim()}…`;
-}
 
 export default function Testimonials() {
   usePageMeta(pageMeta.testimonials);
@@ -16,24 +12,31 @@ export default function Testimonials() {
   return (
     <>
       <PageHero
-        eyebrow="Stories"
-        title="Community voices"
-        description="Personal experiences — not guaranteed outcomes."
+        eyebrow="Success Stories"
+        title="Real journeys from our community"
+        description="Hear from learners who worked on mindset, skills, and growth with 10X Wealth Creators. Individual results vary — these are personal experiences, not guaranteed outcomes."
       >
         <div className="mt-8 cta-group">
           <Button href={contact.whatsappGroup} size="lg">
-            Join Community
+            Join the Community
           </Button>
           <Button to="/contact" variant="secondary" size="lg">
-            Book a Call
+            Book a Discovery Call
           </Button>
         </div>
       </PageHero>
 
       <section className="section-container section-padding">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <SectionHeader
+          eyebrow="Community Voices"
+          title="Mindset shifts, new skills, practical growth"
+          description="Shared by members guided by our mentors."
+          align="center"
+          className="mb-12"
+        />
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((item) => (
-            <blockquote key={item.id} className="card flex flex-col overflow-hidden">
+            <blockquote key={item.id} className="card card-hover flex flex-col overflow-hidden">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
                   src={item.image}
@@ -41,16 +44,21 @@ export default function Testimonials() {
                   className="h-full w-full object-cover object-top"
                   loading="lazy"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               </div>
-              <div className="flex flex-1 flex-col p-5">
-                <p className="flex-1 text-sm leading-relaxed text-text-muted">
-                  &ldquo;{shortQuote(item.quote)}&rdquo;
+              <div className="flex flex-1 flex-col p-6 sm:p-7">
+                <p className="text-sm font-semibold text-primary">{item.title}</p>
+                <p className="mt-3 flex-1 text-base leading-relaxed text-text-muted">
+                  &ldquo;{item.quote}&rdquo;
                 </p>
-                <footer className="mt-4 text-sm font-semibold text-text">
-                  {item.name}
-                  <span className="mt-0.5 block text-xs font-normal text-text-muted">
-                    {item.role}
-                  </span>
+                <footer className="mt-5 border-t border-border pt-4">
+                  <cite className="block text-sm font-semibold not-italic text-text">
+                    {item.name}
+                  </cite>
+                  <p className="mt-1 text-xs text-text-muted">{item.role}</p>
+                  {item.mentor && (
+                    <p className="mt-2 text-xs text-primary">Mentor: {item.mentor}</p>
+                  )}
                 </footer>
               </div>
             </blockquote>
