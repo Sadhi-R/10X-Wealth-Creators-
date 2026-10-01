@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Button from "../components/ui/Button";
 import PageHero from "../components/ui/PageHero";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -91,12 +90,19 @@ const contactChannels = [
 ];
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
   usePageMeta(pageMeta.contact);
 
   function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
+    const form = event.currentTarget;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const subject = encodeURIComponent(`10X Wealth Creators enquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
   }
 
   return (
@@ -207,18 +213,8 @@ export default function Contact() {
           <SectionHeader
             eyebrow="Message Form"
             title="Send us a message"
-            description="Fill out the form below and we'll get back to you. Note: this form is not yet connected to a backend — use the channels above for immediate contact."
+            description="This opens your email app with your message — no server or backend required."
           />
-
-          {submitted && (
-            <p
-              className="mt-8 rounded-xl border border-primary/30 bg-accent-soft p-5 text-base text-text-muted"
-              role="status"
-            >
-              Thank you — this form is not connected to a backend yet. Please use one of
-              the contact channels above to reach us directly.
-            </p>
-          )}
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             <div>
@@ -264,10 +260,11 @@ export default function Contact() {
           </div>
 
           <Button type="submit" size="lg" className="mt-8">
-            Send Message
+            Open Email to Send
           </Button>
         </form>
       </section>
     </>
   );
 }
+

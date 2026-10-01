@@ -3,59 +3,48 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
-    paths-ignore:
-      - "docs/**"
-      - "README.md"
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Install
         run: npm ci
 
-      - name: Build and publish to docs/
+      - name: Build static site (no backend)
         env:
-          VITE_BASE_PATH: /docs/
-        run: npm run publish:pages
+          VITE_BASE_PATH: /
+        run: npm run build
 
-      - name: Verify production bundle
-        run: |
-          if grep -q 'src="/src/main.jsx"' docs/index.html; then
-            echo "Build failed: docs/index.html still references source JSX."
-            exit 1
-          fi
-          if ! grep -q 'src="/docs/assets/' docs/index.html; then
-            echo "Build failed: docs/index.html is missing bundled assets."
-            cat docs/index.html
-            exit 1
-          fi
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
-      - name: Commit and push built site
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs 404.html
-          if git diff --staged --quiet; then
-            echo "No site changes to deploy."
-            exit 0
-          fi
-          git commit -m "Deploy site to docs/"
-          git push
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

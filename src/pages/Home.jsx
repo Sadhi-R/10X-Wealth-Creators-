@@ -12,8 +12,8 @@ import {
   brand,
   communityContent,
   contact,
-  corePrograms,
   faqs,
+  featuredPrograms,
   founderStory,
   impactStats,
   learningResources,
@@ -175,6 +175,39 @@ export default function Home() {
               <p className="text-3xl font-bold gradient-text sm:text-4xl">{stat.value}</p>
               <p className="mt-2 text-sm leading-relaxed text-text-muted sm:text-base">{stat.label}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured sub-programs */}
+      <section className="section-container section-padding">
+        <SectionHeader
+          eyebrow="Under 10X Wealth Creators"
+          title="Our flagship programs"
+          description="Magical Mornings and Dhruva Foundation are part of the 10X Wealth Creators ecosystem — each designed for a different stage of your growth journey."
+        />
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {featuredPrograms.map((program) => (
+            <a
+              key={program.id}
+              href={program.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card card-hover group flex flex-col p-6 sm:p-8"
+            >
+              <span className="badge w-fit">{program.badge}</span>
+              <h3 className="font-display mt-4 text-2xl font-bold text-text group-hover:text-primary">
+                {program.name}
+              </h3>
+              <p className="mt-1 text-sm font-semibold text-primary">{program.tagline}</p>
+              <p className="mt-4 flex-1 text-base leading-relaxed text-text-muted">
+                {program.description}
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                {program.cta}
+                <span aria-hidden>→</span>
+              </span>
+            </a>
           ))}
         </div>
       </section>

@@ -102,6 +102,30 @@ export const brand = {
     "10X Wealth Creators is a mentorship-led education movement helping professionals discover their purpose, master mindset and modern skills, and build sustainable income — with honesty, structure, and support.",
 };
 
+/** Featured sub-programs under the 10X Wealth Creators platform */
+export const featuredPrograms = [
+  {
+    id: "magical-mornings",
+    name: "Magical Mornings",
+    tagline: "Daily reset for mind, body & energy",
+    description:
+      "A live morning workshop to start your day with clarity, calm, and purpose — health, wealth, relationships, and career.",
+    href: "https://magicalmornings.10xwealthcreators.com",
+    cta: "Visit Magical Mornings",
+    badge: "Workshop",
+  },
+  {
+    id: "dhruva",
+    name: "Dhruva Foundation",
+    tagline: "Business Startup School",
+    description:
+      "Turn your idea into a profitable business with mentor-led guidance — idea, plan, growth, and community.",
+    href: "https://dhruva.10xwealthcreators.com",
+    cta: "Visit Dhruva Startup School",
+    badge: "Startup School",
+  },
+];
+
 export const visionMission = {
   vision:
     "A world where 10 million people live with financial confidence, purpose, and the skills to create lasting wealth — starting from the inside out.",
