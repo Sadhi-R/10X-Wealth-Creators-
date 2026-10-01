@@ -188,13 +188,9 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="mt-4 grid gap-2 border-t border-border/70 pt-4">
-              <Button href={contact.whatsappGroup} className="w-full" onClick={() => setMenuOpen(false)}>
-                Join Community
-              </Button>
+            <div className="mt-4 border-t border-border/70 pt-4">
               <Button
                 to="/contact"
-                variant="secondary"
                 className="w-full"
                 onClick={() => setMenuOpen(false)}
               >

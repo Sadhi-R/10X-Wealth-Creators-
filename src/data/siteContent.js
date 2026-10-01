@@ -99,7 +99,7 @@ export const brand = {
     "Helping people find passion and purpose — then build sustainable income with clarity, skills, and community.",
   heroHeadline: "Build wealth with clarity, confidence, and community",
   heroSubheadline:
-    "10X Wealth Creators is a mentorship-led education brand for professionals who want purpose, modern skills, and honest guidance — not empty promises.",
+    "10X Wealth Creators is a mentorship-led education brand for professionals who want purpose, modern skills, and clear guidance for real growth.",
 };
 
 /** Featured sub-programs under the 10X Wealth Creators platform */
