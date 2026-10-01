@@ -167,7 +167,11 @@ Assets are served from `public/images/`:
 |------|--------|
 | `Logo.png` | Navbar, footer, hero card |
 | `favicon.png` | Browser tab icon |
-| `hero-background.png` | Home hero background |
+| `hero-community.jpg` | Home hero background |
+| `hero-mentorship.jpg` | Hero side panel / mentorship visual |
+| `section-mentorship.jpg` | Story section imagery |
+| `logo-white.png` | White lotus mark (navy nav / dark surfaces) |
+| `Logo.png` | Gold lotus mark (light surfaces) |
 | `sampath-kumar.jpg` / `ram-prasad.jpg` | Mentor photos |
 | `courses/*` | Course cover images |
 
@@ -175,13 +179,15 @@ Update paths in `src/data/siteImages.js` if you rename or add files.
 
 ## Deployment
 
-This is a static SPA. **Always deploy the built `dist/` folder** — never serve the repo root.
+This is a static SPA. **Serve from the site root (`/`)** — never from `/docs/`.
 
-### GitHub Pages
+### GitHub Pages (required)
 
-Push to `master` — `.github/workflows/deploy.yml` runs `npm run publish:pages` and commits the built site to `docs/`. The root `index.html` redirects visitors to `/docs/`.
+1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**
+2. Push to `master` — `.github/workflows/deploy.yml` builds with `VITE_BASE_PATH=/` and deploys `dist/` to Pages
+3. Custom domain: `10xwealthcreators.com` (`public/CNAME` + root `CNAME`)
 
-Custom domain: `10xwealthcreators.com` via `public/CNAME`.
+Legacy `/docs` URLs redirect to `/`. Do **not** use “Deploy from a branch → /docs folder”.
 
 ### Netlify / Vercel
 

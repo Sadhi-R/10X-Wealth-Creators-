@@ -2,8 +2,11 @@ const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")
 
 export const siteImages = {
   logo: withBase("/images/Logo.png"),
+  logoWhite: withBase("/images/logo-white.png"),
   favicon: withBase("/images/favicon.png"),
-  heroBackground: withBase("/images/hero-background.png"),
+  heroBackground: withBase("/images/hero-community.jpg"),
+  heroMentorship: withBase("/images/hero-mentorship.jpg"),
+  sectionMentorship: withBase("/images/section-mentorship.jpg"),
   mentors: {
     sampath: withBase("/images/sampath-kumar.jpg"),
     ram: withBase("/images/ram-prasad.jpg"),

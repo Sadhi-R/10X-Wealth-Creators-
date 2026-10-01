@@ -12,6 +12,7 @@ import {
   brand,
   communityContent,
   contact,
+  corePrograms,
   faqs,
   featuredPrograms,
   founderStory,
@@ -71,38 +72,41 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-0 overflow-hidden lg:min-h-[88vh]">
+      <section className="relative min-h-[100svh] overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={siteImages.heroBackground}
-            alt="10X Wealth Creators — mentorship and community for financial growth"
-            className="h-full w-full object-cover object-center"
+            alt="10X Wealth Creators community and mentorship"
+            className="h-full w-full object-cover object-[center_30%]"
           />
-          <div className="hero-glossy-overlay absolute inset-0" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#00102f]/92 via-[#001848]/72 to-[#001848]/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#00102f]/80 via-transparent to-[#00102f]/40" />
         </div>
 
-        <div className="section-container relative flex min-h-0 items-center py-16 sm:py-20 lg:min-h-[88vh] lg:py-28">
-          <div className="grid w-full min-w-0 items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div className="section-container relative flex min-h-[100svh] items-center pb-16 pt-28 sm:pb-20 sm:pt-32">
+          <div className="grid w-full min-w-0 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
             <div className="min-w-0 max-w-2xl">
-              <p className="badge">{brand.name}</p>
-              <h1 className="font-display mt-6 text-[clamp(2.25rem,5vw,3.75rem)] font-bold tracking-tight text-text leading-[1.08]">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[#FFA800] backdrop-blur-sm sm:px-4 sm:text-xs">
+                {brand.name}
+              </p>
+              <h1 className="font-display mt-6 text-[clamp(2.35rem,5.5vw,3.9rem)] font-bold tracking-tight text-white leading-[1.08]">
                 {brand.heroHeadline}
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted sm:text-xl">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
                 {brand.heroSubheadline}
               </p>
 
-              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-text-muted sm:text-base">
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-white/75 sm:text-base">
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#FFA800]" />
                   15+ years mentorship
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#FFA800]" />
                   20+ programs
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#FFA800]" />
                   1,000+ community members
                 </li>
               </ul>
@@ -111,53 +115,46 @@ export default function Home() {
                 <Button to="/wealth-framework" size="lg">
                   Start Your Journey
                 </Button>
-                <Button href={contact.whatsappGroup} variant="secondary" size="lg">
+                <Button
+                  href={contact.whatsappGroup}
+                  variant="secondary"
+                  size="lg"
+                  className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-[#001848]"
+                >
                   Join the Community
                 </Button>
               </div>
               <p className="mt-6">
-                <Button to="/testimonials" variant="ghost" size="sm">
-                  Watch Success Stories &rarr;
-                </Button>
+                <Link
+                  to="/testimonials"
+                  className="text-sm font-semibold text-white/80 underline-offset-4 transition hover:text-[#FFA800] hover:underline"
+                >
+                  Watch Success Stories →
+                </Link>
               </p>
             </div>
 
-            <div className="glass-strong glossy-panel min-w-0 overflow-hidden rounded-3xl border-primary/15 p-0">
-              <div className="h-1.5 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
-              <div className="p-6 sm:p-8 lg:p-10">
-                <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-                  <Logo size="lg" />
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-primary sm:text-sm">
+            <div className="hidden min-w-0 overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-0 shadow-[0_24px_64px_rgba(0,16,47,0.45)] backdrop-blur-md sm:block">
+              <img
+                src={siteImages.heroMentorship}
+                alt="Mentorship space in Hyderabad"
+                className="aspect-[4/3] h-auto w-full object-cover lg:aspect-[5/4]"
+              />
+              <div className="space-y-3 p-5 sm:p-6">
+                <div className="flex items-center gap-3">
+                  <Logo size="md" variant="white" />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#FFA800]">
                       {brand.tagline}
                     </p>
-                    <p className="text-sm text-text-muted">Hyderabad, India</p>
+                    <p className="text-sm text-white/70">Hyderabad, India</p>
                   </div>
                 </div>
-
-                <p className="mt-6 text-lg font-semibold leading-snug text-text sm:text-xl lg:text-2xl">
+                <p className="text-sm leading-relaxed text-white/85 sm:text-base">
                   {brand.missionStatement}
                 </p>
-
-                <ul className="mt-8 space-y-4">
-                  {[
-                    "Growth mindset & emotional clarity",
-                    "Business strategy & AI-powered skills",
-                    "Community support on your journey",
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 text-base text-text-muted">
-                      <span className="check-badge mt-0.5 shrink-0">
-                        <CheckIcon className="h-3.5 w-3.5" />
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="stat-card mt-8 text-center">
-                  <p className="text-3xl font-bold gradient-text">{visionStat.value}</p>
-                  <p className="mt-1 text-sm leading-snug text-text-muted">{visionStat.label}</p>
-                </div>
+                <p className="text-2xl font-bold text-[#FFA800]">{visionStat.value}</p>
+                <p className="text-xs text-white/65">{visionStat.label}</p>
               </div>
             </div>
           </div>
@@ -324,20 +321,30 @@ export default function Home() {
               Meet the Founders
             </Button>
           </div>
-          <div className="card overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
-            <div className="p-8 sm:p-10">
-              <h3 className="text-xl font-bold text-text">What makes us different</h3>
-              <ul className="mt-7 space-y-5">
-                {aboutStory.values.map((item) => (
-                  <li key={item} className="flex gap-4 text-base text-text-muted">
-                    <span className="check-badge mt-0.5">
-                      <CheckIcon className="h-3.5 w-3.5" />
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="space-y-6">
+            <div className="overflow-hidden rounded-3xl border border-border/80 shadow-[var(--shadow-card)]">
+              <img
+                src={siteImages.sectionMentorship}
+                alt="Mentorship session with 10X Wealth Creators"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="card overflow-hidden">
+              <div className="h-2 bg-gradient-to-r from-primary via-primary-hover to-primary/30" />
+              <div className="p-8 sm:p-10">
+                <h3 className="text-xl font-bold text-text">What makes us different</h3>
+                <ul className="mt-7 space-y-5">
+                  {aboutStory.values.map((item) => (
+                    <li key={item} className="flex gap-4 text-base text-text-muted">
+                      <span className="check-badge mt-0.5">
+                        <CheckIcon className="h-3.5 w-3.5" />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

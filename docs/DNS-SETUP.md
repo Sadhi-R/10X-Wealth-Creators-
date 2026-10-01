@@ -39,6 +39,20 @@ Go to: **Domain portfolio → 10xwealthcreators.com → DNS / Nameservers → DN
 
 ## GitHub Pages custom domains (each repo)
 
+For each repo: **Settings → Pages**
+
+1. **Source:** GitHub Actions (not “Deploy from a branch”)
+2. **Custom domain:** set as in the table below, then wait for DNS + HTTPS
+
+| Repo | Custom domain |
+|------|----------------|
+| `10X-Wealth-Creators-` | `10xwealthcreators.com` (+ `www` optional) |
+| `Magical_Mornings` | `magicalmornings.10xwealthcreators.com` |
+| `Dhruva_Foudation` | `dhruva.10xwealthcreators.com` |
+
+> **10X Wealth Creators must NOT use `/docs` as the site path.** The app is built with base `/` and served at the domain root.
+
+
 ### 1) Magical Mornings — subdomain
 Repo: https://github.com/Sadhi-R/Magical_Mornings/settings/pages  
 Custom domain: `magicalmornings.10xwealthcreators.com`  

@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <script>
-      location.replace(
-        "/docs" + location.pathname + location.search + location.hash
-      );
+      // SPA fallback for GitHub Pages — serve app shell on unknown routes when using branch deploy.
+      // With Actions deploy, dist/404.html is a copy of the built index.
+      location.replace("/" + (location.search || "") + (location.hash || ""));
     </script>
+    <meta http-equiv="refresh" content="0; url=/" />
+    <title>10X Wealth Creators</title>
   </head>
-  <body></body>
+  <body>
+    <a href="/">Continue to 10X Wealth Creators</a>
+  </body>
 </html>
