@@ -76,37 +76,35 @@ export default function Home() {
         <div className="absolute inset-0">
           <img
             src={siteImages.heroBackground}
-            alt="10X Wealth Creators community and mentorship"
-            className="h-full w-full object-cover object-[center_30%]"
+            alt="Happy family living with freedom, clarity, and peace"
+            className="h-full w-full object-cover object-[center_35%]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#00102f]/92 via-[#001848]/72 to-[#001848]/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#00102f]/80 via-transparent to-[#00102f]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/82 to-white/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50" />
         </div>
 
         <div className="section-container relative flex min-h-[100svh] items-center pb-16 pt-28 sm:pb-20 sm:pt-32">
           <div className="grid w-full min-w-0 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
             <div className="min-w-0 max-w-2xl">
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[#FFA800] backdrop-blur-sm sm:px-4 sm:text-xs">
-                {brand.name}
-              </p>
-              <h1 className="font-display mt-6 text-[clamp(2.35rem,5.5vw,3.9rem)] font-bold tracking-tight text-white leading-[1.08]">
+              <p className="badge">{brand.name}</p>
+              <h1 className="font-display mt-6 text-[clamp(2.35rem,5.5vw,3.9rem)] font-bold tracking-tight text-text leading-[1.08]">
                 {brand.heroHeadline}
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted sm:text-xl">
                 {brand.heroSubheadline}
               </p>
 
-              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-white/75 sm:text-base">
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-text-muted sm:text-base">
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#FFA800]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                   15+ years mentorship
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#FFA800]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                   20+ programs
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#FFA800]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                   1,000+ community members
                 </li>
               </ul>
@@ -115,46 +113,41 @@ export default function Home() {
                 <Button to="/wealth-framework" size="lg">
                   Start Your Journey
                 </Button>
-                <Button
-                  href={contact.whatsappGroup}
-                  variant="secondary"
-                  size="lg"
-                  className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-[#001848]"
-                >
+                <Button href={contact.whatsappGroup} variant="secondary" size="lg">
                   Join the Community
                 </Button>
               </div>
               <p className="mt-6">
                 <Link
                   to="/testimonials"
-                  className="text-sm font-semibold text-white/80 underline-offset-4 transition hover:text-[#FFA800] hover:underline"
+                  className="text-sm font-semibold text-primary underline-offset-4 transition hover:text-primary-hover hover:underline"
                 >
                   Watch Success Stories →
                 </Link>
               </p>
             </div>
 
-            <div className="hidden min-w-0 overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-0 shadow-[0_24px_64px_rgba(0,16,47,0.45)] backdrop-blur-md sm:block">
+            <div className="glass-strong glossy-panel min-w-0 overflow-hidden rounded-3xl border-primary/15 p-0 shadow-[var(--shadow-card)]">
               <img
-                src={siteImages.heroMentorship}
-                alt="Mentorship space in Hyderabad"
-                className="aspect-[4/3] h-auto w-full object-cover lg:aspect-[5/4]"
+                src={siteImages.heroFamily}
+                alt="A happy, stress-free family enjoying freedom together"
+                className="aspect-[4/3] h-auto w-full object-cover object-center lg:aspect-[5/4]"
               />
               <div className="space-y-3 p-5 sm:p-6">
                 <div className="flex items-center gap-3">
-                  <Logo size="md" variant="white" />
+                  <Logo size="md" />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#FFA800]">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">
                       {brand.tagline}
                     </p>
-                    <p className="text-sm text-white/70">Hyderabad, India</p>
+                    <p className="text-sm text-text-muted">Hyderabad, India</p>
                   </div>
                 </div>
-                <p className="text-sm leading-relaxed text-white/85 sm:text-base">
+                <p className="text-sm leading-relaxed text-text-muted sm:text-base">
                   {brand.missionStatement}
                 </p>
-                <p className="text-2xl font-bold text-[#FFA800]">{visionStat.value}</p>
-                <p className="text-xs text-white/65">{visionStat.label}</p>
+                <p className="text-2xl font-bold gradient-text">{visionStat.value}</p>
+                <p className="text-xs text-text-muted">{visionStat.label}</p>
               </div>
             </div>
           </div>

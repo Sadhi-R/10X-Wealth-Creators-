@@ -6,25 +6,15 @@ const sizes = {
   lg: "h-14 w-14",
 };
 
-/**
- * @param {"white" | "gold"} [variant]
- * white — for navy / dark surfaces
- * gold — for light surfaces
- */
-export default function Logo({ size = "md", className = "", variant = "white" }) {
-  const src = variant === "gold" ? siteImages.logo : siteImages.logoWhite;
-  const plate =
-    variant === "white"
-      ? "bg-[#001848] ring-white/25 group-hover:ring-white/45"
-      : "bg-gradient-to-br from-[#fff8e8] to-[#ffe9b8] ring-primary/30 group-hover:ring-primary/55 group-hover:shadow-[0_0_18px_rgba(255,168,0,0.35)]";
-
+/** Gold lotus mark on a light plate — brand logo for the white theme. */
+export default function Logo({ size = "md", className = "" }) {
   return (
     <span className={`relative inline-flex shrink-0 ${className}`}>
       <span
-        className={`${sizes[size]} flex items-center justify-center overflow-hidden rounded-xl p-1.5 ring-2 transition-all duration-200 ${plate}`}
+        className={`${sizes[size]} flex items-center justify-center overflow-hidden rounded-xl bg-white p-1 ring-2 ring-primary/25 transition-all duration-200 group-hover:ring-primary/50 group-hover:shadow-[0_0_18px_rgba(255,168,0,0.28)]`}
       >
         <img
-          src={src}
+          src={siteImages.logo}
           alt="10X Wealth Creators"
           className="h-full w-full object-contain"
         />

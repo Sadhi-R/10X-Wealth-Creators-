@@ -59,7 +59,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <Logo size="lg" variant="white" />
+              <Logo size="lg" />
               <p className="text-xl font-bold tracking-tight text-text">
                 <span className="text-primary">10X</span> Wealth Creators
               </p>

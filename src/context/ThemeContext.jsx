@@ -4,29 +4,21 @@ const ThemeContext = createContext(null);
 const THEME_KEY = "10x-theme";
 const DEFAULT_THEME = "light";
 
-function getInitialTheme() {
-  if (typeof window === "undefined") return DEFAULT_THEME;
-  const stored = localStorage.getItem(THEME_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-  return DEFAULT_THEME;
-}
-
+/** White theme only — dark theme disabled per brand direction. */
 export function ThemeProvider({ children }) {
-  const [theme, setThemeState] = useState(getInitialTheme);
+  const [theme] = useState(DEFAULT_THEME);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem(THEME_KEY, theme);
-  }, [theme]);
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem(THEME_KEY, "light");
+  }, []);
 
-  function setTheme(next) {
-    if (next === "light" || next === "dark") {
-      setThemeState(next);
-    }
+  function setTheme() {
+    /* locked to light */
   }
 
   function toggleTheme() {
-    setThemeState((current) => (current === "light" ? "dark" : "light"));
+    /* locked to light */
   }
 
   return (
